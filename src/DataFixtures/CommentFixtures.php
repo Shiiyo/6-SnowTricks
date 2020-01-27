@@ -19,18 +19,17 @@ class CommentFixtures extends Fixture
         $trickArray = $manager->getRepository('App\Entity\Trick')->findAll();
         $userArray = $manager->getRepository('App\Entity\User')->findAll();
 
-        foreach ($trickArray as $trick)
-        {
+        foreach ($trickArray as $trick) {
             $now = new \DateTime();
             $interval = $now->diff($trick->getCreatedAt())->days;
 
-            for ($l = 1; $l <= random_int(3,6); $l++){
+            for ($l = 1; $l <= random_int(3, 6); $l++) {
                 $comment = new Comment();
                 $comment->setTrick($trick);
                 $comment->setCreatedAt($faker->dateTimeBetween('-'.$interval.' days'));
                 shuffle($userArray);
                 $comment->setUser($userArray[0]);
-                $comment->setContent($faker->sentences(random_int(2,6), true));
+                $comment->setContent($faker->sentences(random_int(2, 6), true));
 
                 $manager->persist($comment);
             }

@@ -33,7 +33,6 @@ class TrickFixtures extends Fixture
 
             $manager->persist($trick);
             $manager->persist($trickGroup);
-
         }
     }
 }
