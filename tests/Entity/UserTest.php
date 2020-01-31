@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use App\Entity\Picture;
 use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 
@@ -37,5 +38,12 @@ class UserTest extends TestCase
     {
         $this->user->setPassword('Test');
         $this->assertEquals('Test', $this->user->getPassword());
+    }
+
+    public function testPicture()
+    {
+        $picture = new Picture();
+        $this->user->setPicture($picture);
+        $this->assertEquals($picture, $this->user->getPicture());
     }
 }
