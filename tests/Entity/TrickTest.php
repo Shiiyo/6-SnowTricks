@@ -39,8 +39,8 @@ class TrickTest extends TestCase
     public function testCreatedAt()
     {
         $dateCreated = new \DateTime('2020-01-28T15:03:01.012345Z');
-        $this->trick->setCreatedAt($dateCreated );
-        $this->assertSame($dateCreated , $this->trick->getCreatedAt());
+        $this->trick->setCreatedAt($dateCreated);
+        $this->assertSame($dateCreated, $this->trick->getCreatedAt());
     }
 
     public function testGetComments()

@@ -42,5 +42,4 @@ class CommentTest extends TestCase
         $this->comment->setTrick($trick);
         $this->assertSame($trick, $this->comment->getTrick());
     }
-
 }
