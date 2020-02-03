@@ -11,16 +11,15 @@ class TrickGroupTest extends TestCase
 {
     private $trickGroup;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function setUp()
     {
-        parent::__construct($name, $data, $dataName);
         $this->trickGroup = new TrickGroup();
     }
 
     public function testName()
     {
         $this->trickGroup->setName('Test');
-        $this->assertEquals('Test', $this->trickGroup->getName());
+        $this->assertSame('Test', $this->trickGroup->getName());
     }
 
     public function testTricks()

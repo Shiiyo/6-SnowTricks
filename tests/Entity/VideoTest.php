@@ -10,21 +10,21 @@ class VideoTest extends TestCase
 {
     private $video;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function setUp()
     {
-        parent::__construct($name, $data, $dataName);
         $this->video = new Video();
     }
 
     public function testTricks()
     {
-        $this->video->setTrick(new Trick());
-        $this->assertEquals(new Trick(), $this->video->getTrick());
+        $trick = new Trick();
+        $this->video->setTrick($trick);
+        $this->assertSame($trick, $this->video->getTrick());
     }
 
     public function testName()
     {
         $this->video->setName('Test');
-        $this->assertEquals('Test', $this->video->getName());
+        $this->assertSame('Test', $this->video->getName());
     }
 }

@@ -12,34 +12,35 @@ class TrickTest extends TestCase
 {
     private $trick;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function setUp()
     {
-        parent::__construct($name, $data, $dataName);
         $this->trick = new Trick();
     }
 
     public function testUser()
     {
-        $this->trick->setUser(new User());
-        $this->assertEquals(new User(), $this->trick->getUser());
+        $user = new User();
+        $this->trick->setUser($user);
+        $this->assertSame($user, $this->trick->getUser());
     }
 
     public function testName()
     {
         $this->trick->setName('Test');
-        $this->assertEquals('Test', $this->trick->getName());
+        $this->assertSame('Test', $this->trick->getName());
     }
 
     public function testContent()
     {
         $this->trick->setContent('Test');
-        $this->assertEquals('Test', $this->trick->getContent());
+        $this->assertSame('Test', $this->trick->getContent());
     }
 
     public function testCreatedAt()
     {
-        $this->trick->setCreatedAt(new \DateTime('2020-01-28T15:03:01.012345Z'));
-        $this->assertEquals(new \DateTime('2020-01-28T15:03:01.012345Z'), $this->trick->getCreatedAt());
+        $dateCreated = new \DateTime('2020-01-28T15:03:01.012345Z');
+        $this->trick->setCreatedAt($dateCreated );
+        $this->assertSame($dateCreated , $this->trick->getCreatedAt());
     }
 
     public function testGetComments()

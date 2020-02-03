@@ -11,33 +11,36 @@ class CommentTest extends TestCase
 {
     private $comment;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function setUp()
     {
-        parent::__construct($name, $data, $dataName);
         $this->comment = new Comment();
     }
 
     public function testUser()
     {
-        $this->comment->setUser(new User());
-        $this->assertEquals(new User(), $this->comment->getUser());
+        $user = new User();
+        $this->comment->setUser($user);
+        $this->assertSame($user, $this->comment->getUser());
     }
 
     public function testCreatedAt()
     {
-        $this->comment->setCreatedAt(new \DateTime('2020-01-28T15:03:01.012345Z'));
-        $this->assertEquals(new \DateTime('2020-01-28T15:03:01.012345Z'), $this->comment->getCreatedAt());
+        $dateCreate = new \DateTime('2020-01-28T15:03:01.012345Z');
+        $this->comment->setCreatedAt($dateCreate);
+        $this->assertSame($dateCreate, $this->comment->getCreatedAt());
     }
 
     public function testContent()
     {
         $this->comment->setContent('Test');
-        $this->assertEquals('Test', $this->comment->getContent());
+        $this->assertSame('Test', $this->comment->getContent());
     }
 
     public function testTrick()
     {
-        $this->comment->setTrick(new Trick());
-        $this->assertEquals(new Trick(), $this->comment->getTrick());
+        $trick = new Trick();
+        $this->comment->setTrick($trick);
+        $this->assertSame($trick, $this->comment->getTrick());
     }
+
 }

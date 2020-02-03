@@ -12,9 +12,8 @@ class PictureTest extends TestCase
 {
     private $picture;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function setUp()
     {
-        parent::__construct($name, $data, $dataName);
         $this->picture = new Picture();
     }
 
@@ -29,13 +28,14 @@ class PictureTest extends TestCase
 
     public function testUser()
     {
-        $this->picture->setUser(new User());
-        $this->assertEquals(new User(), $this->picture->getUser());
+        $user = new User();
+        $this->picture->setUser($user);
+        $this->assertSame($user, $this->picture->getUser());
     }
 
     public function testName()
     {
         $this->picture->setName('Test');
-        $this->assertEquals('Test', $this->picture->getName());
+        $this->assertSame('Test', $this->picture->getName());
     }
 }
