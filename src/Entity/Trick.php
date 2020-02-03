@@ -34,7 +34,6 @@ class Trick
      */
     private $content;
 
-
     /**
      * @ORM\Column(type="datetime")
      */

@@ -8,9 +8,6 @@ use Doctrine\Persistence\ObjectManager;
 
 class TrickFixtures extends Fixture
 {
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager)
     {
         $faker = \Faker\Factory::create('fr_FR');
@@ -19,7 +16,7 @@ class TrickFixtures extends Fixture
         $trickGroupArray = $manager->getRepository('App\Entity\TrickGroup')->findAll();
 
         //Create tricks and comment in each trick
-        for ($k = 1; $k <= 10; $k++) {
+        for ($k = 1; $k <= 10; ++$k) {
             $trick = new Trick();
             $trick->setName($faker->words(2, true));
             $trick->setContent($faker->paragraph);

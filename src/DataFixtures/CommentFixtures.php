@@ -9,7 +9,6 @@ use Doctrine\Persistence\ObjectManager;
 class CommentFixtures extends Fixture
 {
     /**
-     * @param ObjectManager $manager
      * @throws \Exception
      */
     public function load(ObjectManager $manager)
@@ -23,7 +22,7 @@ class CommentFixtures extends Fixture
             $now = new \DateTime();
             $interval = $now->diff($trick->getCreatedAt())->days;
 
-            for ($l = 1; $l <= random_int(3, 6); $l++) {
+            for ($l = 1; $l <= random_int(3, 6); ++$l) {
                 $comment = new Comment();
                 $comment->setTrick($trick);
                 $comment->setCreatedAt($faker->dateTimeBetween('-'.$interval.' days'));
