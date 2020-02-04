@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="header">
+        <h1>Snowtricks</h1>
+        <h2>Tremplin aux acrobates</h2>
+    </section>
+    
+    <section class="tricks">
+        {% for trick in tricks %}
+            <article>
+                <h3>{{ trick.name }}</h3>
+                <img src="http://placehold.it/350x150" alt="">
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}
