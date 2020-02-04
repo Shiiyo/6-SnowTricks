@@ -7,4 +7,11 @@
 /public/bundles/
 /var/
 /vendor/
+bin/.phpunit/
+.idea/inspectionProfiles/Project_Default.xml
+.php_cs.dist
+config/packages/
+.idea/
+.php_cs.cache
+
 ###< symfony/framework-bundle ###
