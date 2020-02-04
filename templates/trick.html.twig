@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ trick.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ trick.name }}</h1>
+    <p class="metadata">
+        Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans la catégorie
+        {% for group in trick.trickGroups %}
+            {{ group.name }}.
+        {% endfor %}
+    </p>
+    <p>{{ trick.content }}</p>
+
+    <div class="comments">
+        <h2>Commentaires</h2>
+        {% for comment in trick.comments %}
+            <p class="text-primary"> {{ comment.user.name }}</p>
+            <p class="text-secondary">{{ comment.content }}</p>
+            <p class="text-muted">Ecrit le {{ comment.createdAt | date('d/m/Y') }} à {{ comment.createdAt | date('H:i') }}.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
