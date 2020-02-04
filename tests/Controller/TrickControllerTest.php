@@ -4,14 +4,13 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class HomeControllerTest extends WebTestCase
+class TrickControllerTest extends WebTestCase
 {
     public function testIndex()
     {
         $client = static::createClient();
-        $client->request('GET', '/');
+        $client->request('GET', '/trick/21');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertSelectorTextContains('html h1', 'Snowtricks');
-        $this->assertSelectorTextContains('html h2', 'Tremplin aux acrobates');
+        $this->assertSelectorTextContains('html h2', 'Commentaires');
     }
 }
