@@ -3,11 +3,22 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ *     fields = {"username"},
+ *     message = "{{ value }} est déjà utilisé."
+ * )
+ * @UniqueEntity(
+ *     fields = {"email"},
+ *     message = "Cet email est déjà utilisé."
+ * )
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -18,21 +29,18 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
-     */
-    private $firstName;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
      */
     private $password;
 
@@ -58,26 +66,14 @@ class User
         return $this;
     }
 
-    public function getName(): ?string
+    public function getUsername(): ?string
     {
-        return $this->name;
+        return $this->username;
     }
 
-    public function setName(string $name): self
+    public function setUsername(string $username): self
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
-
-    public function setFirstName(string $firstName): self
-    {
-        $this->firstName = $firstName;
+        $this->username = $username;
 
         return $this;
     }
@@ -110,5 +106,18 @@ class User
         }
 
         return $this;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getSalt()
+    {
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
     }
 }

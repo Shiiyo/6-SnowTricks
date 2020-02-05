@@ -15,7 +15,7 @@
     <div class="comments">
         <h2>Commentaires</h2>
         {% for comment in trick.comments %}
-            <p class="text-primary"> {{ comment.user.name }}</p>
+            <p class="text-primary"> {{ comment.user.username }}</p>
             <p class="text-secondary">{{ comment.content }}</p>
             <p class="text-muted">Ecrit le {{ comment.createdAt | date('d/m/Y') }} à {{ comment.createdAt | date('H:i') }}.</p>
         {% endfor %}

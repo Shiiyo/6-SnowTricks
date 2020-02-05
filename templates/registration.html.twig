@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if editMode %}
+        Modification du compte
+    {% else %}
+        Inscription
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <h1>
+        {% if editMode %}
+            Modification du compte
+        {% else %}
+            Inscription
+        {% endif %}
+    </h1>
+    {{ form_start(form) }}
+    {{ form_row(form.username, {'label': 'Pseudo'}) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.password, {'label': 'Mot de passe'}) }}
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer
+        {% else %}
+            Créer un compte
+        {% endif %}
+    </button>
+    {{ form_end(form) }}
+{% endblock %}

@@ -21,16 +21,10 @@ class UserTest extends TestCase
         $this->assertSame('test@test.fr', $this->user->getEmail());
     }
 
-    public function testName()
+    public function testUsername()
     {
-        $this->user->setName('Test');
-        $this->assertSame('Test', $this->user->getName());
-    }
-
-    public function testFirstName()
-    {
-        $this->user->setFirstName('Test');
-        $this->assertSame('Test', $this->user->getFirstName());
+        $this->user->setUsername('Test');
+        $this->assertSame('Test', $this->user->getUsername());
     }
 
     public function testPassword()
