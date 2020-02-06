@@ -5,13 +5,12 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class LogInController extends AbstractController
+class LogOutController extends AbstractController
 {
     /**
-     * @Route("/login", name="log_in")
+     * @Route("/deconnexion", name="log_out")
      */
     public function index()
     {
-        return $this->render('login.html.twig');
     }
 }
