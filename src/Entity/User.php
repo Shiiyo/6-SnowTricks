@@ -35,12 +35,23 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     min = 3,
+     *     minMessage="Votre pseudo est trop court ( {{ limit }} caractères mini).",
+     *     max= 30,
+     *     maxMessage="Votre pseudo est trop long ( {{ limit }} caractères maxi)."
+     * )
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
+     * @Assert\Length(
+     *     min= 8,
+     *     minMessage = "Votre mot de passe doit faire minimum {{ limit }} caractères.",
+     *     max = 30,
+     *     maxMessage = "Votre mot de passe est trop long ({{ limit }} caractères maxi)."
+     * )
      */
     private $password;
 
