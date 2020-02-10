@@ -8,9 +8,8 @@ class TrickControllerTest extends WebTestCase
 {
     public function testIndex()
     {
-        $client = static::createClient();
-        $client->request('GET', '/trick/21');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertSelectorTextContains('html h2', 'Commentaires');
+        $test = new TestGlobalController();
+        $content = $test->testRenderView('/trick/40', 'Commentaires');
+        $this->assertContains('pariatur harum', $content);
     }
 }

@@ -10,6 +10,42 @@
     </head>
     <body>
         <div class="container">
+            <section class="nav-header">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="/"><h1>Snowtricks</h1></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarColor03">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Tricks</a>
+                            </li>
+
+                            {% if not app.user %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('registration') }}">Inscription</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('log_in') }}">Connexion</a>
+                                </li>
+
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('user_edit', {id:app.user.id}) }}">Mon Compte</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('log_out') }}">Deconnexion</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </section>
             {% block body %}{% endblock %}
             {% block javascripts %}{% endblock %}
         </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Security;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
@@ -14,7 +14,7 @@ class RegistrationController extends AbstractController
 {
     /**
      * @Route("/inscription", name="registration")
-     * @Route("/{id}/modification", name="user_edit")
+     * @Route("/modification/{id}", name="user_edit")
      */
     public function index(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
@@ -31,11 +31,14 @@ class RegistrationController extends AbstractController
             $user->setPassword($hash);
             $manager->persist($user);
             $manager->flush();
+
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('registration.html.twig', [
             'form' => $form->createView(),
             'editMode' => null !== $user->getId(),
+            'user_id' => $user->getId(),
         ]);
     }
 }

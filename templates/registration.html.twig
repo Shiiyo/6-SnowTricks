@@ -9,23 +9,34 @@
 {% endblock %}
 
 {% block body %}
-    <h1>
+
+    <h2>
         {% if editMode %}
             Modification du compte
         {% else %}
             Inscription
         {% endif %}
-    </h1>
-    {{ form_start(form) }}
-    {{ form_row(form.username, {'label': 'Pseudo'}) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.password, {'label': 'Mot de passe'}) }}
-    <button type="submit" class="btn btn-success">
-        {% if editMode %}
-            Enregistrer
-        {% else %}
-            Créer un compte
-        {% endif %}
-    </button>
-    {{ form_end(form) }}
+    </h2>
+
+    <section class="formulaire">
+        {{ form_start(form) }}
+        {{ form_row(form.username, {'label': 'Pseudo'}) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password, {'label': 'Mot de passe'}) }}
+
+            {% if editMode %}
+                <button type="submit" class="btn btn-success">
+                    Enregistrer
+                </button>
+                    <div><a href="{{ path('delete_user', {id:user_id}) }}">Supprimer le compte</a></div>
+            {% else %}
+                <button type="submit" class="btn btn-success">
+                    Créer un compte
+                </button>
+                    <div><a href="{{ path('log_in') }}">Déjà un compte ?</a></div>
+            {% endif %}
+
+        {{ form_end(form) }}
+    </section>
+
 {% endblock %}

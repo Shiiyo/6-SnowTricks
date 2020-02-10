@@ -3,17 +3,20 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <h1>Connexion</h1>
+    <h2>Connexion</h2>
+    <section class="formulaire">
+        <form action="{{ path('log_in') }}" method="post">
+            <div class="form-group">
+                <input placeholder="Pseudo" required name="_username" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <input placeholder="Mot de passe" required name="_password" type="password" class="form-control">
+            </div>
+            <div class="from-group">
+                <button type="submit" class="btn btn-success">Connexion</button>
+            </div>
+        </form>
+    </section>
 
-    <form action="{{ path('log_in') }}" method="post">
-        <div class="form-group">
-            <input placeholder="Pseudo" required name="_username" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <input placeholder="Mot de passe" required name="_password" type="password" class="form-control">
-        </div>
-        <div class="from-group">
-            <button type="submit" class="btn btn-success">Connexion</button>
-        </div>
-    </form>
+    <div><a href="{{ path('registration') }}">Créer un compte</a></div>
 {% endblock %}
