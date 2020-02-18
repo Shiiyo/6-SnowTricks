@@ -28,7 +28,8 @@ class DeleteUserControllerTest extends WebTestCase
         $user = new User();
         $user->setPassword('toto')
             ->setEmail('toto')
-            ->setUsername('toto');
+            ->setUsername('toto')
+            ->setIsActive(0);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 

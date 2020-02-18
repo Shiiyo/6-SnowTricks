@@ -3,6 +3,7 @@
 namespace App\Tests;
 
 use App\Entity\Picture;
+use App\Entity\Token;
 use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 
@@ -38,5 +39,18 @@ class UserTest extends TestCase
         $picture = new Picture();
         $this->user->setPicture($picture);
         $this->assertSame($picture, $this->user->getPicture());
+    }
+
+    public function testToken()
+    {
+        $token = new Token();
+        $this->user->setToken($token);
+        $this->assertSame($token, $this->user->getToken());
+    }
+
+    public function testIsActive()
+    {
+        $this->user->setIsActive(1);
+        $this->assertSame(true, $this->user->getIsActive());
     }
 }
