@@ -23,6 +23,9 @@ class RegistrationController extends AbstractController
         if (!$user) {
             $user = new User();
         }
+        else{
+            $this->denyAccessUnlessGranted('ROLE_USER');
+        }
 
         $form = $this->createForm(RegistrationType::class, $user);
 
@@ -40,7 +43,7 @@ class RegistrationController extends AbstractController
             $manager->flush();
 
             $token = $generateToken->generateToken($user);
-            $mailer->sendEmail($user, $token);
+            $mailer->sendWelcomeEmail($user, $token);
 
             return $this->redirectToRoute('home');
         }

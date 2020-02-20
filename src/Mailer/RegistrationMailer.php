@@ -16,13 +16,28 @@ class RegistrationMailer
         $this->setMailer($mailer);
     }
 
-    public function sendEmail(User $user, Token $token)
+    public function sendWelcomeEmail(User $user, Token $token)
     {
         $email = (new TemplatedEmail())
             ->from('info@snowtricks.com')
             ->to($user->getEmail())
             ->subject('Bienvenue dans la communauté de SnowTricks !')
             ->htmlTemplate('emails/registration.html.twig')
+            ->context([
+                'token' => $token,
+                'user' => $user,
+            ]);
+
+        return $this->getMailer()->send($email);
+    }
+
+    public function sendResetPasswordEmail(User $user, Token $token)
+    {
+        $email = (new TemplatedEmail())
+            ->from('info@snowtricks.com')
+            ->to($user->getEmail())
+            ->subject('Vous avez demandé à réinitialiser votre mot de passe sur SnowTricks.')
+            ->htmlTemplate('emails/resetPassword.html.twig')
             ->context([
                 'token' => $token,
                 'user' => $user,
