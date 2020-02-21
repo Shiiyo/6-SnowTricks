@@ -43,7 +43,7 @@ class RegistrationController extends AbstractController
             $manager->flush();
 
             $token = $generateToken->generateToken($user);
-            $mailer->sendWelcomeEmail($user, $token);
+            $mailer->sendEmail($user, $token);
 
             return $this->redirectToRoute('home');
         }

@@ -10,7 +10,7 @@ class TestGlobalController extends WebTestCase
     {
         $client = static::createClient();
         $client->request('GET', $route);
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isSuccessful());
         $this->assertSelectorTextContains('h2', $textExpected);
 
         return $client->getResponse()->getContent();

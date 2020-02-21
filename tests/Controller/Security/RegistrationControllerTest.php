@@ -15,8 +15,9 @@ class RegistrationControllerTest extends WebTestCase
 
     public function testModification()
     {
-        $test = new TestGlobalController();
-        $content = $test->testRenderView('/modification/87', 'Modification du compte');
-        $this->assertContains('Shiyo', $content);
+        $client = static::createClient();
+        $client->request('GET', '/modification/87');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 }
