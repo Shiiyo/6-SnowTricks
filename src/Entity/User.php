@@ -3,11 +3,22 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ *     fields = {"username"},
+ *     message = "{{ value }} est déjà utilisé."
+ * )
+ * @UniqueEntity(
+ *     fields = {"email"},
+ *     message = "Cet email est déjà utilisé."
+ * )
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -18,21 +29,29 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     min = 3,
+     *     minMessage="Votre pseudo est trop court ( {{ limit }} caractères mini).",
+     *     max= 30,
+     *     maxMessage="Votre pseudo est trop long ( {{ limit }} caractères maxi)."
+     * )
      */
-    private $name;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
-     */
-    private $firstName;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     min= 8,
+     *     minMessage = "Votre mot de passe doit faire minimum {{ limit }} caractères.",
+     *     max = 30,
+     *     maxMessage = "Votre mot de passe est trop long ({{ limit }} caractères maxi)."
+     * )
      */
     private $password;
 
@@ -40,6 +59,16 @@ class User
      * @ORM\OneToOne(targetEntity="App\Entity\Picture", mappedBy="user", cascade={"persist", "remove"})
      */
     private $picture;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Token", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive;
 
     public function getId(): ?int
     {
@@ -58,26 +87,14 @@ class User
         return $this;
     }
 
-    public function getName(): ?string
+    public function getUsername(): ?string
     {
-        return $this->name;
+        return $this->username;
     }
 
-    public function setName(string $name): self
+    public function setUsername(string $username): self
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
-
-    public function setFirstName(string $firstName): self
-    {
-        $this->firstName = $firstName;
+        $this->username = $username;
 
         return $this;
     }
@@ -108,6 +125,49 @@ class User
         if ($picture->getUser() !== $newUser) {
             $picture->setUser($newUser);
         }
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getSalt()
+    {
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function getToken(): ?Token
+    {
+        return $this->token;
+    }
+
+    public function setToken(?Token $token): self
+    {
+        $this->token = $token;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = null === $token ? null : $this;
+        if ($token->getUser() !== $newUser) {
+            $token->setUser($newUser);
+        }
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

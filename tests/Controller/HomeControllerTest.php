@@ -8,10 +8,7 @@ class HomeControllerTest extends WebTestCase
 {
     public function testIndex()
     {
-        $client = static::createClient();
-        $client->request('GET', '/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertSelectorTextContains('html h1', 'Snowtricks');
-        $this->assertSelectorTextContains('html h2', 'Tremplin aux acrobates');
+        $test = new TestGlobalController();
+        $test->testRenderView('/', 200);
     }
 }

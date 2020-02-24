@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if editMode %}
+        Modification du compte
+    {% else %}
+        Inscription
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+    <h2>
+        {% if editMode %}
+            Modification du compte
+        {% else %}
+            Inscription
+        {% endif %}
+    </h2>
+
+    <section class="formulaire">
+        {{ form_start(form) }}
+        {{ form_row(form.username, {'label': 'Pseudo'}) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password, {'label': 'Mot de passe'}) }}
+
+            {% if editMode %}
+                <button type="submit" class="btn btn-success">
+                    Enregistrer
+                </button>
+                    <div><a href="{{ path('delete_user', {id:user_id}) }}">Supprimer le compte</a></div>
+            {% else %}
+                <button type="submit" class="btn btn-success">
+                    Créer un compte
+                </button>
+                    <div><a href="{{ path('log_in') }}">Déjà un compte ?</a></div>
+            {% endif %}
+
+        {{ form_end(form) }}
+    </section>
+
+{% endblock %}
