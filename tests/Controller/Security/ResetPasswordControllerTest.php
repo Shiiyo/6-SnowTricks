@@ -2,15 +2,14 @@
 
 namespace App\Tests\Controller\Security;
 
+use App\Tests\Controller\TestGlobalController;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ResetPasswordControllerTest extends WebTestCase
 {
     public function testIndex()
     {
-        $client = static::createClient();
-        $client->request('GET', '/reset-password/42');
-
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $test = new TestGlobalController();
+        $test->testRenderView('/reset-password/42', 302);
     }
 }

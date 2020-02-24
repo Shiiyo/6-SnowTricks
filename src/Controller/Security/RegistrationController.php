@@ -22,9 +22,9 @@ class RegistrationController extends AbstractController
     {
         if (!$user) {
             $user = new User();
-        }
-        else{
+        } else {
             $this->denyAccessUnlessGranted('ROLE_USER');
+            $this->denyAccessUnlessGranted('edit', $user);
         }
 
         $form = $this->createForm(RegistrationType::class, $user);

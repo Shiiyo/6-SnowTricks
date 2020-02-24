@@ -6,12 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TestGlobalController extends WebTestCase
 {
-    public function testRenderView($route, $textExpected)
+    public function testRenderView($route, $code)
     {
         $client = static::createClient();
         $client->request('GET', $route);
-        $this->assertTrue($client->getResponse()->isSuccessful());
-        $this->assertSelectorTextContains('h2', $textExpected);
+        $this->assertEquals($code, $client->getResponse()->getStatusCode());
 
         return $client->getResponse()->getContent();
     }

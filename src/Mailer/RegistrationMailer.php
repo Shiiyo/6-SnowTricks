@@ -9,7 +9,10 @@ use Symfony\Component\Mailer\MailerInterface;
 
 class RegistrationMailer
 {
-    private MailerInterface $mailer;
+    /**
+     * @var MailerInterface
+     */
+    private $mailer;
 
     public function __construct(MailerInterface $mailer)
     {
@@ -30,7 +33,6 @@ class RegistrationMailer
 
         return $this->getMailer()->send($email);
     }
-
 
     /**
      * @return MailerInterface

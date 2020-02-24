@@ -14,6 +14,9 @@ class DeleteUserController extends AbstractController
      */
     public function index(User $user, EntityManagerInterface $manager)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted('edit', $user);
+
         $manager->remove($user);
         $manager->flush();
 

@@ -10,6 +10,6 @@ class LogInControllerTest extends WebTestCase
     public function testIndex()
     {
         $test = new TestGlobalController();
-        $test->testRenderView('/login', 'Connexion');
+        $test->testRenderView('/login', 200);
     }
 }

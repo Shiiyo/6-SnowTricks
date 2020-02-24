@@ -10,14 +10,12 @@ class RegistrationControllerTest extends WebTestCase
     public function testInscription()
     {
         $test = new TestGlobalController();
-        $test->testRenderView('/inscription', 'Inscription');
+        $test->testRenderView('/inscription', 200);
     }
 
     public function testModification()
     {
-        $client = static::createClient();
-        $client->request('GET', '/modification/87');
-
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $test = new TestGlobalController();
+        $test->testRenderView('/modification/87', 302);
     }
 }
