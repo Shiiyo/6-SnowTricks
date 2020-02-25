@@ -12,6 +12,6 @@ class LogInController extends AbstractController
      */
     public function index()
     {
-        return $this->render('login.html.twig');
+        return $this->render('security/login.html.twig');
     }
 }

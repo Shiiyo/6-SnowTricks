@@ -5,13 +5,16 @@
 {% block body %}
     <h1>{{ trick.name }}</h1>
     <p class="metadata">
-        Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans la catégorie
-        {% for group in trick.trickGroups %}
-            {{ group.name }}.
-        {% endfor %}
+        Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans la catégorie {{ trick.trickGroup.name }}.
     </p>
     <p>{{ trick.content }}</p>
 
+    {% if app.user %}
+        <button type="button" class="btn btn-info"><a href="{{ path('trick_edit', {id:trick.id}) }}">Modifier le trick</a></button>
+        <button type="button" class="btn btn-danger"><a href="{{ path('trick_delete', {id:trick.id}) }}" onclick="return confirm('Vous êtes sûr de vouloir supprimer ce trick?')">Supprimer le trick</a></button>
+    {% endif %}
+
+    <hr/>
     <div class="comments">
         <h2>Commentaires</h2>
         {% for comment in trick.comments %}

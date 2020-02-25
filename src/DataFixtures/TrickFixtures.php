@@ -19,13 +19,13 @@ class TrickFixtures extends Fixture
         for ($k = 1; $k <= 10; ++$k) {
             $trick = new Trick();
             $trick->setName($faker->words(2, true));
-            $trick->setContent($faker->paragraph);
+            $trick->setContent($faker->paragraphs(5, true));
             shuffle($userArray);
             $trick->setUser($userArray[0]);
             $trick->setCreatedAt($faker->dateTimeBetween('-3 month', 'now'));
             shuffle($trickGroupArray);
             $trickGroup = $trickGroupArray[0];
-            $trick->addTrickGroup($trickGroup);
+            $trick->setTrickGroup($trickGroup);
             $trickGroup->addTrick($trick);
 
             $manager->persist($trick);

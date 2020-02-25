@@ -36,19 +36,19 @@ class ForgotPasswordController extends AbstractController
 
                 $this->addFlash('success', 'Un email vous a été envoyé.');
 
-                return $this->render('forgotPassword.html.twig', [
+                return $this->render('security/forgotPassword.html.twig', [
                     'form' => $form->createView(),
                 ]);
             }
 
             $this->addFlash('error', 'Votre pseudo n\'existe pas');
 
-            return $this->render('forgotPassword.html.twig', [
+            return $this->render('security/forgotPassword.html.twig', [
                 'form' => $form->createView(),
             ]);
         }
 
-        return $this->render('forgotPassword.html.twig', [
+        return $this->render('security/forgotPassword.html.twig', [
             'form' => $form->createView(),
         ]);
     }
