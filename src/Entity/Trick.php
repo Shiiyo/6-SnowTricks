@@ -55,16 +55,16 @@ class Trick
     private $videos;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\TrickGroup", mappedBy="tricks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TrickGroup", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $trickGroups;
+    private $trickGroup;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->pictures = new ArrayCollection();
         $this->videos = new ArrayCollection();
-        $this->trickGroups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,6 +116,18 @@ class Trick
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getTrickGroup()
+    {
+        return $this->trickGroup;
+    }
+
+    public function setTrickGroup($trickGroup)
+    {
+        $this->trickGroup = $trickGroup;
 
         return $this;
     }
@@ -205,34 +217,6 @@ class Trick
             if ($video->getTrick() === $this) {
                 $video->setTrick(null);
             }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|TrickGroup[]
-     */
-    public function getTrickGroups(): Collection
-    {
-        return $this->trickGroups;
-    }
-
-    public function addTrickGroup(TrickGroup $trickGroup): self
-    {
-        if (!$this->trickGroups->contains($trickGroup)) {
-            $this->trickGroups[] = $trickGroup;
-            $trickGroup->addTrick($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTrickGroup(TrickGroup $trickGroup): self
-    {
-        if ($this->trickGroups->contains($trickGroup)) {
-            $this->trickGroups->removeElement($trickGroup);
-            $trickGroup->removeTrick($this);
         }
 
         return $this;

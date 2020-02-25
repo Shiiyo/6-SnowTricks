@@ -9,9 +9,6 @@ use Symfony\Component\Mailer\MailerInterface;
 
 class RegistrationMailer
 {
-    /**
-     * @var MailerInterface
-     */
     private $mailer;
 
     public function __construct(MailerInterface $mailer)

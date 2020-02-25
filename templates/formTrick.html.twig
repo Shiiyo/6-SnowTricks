@@ -1,0 +1,20 @@
+{% extends '././base.html.twig' %}
+{% block title %}
+    {% if editMode %}
+        Modification du trick
+    {% else %}
+        Nouveau trick
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if editMode %}
+        <h2>Modification du trick</h2>
+    {% else %}
+        <h2>Nouveau trick</h2>
+    {% endif %}
+
+    <section class="formulaire">
+        {{ form(form) }}
+    </section>
+{% endblock %}

@@ -16,7 +16,7 @@ class RegistrationController extends AbstractController
 {
     /**
      * @Route("/inscription", name="registration")
-     * @Route("/modification/{id}", name="user_edit")
+     * @Route("/modification-compte/{id}", name="user_edit")
      */
     public function index(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, RegistrationMailer $mailer, GenerateToken $generateToken)
     {
@@ -48,7 +48,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('registration.html.twig', [
+        return $this->render('security/registration.html.twig', [
             'form' => $form->createView(),
             'editMode' => null !== $user->getId(),
             'user_id' => $user->getId(),

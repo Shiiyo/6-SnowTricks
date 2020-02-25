@@ -24,7 +24,7 @@ class TrickGroup
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Trick", inversedBy="trickGroups")
+     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="trickGroup")
      */
     private $tricks;
 
