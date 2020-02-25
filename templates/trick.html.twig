@@ -17,7 +17,14 @@
     <hr/>
     <div class="comments">
         <h2>Commentaires</h2>
-        {% for comment in trick.comments %}
+
+        {% if app.user %}
+            <section class="formulaire">
+                {{ form(form) }}
+            </section>
+        {% endif %}
+
+        {% for comment in trick.comments|reverse %}
             <p class="text-primary"> {{ comment.user.username }}</p>
             <p class="text-secondary">{{ comment.content }}</p>
             <p class="text-muted">Ecrit le {{ comment.createdAt | date('d/m/Y') }} à {{ comment.createdAt | date('H:i') }}.</p>
