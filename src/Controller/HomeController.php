@@ -13,7 +13,7 @@ class HomeController extends AbstractController
      */
     public function index(TrickRepository $repo)
     {
-        $tricks = $repo->findAll();
+        $tricks = $repo->findBy([], ['createdAt' => 'desc']);
 
         return $this->render('home.html.twig', [
             'tricks' => $tricks,

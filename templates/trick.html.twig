@@ -10,8 +10,8 @@
     <p>{{ trick.content }}</p>
 
     {% if app.user %}
-        <button type="button" class="btn btn-info"><a href="">Modifier le trick</a></button>
-        <button type="button" class="btn btn-danger"><a href="">Supprimer le trick</a></button>
+        <button type="button" class="btn btn-info"><a href="{{ path('trick_edit', {id:trick.id}) }}">Modifier le trick</a></button>
+        <button type="button" class="btn btn-danger"><a href="{{ path('trick_delete', {id:trick.id}) }}" onclick="return confirm('Vous êtes sûr de vouloir supprimer ce trick?')">Supprimer le trick</a></button>
     {% endif %}
 
     <hr/>
