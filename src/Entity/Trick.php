@@ -45,7 +45,7 @@ class Trick
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Picture", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick")
      */
     private $pictures;
 

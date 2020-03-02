@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,7 +18,7 @@ class Picture
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Trick", inversedBy="pictures")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="pictures", cascade={"persist", "remove"})
      */
     private $trick;
 
@@ -31,11 +30,10 @@ class Picture
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $file;
 
     public function __construct()
     {
-        $this->trick = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -43,31 +41,6 @@ class Picture
         return $this->id;
     }
 
-    /**
-     * @return Collection|Trick[]
-     */
-    public function getTrick(): Collection
-    {
-        return $this->trick;
-    }
-
-    public function addTrick(Trick $trick): self
-    {
-        if (!$this->trick->contains($trick)) {
-            $this->trick[] = $trick;
-        }
-
-        return $this;
-    }
-
-    public function removeTrick(Trick $trick): self
-    {
-        if ($this->trick->contains($trick)) {
-            $this->trick->removeElement($trick);
-        }
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
@@ -81,15 +54,25 @@ class Picture
         return $this;
     }
 
-    public function getName(): ?string
+    public function getFile()
     {
-        return $this->name;
+        return $this->file;
     }
 
-    public function setName(string $name): self
+    public function setFile($file): self
     {
-        $this->name = $name;
+        $this->file = $file;
 
         return $this;
+    }
+
+    public function getTrick(): ?Trick
+    {
+        return $this->trick;
+    }
+
+    public function setTrick(?Trick $trick): void
+    {
+        $this->trick = $trick;
     }
 }

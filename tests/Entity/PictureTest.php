@@ -35,7 +35,7 @@ class PictureTest extends TestCase
 
     public function testName()
     {
-        $this->picture->setName('Test');
-        $this->assertSame('Test', $this->picture->getName());
+        $this->picture->setFile('Test');
+        $this->assertSame('Test', $this->picture->getFile());
     }
 }

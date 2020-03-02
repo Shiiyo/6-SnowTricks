@@ -27,6 +27,17 @@ class FormTrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $pictures = $trick->getPictures();
+            foreach ($pictures as  $picture){
+                $file = $picture->getFile();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->getParameter('upload_directory'), $fileName);
+                $picture->setFile($fileName);
+                $picture->setTrick($trick);
+                $manager->persist($picture);
+            }
+
             $trick->setUser($this->getUser());
             $manager->persist($trick);
             $manager->flush();

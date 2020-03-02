@@ -18,11 +18,12 @@ class GenerateToken
     public function generateToken(User $user)
     {
         $token = new Token();
-        $token->setUser($user)
-            ->setValue(bin2hex(random_bytes(32)))
+        $user->setToken($token);
+        $token->setValue(bin2hex(random_bytes(32)))
             ->setExpiryDate(new \DateTime('+25 hours'));
 
         $this->manager->persist($token);
+        $this->manager->persist($user);
         $this->manager->flush();
 
         return $token;
