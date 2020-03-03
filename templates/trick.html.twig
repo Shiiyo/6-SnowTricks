@@ -1,19 +1,41 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('trick') }}
+{% endblock %}
+
 {% block title %}{{ trick.name }}{% endblock %}
 
 {% block body %}
     <h1>{{ trick.name }}</h1>
-    <p class="metadata">
-        Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans la catégorie {{ trick.trickGroup.name }}.
-    </p>
+
+    <div class="main-picture">
+        {% set i = 0 %}
+        {% for picture in trick.pictures %}
+            {% if i == 0 %}
+                <img src="{{ asset('uploads/' ~ picture.file) }}" alt="" id="main" class="img-thumbnail">
+            {% endif %}
+            {% set i = i + 1 %}
+        {% endfor %}
+    </div>
+
+    {% for picture in trick.pictures %}
+        <a href="{{ asset('uploads/' ~ picture.file)}}" target="_blank"><img src="{{ asset('uploads/' ~ picture.file) | imagine_filter('my_thumb') }}" alt="" ></a>
+        {% set i = i + 1 %}
+    {% endfor %}
+
+
     <p>{{ trick.content }}</p>
 
     {% if app.user %}
         <button type="button" class="btn btn-info"><a href="{{ path('trick_edit', {id:trick.id}) }}">Modifier le trick</a></button>
         <button type="button" class="btn btn-danger"><a href="{{ path('trick_delete', {id:trick.id}) }}" onclick="return confirm('Vous êtes sûr de vouloir supprimer ce trick?')">Supprimer le trick</a></button>
     {% endif %}
-
+    <hr>
+    <p class="metadata">
+        Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans la catégorie {{ trick.trickGroup.name }}.
+    </p>
     <hr/>
     <div class="comments">
         <h2>Commentaires</h2>
@@ -23,7 +45,7 @@
                 {{ form(form) }}
             </section>
         {% endif %}
-
+        <hr>
         {% for comment in trick.comments|reverse %}
             <p class="text-primary"> {{ comment.user.username }}</p>
             <p class="text-secondary">{{ comment.content }}</p>
@@ -31,3 +53,9 @@
         {% endfor %}
     </div>
 {% endblock %}
+
+
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('trick') }}
+ {% endblock %}

@@ -13,7 +13,7 @@ bin/.phpunit/
 config/packages/
 .idea/
 .php_cs.cache
-/public/uploads
+/public/uploads/
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-bundle ###
@@ -22,3 +22,7 @@ config/packages/
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

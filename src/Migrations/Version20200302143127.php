@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200228093735 extends AbstractMigration
+final class Version20200302143127 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,7 +22,9 @@ final class Version20200228093735 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE picture CHANGE name file VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE trick ADD front_picture_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE trick ADD CONSTRAINT FK_D8F0A91EC7286F9A FOREIGN KEY (front_picture_id) REFERENCES picture (id)');
+        $this->addSql('CREATE INDEX IDX_D8F0A91EC7286F9A ON trick (front_picture_id)');
     }
 
     public function down(Schema $schema): void
@@ -30,6 +32,8 @@ final class Version20200228093735 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE picture CHANGE file name VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE trick DROP FOREIGN KEY FK_D8F0A91EC7286F9A');
+        $this->addSql('DROP INDEX IDX_D8F0A91EC7286F9A ON trick');
+        $this->addSql('ALTER TABLE trick DROP front_picture_id');
     }
 }

@@ -60,6 +60,11 @@ class Trick
      */
     private $trickGroup;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Picture")
+     */
+    private $frontPicture;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -218,6 +223,18 @@ class Trick
                 $video->setTrick(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFrontPicture(): ?Picture
+    {
+        return $this->frontPicture;
+    }
+
+    public function setFrontPicture(?Picture $frontPicture): self
+    {
+        $this->frontPicture = $frontPicture;
 
         return $this;
     }
