@@ -61,7 +61,7 @@ class Trick
     private $trickGroup;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Picture")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"})
      */
     private $frontPicture;
 
@@ -180,7 +180,7 @@ class Trick
     {
         if (!$this->pictures->contains($picture)) {
             $this->pictures[] = $picture;
-            $picture->addTrick($this);
+            $picture->setTrick($this);
         }
 
         return $this;
@@ -190,7 +190,7 @@ class Trick
     {
         if ($this->pictures->contains($picture)) {
             $this->pictures->removeElement($picture);
-            $picture->removeTrick($this);
+            $picture->setTrick(null);
         }
 
         return $this;

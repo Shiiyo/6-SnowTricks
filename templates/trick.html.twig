@@ -11,15 +11,13 @@
     <h1>{{ trick.name }}</h1>
 
     <div class="main-picture">
-        {% set i = 0 %}
-        {% for picture in trick.pictures %}
-            {% if i == 0 %}
-                <img src="{{ asset('uploads/' ~ picture.file) }}" alt="" id="main" class="img-thumbnail">
-            {% endif %}
-            {% set i = i + 1 %}
-        {% endfor %}
+        {% if  trick.frontPicture is not same as(null) %}
+            <img src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" id="main" class="img-thumbnail">
+        {% else %}
+            <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" id="main" class="img-thumbnail">
+        {% endif %}
     </div>
-
+    {% set i = 0 %}
     {% for picture in trick.pictures %}
         <a href="{{ asset('uploads/' ~ picture.file)}}" target="_blank"><img src="{{ asset('uploads/' ~ picture.file) | imagine_filter('my_thumb') }}" alt="" ></a>
         {% set i = i + 1 %}

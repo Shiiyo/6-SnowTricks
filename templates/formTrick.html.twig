@@ -17,10 +17,35 @@
     <section class="formulaire">
         {{ form_start(form) }}
             {{ form_row(form.name) }}
-            {{ form_row(form.content) }}
+
+            <!-- Show pictures already loads -->
+            {% if editMode %}
+                <div class="main-picture">
+                    {% if  trick.frontPicture is not same as(null) %}
+                        <img src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" id="main" class="img-thumbnail">
+                    {% else %}
+                        <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" id="main" class="img-thumbnail">
+                    {% endif %}
+                </div>
+                {% set i = 0 %}
+                {% for picture in trick.pictures %}
+                    <img src="{{ asset('uploads/' ~ picture.file) | imagine_filter('my_thumb') }}" alt="" class="img img-responsive img-preview thumbnail">
+                    {% set i = i + 1 %}
+                {% endfor %}
+            {% endif %}
+
+
+        <!-- Form -->
+            {{ form_label(form.frontPicture, 'Image de couverture') }}
+            {{ form_widget(form.frontPicture) }}
+
+        <h3>Images</h3>
+            <ul class="pictures" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e }}">
+           </ul>
+
+            <br/><br/>
             {{ form_row(form.trickGroup) }}
-            {{ form_row(form.pictures) }}
-            <a href="#" id="add_picture" class="btn btn-info">Ajouter une image</a>
+            {{ form_row(form.content) }}
 
             {% if editMode %}
                 {{ form_row(form.submit, {'label': 'Modifier le trick'})}}

@@ -28,6 +28,19 @@ class FormTrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pictures = $trick->getPictures();
+            $frontPicture = $trick->getFrontPicture();
+
+            //Save the front picture name file
+            if (null !== $frontPicture->getFile()) {
+                $file = $frontPicture->getFile();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->getParameter('upload_directory'), $fileName);
+                $frontPicture->setFile($fileName);
+                $frontPicture->setTrick($trick);
+                $manager->persist($frontPicture);
+            }
+
+            //Save all the pictures
             foreach ($pictures as  $picture) {
                 $file = $picture->getFile();
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
@@ -49,6 +62,7 @@ class FormTrickController extends AbstractController
         return $this->render('formTrick.html.twig', [
             'form' => $form->createView(),
             'editMode' => null !== $trick->getId(),
+            'trick' => $trick,
         ]);
     }
 }
