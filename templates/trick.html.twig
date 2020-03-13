@@ -10,6 +10,7 @@
 {% block body %}
     <h1>{{ trick.name }}</h1>
 
+    <!-- Main picture -->
     <div class="main-picture">
         {% if  trick.frontPicture is not same as(null) %}
             <img src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" id="main" class="img-thumbnail">
@@ -17,12 +18,18 @@
             <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" id="main" class="img-thumbnail">
         {% endif %}
     </div>
+
+    <!-- Pictures -->
     {% set i = 0 %}
     {% for picture in trick.pictures %}
         <a href="{{ asset('uploads/' ~ picture.file)}}" target="_blank"><img src="{{ asset('uploads/' ~ picture.file) | imagine_filter('my_thumb') }}" alt="" ></a>
         {% set i = i + 1 %}
     {% endfor %}
 
+    <!-- Vidéos -->
+    {% for video in trick.videos %}
+        <iframe width="480" height="270" src="{{ video.url }}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    {% endfor %}
 
     <p>{{ trick.content }}</p>
 

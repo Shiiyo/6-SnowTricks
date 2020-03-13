@@ -7,6 +7,18 @@
     {% endif %}
 {% endblock %}
 
+{% import _self as formMacro %}
+
+{% macro printPictureRow(formPicture) %}
+    <div class="js-picture">
+        {{ form_row(formPicture.file) }}
+        <div class="delete-picture">
+            <button type="button" class="btn btn-danger">Supprimer</button>
+        </div>
+
+    </div>
+{% endmacro %}
+
 {% block body %}
     {% if editMode %}
         <h2>Modification du trick</h2>
@@ -40,12 +52,19 @@
             {{ form_widget(form.frontPicture) }}
 
         <h3>Images</h3>
-            <ul class="pictures" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e }}">
+            <ul class="pictures" data-prototype="{{ formMacro.printPictureRow(form.pictures.vars.prototype)|e('html_attr') }}">
            </ul>
+
+{#            <ul>
+                {% for video in form['videos'] %}
+                    <li>{{ form_row(video) }}</li>
+                {% endfor %}
+            </ul>#}
 
             <br/><br/>
             {{ form_row(form.trickGroup) }}
             {{ form_row(form.content) }}
+
 
             {% if editMode %}
                 {{ form_row(form.submit, {'label': 'Modifier le trick'})}}

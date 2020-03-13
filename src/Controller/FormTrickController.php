@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
+use App\Entity\Video;
 use App\Form\TrickType;
+use App\VideoHostTemplate;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,8 +29,8 @@ class FormTrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $pictures = $trick->getPictures();
-            $frontPicture = $trick->getFrontPicture();
+            $frontPicture = $form->get('frontPicture')->getData();
+            $pictures = $form->get('pictures')->getData();
 
             //Save the front picture name file
             if (null !== $frontPicture->getFile()) {
@@ -38,17 +40,37 @@ class FormTrickController extends AbstractController
                 $frontPicture->setFile($fileName);
                 $frontPicture->setTrick($trick);
                 $manager->persist($frontPicture);
+            } else {
+                $trick->setFrontPicture(null);
             }
 
             //Save all the pictures
             foreach ($pictures as  $picture) {
-                $file = $picture->getFile();
-                $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                $file->move($this->getParameter('upload_directory'), $fileName);
-                $picture->setFile($fileName);
-                $picture->setTrick($trick);
-                $manager->persist($picture);
+                if (null !== $picture->getFile()) {
+                    $file = $picture->getFile();
+                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $file->move($this->getParameter('upload_directory'), $fileName);
+                    $picture->setFile($fileName);
+                    $picture->setTrick($trick);
+                    $manager->persist($picture);
+                } else {
+                    $trick->removePicture($picture);
+                }
             }
+
+            //Save video
+            /*            $videoUrl = $form->get('videos')->getData();
+                        $video = new Video();
+                        $hostTemplate = new VideoHostTemplate();
+            
+                        $hostName = $hostTemplate->getHostName($videoUrl);
+                        $video->setHostName($hostName);
+            
+                        $videoName = $hostTemplate->getVideoName($videoUrl, $hostName);
+                        $video->setName($videoName);
+            
+                        $video->setTrick($trick);
+                        $manager->persist($video);*/
 
             $trick->setUser($this->getUser());
             $manager->persist($trick);

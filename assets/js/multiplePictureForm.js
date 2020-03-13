@@ -1,10 +1,13 @@
-//Ajoute un bouton Ajouter une image
+
+//Add a picture button variables
 var $addPictureButton = $('<button type="button" class="btn btn-info add_picture_button">Ajouter une image</button>');
 var $newLinkLi = $('<li></li>').append($addPictureButton);
-
 var $collectionHolder;
 
+var $deleteButton = $('<button type="button" class="btn btn-danger">Supprimer</button>');
+
 $(document).ready(function() {
+    ///////////////////////// Add a button for adding a picture ////////////////////////
     // Get the ul that holds the collection of Pictures
     $collectionHolder = $('ul.pictures');
 
@@ -19,20 +22,20 @@ $(document).ready(function() {
         // add a new tag form (see next code block)
         addPictureForm($collectionHolder, $newLinkLi);
     });
+
+    $('body').on('click', ".delete-picture", function () {
+        $(this).closest('li').remove();
+    })
 });
 
 function addPictureForm($collectionHolder, $newLinkLi) {
-    // Get the data-prototype explained earlier
+    // Get the data-prototype
     var prototype = $collectionHolder.data('prototype');
 
     // get the new index
     var index = $collectionHolder.data('index');
 
     var newForm = prototype;
-    // You need this only if you didn't set 'label' => false in your tags field in TaskType
-    // Replace '__name__label__' in the prototype's HTML to
-    // instead be a number based on how many items we have
-    // newForm = newForm.replace(/__name__label__/g, index);
 
     // Replace '__name__' in the prototype's HTML to
     // instead be a number based on how many items we have

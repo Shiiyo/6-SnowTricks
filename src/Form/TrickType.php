@@ -27,13 +27,21 @@ class TrickType extends AbstractType
             ])
             ->add('frontPicture', PictureType::class)
             ->add('pictures', CollectionType::class, [
-                'entry_options' => ['label' => false],
+                'mapped' => false,
                 'entry_type' => PictureType::class,
                 'by_reference' => false,
                 'prototype' => true,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'label' => false,
             ])
+/*            ->add('videos', CollectionType::class, [
+                'entry_type' => TextType::class,
+                'by_reference' => false,
+                'prototype' => true,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])*/
             ->add('submit', SubmitType::class);
     }
 
