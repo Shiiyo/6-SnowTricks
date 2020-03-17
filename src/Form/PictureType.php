@@ -15,6 +15,7 @@ class PictureType extends AbstractType
         $builder->add('file', FileType::class, [
             'required' => false,
             'label' => false,
+            'mapped' => false,
             'attr' => ['class' => 'form-control-file',
                 'type' => 'file',
             ],

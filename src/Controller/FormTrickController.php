@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Picture;
 use App\Entity\Trick;
 use App\Entity\Video;
 use App\Form\TrickType;
@@ -62,13 +63,13 @@ class FormTrickController extends AbstractController
             /*            $videoUrl = $form->get('videos')->getData();
                         $video = new Video();
                         $hostTemplate = new VideoHostTemplate();
-            
+
                         $hostName = $hostTemplate->getHostName($videoUrl);
                         $video->setHostName($hostName);
-            
+
                         $videoName = $hostTemplate->getVideoName($videoUrl, $hostName);
                         $video->setName($videoName);
-            
+
                         $video->setTrick($trick);
                         $manager->persist($video);*/
 
@@ -86,5 +87,16 @@ class FormTrickController extends AbstractController
             'editMode' => null !== $trick->getId(),
             'trick' => $trick,
         ]);
+    }
+
+    /**
+     * @Route("/supprimer-image/{id}", name="delete_picture")
+     */
+    public function deletePicture(Picture $picture, EntityManagerInterface $manager)
+    {
+        $manager->remove($picture);
+        $manager->flush();
+
+        return $this->json(['code' => 200, 'message' => 'Photo supprimé.'], 200);
     }
 }

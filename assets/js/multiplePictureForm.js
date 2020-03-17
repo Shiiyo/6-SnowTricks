@@ -4,8 +4,6 @@ var $addPictureButton = $('<button type="button" class="btn btn-info add_picture
 var $newLinkLi = $('<li></li>').append($addPictureButton);
 var $collectionHolder;
 
-var $deleteButton = $('<button type="button" class="btn btn-danger">Supprimer</button>');
-
 $(document).ready(function() {
     ///////////////////////// Add a button for adding a picture ////////////////////////
     // Get the ul that holds the collection of Pictures
@@ -23,9 +21,14 @@ $(document).ready(function() {
         addPictureForm($collectionHolder, $newLinkLi);
     });
 
-    $('body').on('click', ".delete-picture", function () {
+    ///////////////////////// Remove the image field when we click on the delete button ////////////////////////
+    $('.pictures').on('click', ".delete-picture", function () {
         $(this).closest('li').remove();
-    })
+    });
+
+    ///////////////////////// Remove image in DB when we click on the delete button ////////////////////////
+    //All the delete button for already in DB picture
+    $("a.js-delete-picture").on('click', onClickBtnDelete);
 });
 
 function addPictureForm($collectionHolder, $newLinkLi) {
@@ -54,4 +57,16 @@ function addPictureForm($collectionHolder, $newLinkLi) {
             .find('.custom-file-label')
             .html(inputFile.files[0].name);
     });
+}
+
+function onClickBtnDelete(event) {
+    event.preventDefault();
+    const url = this.href;
+
+    $.get(
+        url,
+        function(){
+            $("a.js-delete-picture").closest('div.js-picture').remove();
+        }
+    );
 }

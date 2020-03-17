@@ -25,7 +25,7 @@ class TrickType extends AbstractType
                 'choice_label' => 'name',
                 'label' => 'Groupe de trick',
             ])
-            ->add('frontPicture', PictureType::class)
+            ->add('frontPicture', PictureType::class, ['mapped' => false])
             ->add('pictures', CollectionType::class, [
                 'mapped' => false,
                 'entry_type' => PictureType::class,
