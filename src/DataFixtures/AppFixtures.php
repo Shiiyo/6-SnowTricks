@@ -28,6 +28,14 @@ class AppFixtures extends Fixture
         $commentFixtures = new CommentFixtures();
         $commentFixtures->load($manager);
 
+        //Create pictures
+        $pictureFixtures = new PictureFixtures();
+        $pictureFixtures->load($manager);
+
+        //Create videos
+        $videoFixtures = new VideoFixtures();
+        $videoFixtures->load($manager);
+
         $manager->flush();
     }
 }
