@@ -60,18 +60,20 @@ class FormTrickController extends AbstractController
             }
 
             //Save video
-            /*            $videoUrl = $form->get('videos')->getData();
-                        $video = new Video();
-                        $hostTemplate = new VideoHostTemplate();
+            $videosURL = $form->get('videos')->getData();
+            foreach ($videosURL as $videoURL) {
+                $video = new Video();
+                $hostTemplate = new VideoHostTemplate();
 
-                        $hostName = $hostTemplate->getHostName($videoUrl);
-                        $video->setHostName($hostName);
+                $hostName = $hostTemplate->getHostName($videoURL);
+                $video->setHostName($hostName);
 
-                        $videoName = $hostTemplate->getVideoName($videoUrl, $hostName);
-                        $video->setName($videoName);
+                $videoName = $hostTemplate->getVideoName($videoURL, $hostName);
+                $video->setName($videoName);
 
-                        $video->setTrick($trick);
-                        $manager->persist($video);*/
+                $video->setTrick($trick);
+                $manager->persist($video);
+            }
 
             $trick->setUser($this->getUser());
             $manager->persist($trick);
@@ -80,6 +82,13 @@ class FormTrickController extends AbstractController
             $this->addFlash('success', 'Le trick est bien enregistré !');
 
             return $this->redirectToRoute('home');
+        }
+
+        //Get the url of each video in this trick
+        $hostTemplate = new VideoHostTemplate();
+        foreach ($trick->getVideos() as $video) {
+            $url = $hostTemplate->getHostTemplate($video->getHostName(), $video->getName());
+            $video->setUrl($url);
         }
 
         return $this->render('formTrick.html.twig', [
@@ -98,5 +107,16 @@ class FormTrickController extends AbstractController
         $manager->flush();
 
         return $this->json(['code' => 200, 'message' => 'Photo supprimé.'], 200);
+    }
+
+    /**
+     * @Route("supprimer-video/{id}", name="delete_video")
+     */
+    public function deleteVideo(Video $video, EntityManagerInterface $manager)
+    {
+        $manager->remove($video);
+        $manager->flush();
+
+        return $this->json(['code' => 200, 'message' => 'Vidéo supprimé'], 200);
     }
 }

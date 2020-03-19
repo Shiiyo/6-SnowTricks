@@ -26,6 +26,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('multiplePicture', './assets/js/multiplePictureForm.js')
     .addEntry('trick', './assets/js/trick.js')
+    .addEntry('multipleVideo', './assets/js/multipleVideoForm.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

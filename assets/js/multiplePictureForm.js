@@ -2,23 +2,31 @@
 //Add a picture button variables
 var $addPictureButton = $('<button type="button" class="btn btn-info add_picture_button">Ajouter une image</button>');
 var $newLinkLi = $('<li></li>').append($addPictureButton);
-var $collectionHolder;
+var $pictureCollectionHolder;
+
 
 $(document).ready(function() {
     ///////////////////////// Add a button for adding a picture ////////////////////////
     // Get the ul that holds the collection of Pictures
-    $collectionHolder = $('ul.pictures');
+    $pictureCollectionHolder = $('ul.pictures');
 
     // add the "add a picture" anchor and li to the tags ul
-    $collectionHolder.append($newLinkLi);
+    $pictureCollectionHolder.append($newLinkLi);
 
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
-    $collectionHolder.data('index', $collectionHolder.find(':input').length);
+    $pictureCollectionHolder.data('index', $pictureCollectionHolder.find(':input').length);
 
     $addPictureButton.on('click', function(e) {
         // add a new tag form (see next code block)
-        addPictureForm($collectionHolder, $newLinkLi);
+        addPictureForm($pictureCollectionHolder, $newLinkLi);
+    });
+
+    $('.custom-file-input').on('change', function (e) {
+        let inputFile = e.currentTarget;
+        $(inputFile).parent()
+            .find('.custom-file-label')
+            .html(inputFile.files[0].name);
     });
 
     ///////////////////////// Remove the image field when we click on the delete button ////////////////////////

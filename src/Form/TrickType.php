@@ -35,13 +35,15 @@ class TrickType extends AbstractType
                 'allow_delete' => true,
                 'label' => false,
             ])
-/*            ->add('videos', CollectionType::class, [
+            ->add('videos', CollectionType::class, [
                 'entry_type' => TextType::class,
                 'by_reference' => false,
                 'prototype' => true,
                 'allow_add' => true,
                 'allow_delete' => true,
-            ])*/
+                'mapped' => false,
+                'label' => false,
+            ])
             ->add('submit', SubmitType::class);
     }
 

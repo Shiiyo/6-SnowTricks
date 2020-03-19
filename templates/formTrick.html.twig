@@ -18,6 +18,16 @@
     </div>
 {% endmacro %}
 
+{% macro printVideoRow(formVideo) %}
+    <div class="js-video">
+        {{ form_row(formVideo) }}
+        <div class="delete-video">
+            <button type="button" class="btn btn-danger">Supprimer</button>
+        </div>
+    </div>
+{% endmacro %}
+
+
 {% block body %}
     {% if editMode %}
         <h2>Modification du trick</h2>
@@ -43,17 +53,25 @@
                         <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" id="main" class="img-thumbnail">
                     {% endif %}
                 </div>
+
                 {% set i = 0 %}
                 {% for picture in trick.pictures %}
-
                     <div class="js-picture">
                         <img src="{{ asset('uploads/' ~ picture.file) | imagine_filter('my_thumb') }}" alt="" class="img img-responsive img-preview thumbnail">
                         <a href="{{ path('delete_picture', {id:picture.id}) }}" class="js-delete-picture">
                             <button type="button" class="delete-existing-picture btn btn-danger">Supprimer</button>
                         </a>
                     </div>
-
                     {% set i = i + 1 %}
+                {% endfor %}
+
+                {% for video in trick.videos %}
+                    <div class="js-video">
+                        <iframe width="480" height="270" src="{{ video.url }}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                        <a href="{{ path('delete_video', {id:video.id}) }}" class="js-delete-video">
+                            <button type="button" class="delete-existing-video btn btn-danger">Supprimer</button>
+                        </a>
+                    </div>
                 {% endfor %}
             {% endif %}
 
@@ -65,11 +83,9 @@
             <ul class="pictures" data-prototype="{{ formMacro.printPictureRow(form.pictures.vars.prototype)|e('html_attr') }}">
            </ul>
 
-{#            <ul>
-                {% for video in form['videos'] %}
-                    <li>{{ form_row(video) }}</li>
-                {% endfor %}
-            </ul>#}
+        <h3>Videos</h3>
+            <ul class="videos" data-prototype="{{ formMacro.printVideoRow(form.videos.vars.prototype)|e('html_attr') }}">
+            </ul>
 
             <br/><br/>
             {{ form_row(form.trickGroup) }}
@@ -88,4 +104,5 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('multiplePicture') }}
+    {{ encore_entry_script_tags('multipleVideo') }}
 {% endblock %}
