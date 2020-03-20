@@ -6,6 +6,7 @@ use App\Entity\Picture;
 use App\Entity\Trick;
 use App\Entity\Video;
 use App\Form\TrickType;
+use App\SlugCreator;
 use App\VideoHostTemplate;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +17,7 @@ class FormTrickController extends AbstractController
 {
     /**
      * @Route("/nouveau-trick", name="new_trick")
-     * @Route("/modification/{id}", name="trick_edit")
+     * @Route("/modification/{slug}", name="trick_edit")
      */
     public function index(Trick $trick = null, Request $request, EntityManagerInterface $manager)
     {
@@ -30,6 +31,13 @@ class FormTrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //Create a slug with the name of the trick
+            $name = $trick->getName();
+            $slugCreator = new SlugCreator();
+            $slug = $slugCreator->slugify($name);
+            $trick->setSlug($slug);
+
+            //Get pictures from the form
             $frontPicture = $form->get('frontPicture')->getData();
             $pictures = $form->get('pictures')->getData();
 

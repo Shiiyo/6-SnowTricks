@@ -8,15 +8,16 @@ use Doctrine\Persistence\ObjectManager;
 
 class VideoFixtures extends Fixture
 {
+    private $nameArray = [
+        'SQyTWk7OxSI',
+        'G9qlTInKbNE',
+        'qsd8uaex-Is',
+        'bA6HZin1VyI',
+        'SqpVHk2O778',
+    ];
+
     public function load(ObjectManager $manager)
     {
-        $nameArray = [
-            'SQyTWk7OxSI',
-            'G9qlTInKbNE',
-            'qsd8uaex-Is',
-            'bA6HZin1VyI',
-            'SqpVHk2O778',
-        ];
         $faker = \Faker\Factory::create('fr_FR');
         $trickArray = $manager->getRepository('App\Entity\Trick')->findAll();
 
@@ -25,11 +26,16 @@ class VideoFixtures extends Fixture
 
             $video->setTrick($faker->randomElement($trickArray));
 
-            $video->setName($faker->randomElement($nameArray));
+            $video->setName($faker->randomElement($this->getNameArray()));
 
             $video->setHostName('youtube');
 
             $manager->persist($video);
         }
+    }
+
+    public function getNameArray(): array
+    {
+        return $this->nameArray;
     }
 }

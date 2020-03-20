@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/trick/{id}", name="trick")
+     * @Route("/trick/{slug}", name="trick")
      */
     public function index(Trick $trick, Request $request, EntityManagerInterface $manager)
     {
