@@ -23,27 +23,32 @@ class FormTrickController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
+        //Creation mode: create a new trick
         if (!$trick) {
             $trick = new Trick();
             $trick->setCreatedAt(new \DateTime());
         }
+
+        //Get the url of each video in this trick
+        $hostTemplate = new VideoHostTemplate();
+        foreach ($trick->getVideos() as $video) {
+            $url = $hostTemplate->getHostTemplate($video->getHostName(), $video->getName());
+            $video->setUrl($url);
+        }
+
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Create a slug with the name of the trick
-            $name = $trick->getName();
             $slugCreator = new SlugCreator();
-            $slug = $slugCreator->slugify($name);
+            $slug = $slugCreator->slugify($trick->getName());
             $trick->setSlug($slug);
 
-            //Get pictures from the form
-            $frontPicture = $form->get('frontPicture')->getData();
-            $pictures = $form->get('pictures')->getData();
-
             //Save the front picture name file
-            if (null !== $frontPicture->getFile()) {
-                $file = $frontPicture->getFile();
+            $frontPicture = $form->get('frontPicture')->getData()->getFile();
+            if (null !== $frontPicture) {
+                $file = $frontPicture->getData();
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move($this->getParameter('upload_directory'), $fileName);
                 $frontPicture->setFile($fileName);
@@ -54,17 +59,15 @@ class FormTrickController extends AbstractController
             }
 
             //Save all the pictures
-            foreach ($pictures as  $picture) {
-                if (null !== $picture->getFile()) {
-                    $file = $picture->getFile();
-                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                    $file->move($this->getParameter('upload_directory'), $fileName);
-                    $picture->setFile($fileName);
-                    $picture->setTrick($trick);
-                    $manager->persist($picture);
-                } else {
-                    $trick->removePicture($picture);
-                }
+            foreach ($form->get('pictures') as $pictureForm) {
+                /** @var Picture $picture */
+                $picture = $pictureForm->getData();
+                $file = $pictureForm->get('file')->getData();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $picture->setFile($fileName);
+                $file->move($this->getParameter('upload_directory'), $fileName);
+                $picture->setTrick($trick);
+                $manager->persist($picture);
             }
 
             //Save video
@@ -92,39 +95,10 @@ class FormTrickController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        //Get the url of each video in this trick
-        $hostTemplate = new VideoHostTemplate();
-        foreach ($trick->getVideos() as $video) {
-            $url = $hostTemplate->getHostTemplate($video->getHostName(), $video->getName());
-            $video->setUrl($url);
-        }
-
         return $this->render('formTrick.html.twig', [
             'form' => $form->createView(),
             'editMode' => null !== $trick->getId(),
             'trick' => $trick,
         ]);
-    }
-
-    /**
-     * @Route("/supprimer-image/{id}", name="delete_picture")
-     */
-    public function deletePicture(Picture $picture, EntityManagerInterface $manager)
-    {
-        $manager->remove($picture);
-        $manager->flush();
-
-        return $this->json(['code' => 200, 'message' => 'Photo supprimé.'], 200);
-    }
-
-    /**
-     * @Route("supprimer-video/{id}", name="delete_video")
-     */
-    public function deleteVideo(Video $video, EntityManagerInterface $manager)
-    {
-        $manager->remove($video);
-        $manager->flush();
-
-        return $this->json(['code' => 200, 'message' => 'Vidéo supprimé'], 200);
     }
 }
