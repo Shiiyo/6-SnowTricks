@@ -13,6 +13,7 @@ bin/.phpunit/
 config/packages/
 .idea/
 .php_cs.cache
+public/uploads/
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-bundle ###

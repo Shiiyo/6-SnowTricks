@@ -69,12 +69,7 @@ function addPictureForm($collectionHolder, $newLinkLi) {
 
 function onClickBtnDelete(event) {
     event.preventDefault();
-    const url = this.href;
-
-    $.get(
-        url,
-        function(){
-            $("a.js-delete-picture").closest('div.js-picture').remove();
-        }
-    );
+    event.target.closest('div.js-picture').remove();
+    //Ajax call
+    $.get(this.href);
 }
