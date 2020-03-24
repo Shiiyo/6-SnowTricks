@@ -7,6 +7,27 @@
     {% endif %}
 {% endblock %}
 
+{% import _self as formMacro %}
+
+{% macro printPictureRow(formPicture) %}
+    <div class="js-picture">
+        {{ form_row(formPicture.file) }}
+        <div class="delete-picture">
+            <button type="button" class="btn btn-danger">Supprimer</button>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro printVideoRow(formVideo) %}
+    <div class="js-video">
+        {{ form_row(formVideo) }}
+        <div class="delete-video">
+            <button type="button" class="btn btn-danger">Supprimer</button>
+        </div>
+    </div>
+{% endmacro %}
+
+
 {% block body %}
     {% if editMode %}
         <h2>Modification du trick</h2>
@@ -15,6 +36,73 @@
     {% endif %}
 
     <section class="formulaire">
-        {{ form(form) }}
+        {{ form_start(form) }}
+            {{ form_row(form.name) }}
+
+            <!-- Show pictures already loads -->
+            {% if editMode %}
+                <div class="main-picture">
+                    {% if  trick.frontPicture is not same as(null) %}
+                        <img src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" id="main" class="img-thumbnail">
+                        <div class="delete-existing-picture">
+                            <a href="{{ path('delete_picture', {id:trick.frontPicture.id}) }}" class="js-delete-picture">
+                                <button type="button" class="btn btn-danger">Supprimer</button>
+                            </a>
+                        </div>
+                    {% else %}
+                        <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" id="main" class="img-thumbnail">
+                    {% endif %}
+                </div>
+
+                {% set i = 0 %}
+                {% for picture in trick.pictures %}
+                    <div class="js-picture">
+                        <img src="{{ asset('uploads/' ~ picture.file) | imagine_filter('my_thumb') }}" alt="" class="img img-responsive img-preview thumbnail">
+                        <a href="{{ path('delete_picture', {id:picture.id}) }}" class="js-delete-picture">
+                            <button type="button" class="delete-existing-picture btn btn-danger">Supprimer</button>
+                        </a>
+                    </div>
+                    {% set i = i + 1 %}
+                {% endfor %}
+
+                {% for video in trick.videos %}
+                    <div class="js-video">
+                        <iframe width="480" height="270" src="{{ video.url }}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                        <a href="{{ path('delete_video', {id:video.id}) }}" class="js-delete-video">
+                            <button type="button" class="delete-existing-video btn btn-danger">Supprimer</button>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+
+        {{ form_label(form.frontPicture, 'Image de couverture') }}
+        {{ form_widget(form.frontPicture) }}
+
+        <h3>Images</h3>
+            <ul class="pictures" data-prototype="{{ formMacro.printPictureRow(form.pictures.vars.prototype)|e('html_attr') }}">
+           </ul>
+
+        <h3>Videos</h3>
+            <ul class="videos" data-prototype="{{ formMacro.printVideoRow(form.videos.vars.prototype)|e('html_attr') }}">
+            </ul>
+
+            <br/><br/>
+            {{ form_row(form.trickGroup) }}
+            {{ form_row(form.content) }}
+
+
+            {% if editMode %}
+                {{ form_row(form.submit, {'label': 'Modifier le trick'})}}
+            {% else %}
+                {{ form_row(form.submit, {'label': 'Nouveau trick'})}}
+            {% endif %}
+        {{ form_end(form) }}
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('multiplePicture') }}
+    {{ encore_entry_script_tags('multipleVideo') }}
 {% endblock %}

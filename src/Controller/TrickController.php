@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Trick;
 use App\Form\CommentType;
+use App\VideoHostTemplate;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/trick/{id}", name="trick")
+     * @Route("/trick/{slug}", name="trick")
      */
     public function index(Trick $trick, Request $request, EntityManagerInterface $manager)
     {
@@ -32,6 +33,13 @@ class TrickController extends AbstractController
             $this->addFlash('success', 'Merci pour votre commentaire !');
 
             return $this->redirectToRoute('trick', ['id' => $trick->getId()]);
+        }
+
+        //Get the url of each video in this trick
+        $hostTemplate = new VideoHostTemplate();
+        foreach ($trick->getVideos() as $video) {
+            $url = $hostTemplate->getHostTemplate($video->getHostName(), $video->getName());
+            $video->setUrl($url);
         }
 
         return $this->render('trick.html.twig', [

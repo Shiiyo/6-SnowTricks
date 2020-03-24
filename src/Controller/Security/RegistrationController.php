@@ -45,6 +45,8 @@ class RegistrationController extends AbstractController
             $token = $generateToken->generateToken($user);
             $mailer->sendEmail($user, $token);
 
+            $this->addFlash('success', 'Votre compte est créé, vous allez recevoir un email de confirmation.');
+
             return $this->redirectToRoute('home');
         }
 

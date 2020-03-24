@@ -6,6 +6,7 @@ use App\Entity\Trick;
 use App\Entity\TrickGroup;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,8 +25,26 @@ class TrickType extends AbstractType
                 'choice_label' => 'name',
                 'label' => 'Groupe de trick',
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Modifier le trick'])
-        ;
+            ->add('frontPicture', PictureType::class, ['mapped' => false])
+            ->add('pictures', CollectionType::class, [
+                'mapped' => false,
+                'entry_type' => PictureType::class,
+                'by_reference' => false,
+                'prototype' => true,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'label' => false,
+            ])
+            ->add('videos', CollectionType::class, [
+                'entry_type' => TextType::class,
+                'by_reference' => false,
+                'prototype' => true,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'mapped' => false,
+                'label' => false,
+            ])
+            ->add('submit', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

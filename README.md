@@ -8,6 +8,7 @@ Using PHP 7.4.2 and Symfony 5.0.2
 ##Install project
 Run the command line: <br/>
 <code>composer install</code><br/>
+<code>yarn install</code><br/>
 Config your database on the .env file and run:<br/>
 <code>php bin/console doctrine:migrations:migrate</code><br/>
 Then run this to generate fake data into the DB:<br/>

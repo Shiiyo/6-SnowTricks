@@ -8,6 +8,13 @@ use Doctrine\Persistence\ObjectManager;
 
 class TrickGroupFixtures extends Fixture
 {
+    private $groups = [
+        'Grabs',
+        'Rotation',
+        'Slides',
+        'Flips',
+    ];
+
     public function load(ObjectManager $manager)
     {
         $faker = \Faker\Factory::create('fr_FR');
@@ -15,9 +22,14 @@ class TrickGroupFixtures extends Fixture
         //Create 8 trick_group
         for ($j = 1; $j <= 8; ++$j) {
             $trickGroup = new TrickGroup();
-            $trickGroup->setName($faker->word());
+            $trickGroup->setName($faker->randomElement($this->getGroups()));
 
             $manager->persist($trickGroup);
         }
+    }
+
+    public function getGroups(): array
+    {
+        return $this->groups;
     }
 }

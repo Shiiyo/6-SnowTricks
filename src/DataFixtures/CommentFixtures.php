@@ -26,8 +26,7 @@ class CommentFixtures extends Fixture
                 $comment = new Comment();
                 $comment->setTrick($trick);
                 $comment->setCreatedAt($faker->dateTimeBetween('-'.$interval.' days'));
-                shuffle($userArray);
-                $comment->setUser($userArray[0]);
+                $comment->setUser($faker->randomElement($userArray));
                 $comment->setContent($faker->sentences(random_int(2, 6), true));
 
                 $manager->persist($comment);

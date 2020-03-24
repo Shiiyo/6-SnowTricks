@@ -27,6 +27,13 @@ class Video
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $hostName;
+
+    private $url;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,5 +61,33 @@ class Video
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getHostName(): ?string
+    {
+        return $this->hostName;
+    }
+
+    public function setHostName(string $hostName): self
+    {
+        $this->hostName = $hostName;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url): void
+    {
+        $this->url = $url;
     }
 }

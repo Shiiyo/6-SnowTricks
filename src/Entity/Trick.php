@@ -45,7 +45,8 @@ class Trick
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Picture", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", cascade={"persist"})
+     * @ORM\joinColumn(onDelete="SET NULL")
      */
     private $pictures;
 
@@ -59,6 +60,17 @@ class Trick
      * @ORM\JoinColumn(nullable=false)
      */
     private $trickGroup;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Picture", cascade={"persist"})
+     * @ORM\joinColumn(onDelete="SET NULL")
+     */
+    private $frontPicture;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -175,7 +187,7 @@ class Trick
     {
         if (!$this->pictures->contains($picture)) {
             $this->pictures[] = $picture;
-            $picture->addTrick($this);
+            $picture->setTrick($this);
         }
 
         return $this;
@@ -185,7 +197,7 @@ class Trick
     {
         if ($this->pictures->contains($picture)) {
             $this->pictures->removeElement($picture);
-            $picture->removeTrick($this);
+            $picture->setTrick(null);
         }
 
         return $this;
@@ -218,6 +230,30 @@ class Trick
                 $video->setTrick(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFrontPicture(): ?Picture
+    {
+        return $this->frontPicture;
+    }
+
+    public function setFrontPicture(?Picture $frontPicture): self
+    {
+        $this->frontPicture = $frontPicture;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
