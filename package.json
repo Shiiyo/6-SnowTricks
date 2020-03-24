@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.1.1",
-        "jquery": "^1.12.4",
+        "jquery": "^3.4.0",
         "popper.js": "^1.16.1"
     }
 }
