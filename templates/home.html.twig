@@ -9,17 +9,39 @@
 
 {% block body %}
 
-    <section class="header">
-        <h2>Tremplin aux acrobates</h2>
+    <section id="presentation">
+        <img src="{{ asset('img/index.jpg') }}" alt="Flying snowboard">
+
     </section>
     
-    <section class="tricks">
-        {% for trick in tricks %}
-            <article>
-                <h3>{{ trick.name }}</h3>
-                <img src="http://placehold.it/350x150" alt="">
-                <button type="button" class="btn btn-info"><a href="{{ path('trick', {slug:trick.slug}) }}">Lire le trick</a></button>
-            </article>
-        {% endfor %}
+    <section id="tricks">
+        <div class="container">
+            <hr>
+            <h2>Liste des tricks</h2>
+            <hr>
+            <div class="row">
+                {% for trick in tricks %}
+                    <div class="col-3">
+                        <article>
+                            <a href="{{ path('trick', {slug:trick.slug}) }}">
+                                {% if  trick.frontPicture is not same as(null) %}
+                                    <img src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" size="20vw">
+                                {% else %}
+                                    <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" size="10vw">
+                                {% endif %}
+                            </a>
+                            <a href="{{ path('trick', {slug:trick.slug}) }}">
+                                <h3>{{ trick.name }}</h3>
+                            </a>
+                            {% if app.user %}
+                                <a href="{{ path('trick_edit', {slug:trick.slug}) }}"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="{{ path('trick_delete', {id:trick.id}) }}" onclick="return confirm('Vous êtes sûr de vouloir supprimer ce trick?')"><i class="fas fa-trash-alt"></i></a>
+                            {% endif %}
+
+                        </article>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </section>
 {% endblock %}
