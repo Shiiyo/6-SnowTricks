@@ -9,12 +9,17 @@
 
 {% block body %}
 
-    <section id="presentation">
-        <img src="{{ asset('img/index.jpg') }}" alt="Flying snowboard">
+    <div id="top-arrow">
+        <a href="#presentation"><i class="fas fa-chevron-up"></i></a>
+    </div>
 
+    <section id="presentation">
+        <div id="arrow">
+            <a href="#list-tricks"><i class="fas fa-chevron-down"></i></a>
+        </div>
     </section>
     
-    <section id="tricks">
+    <section id="list-tricks">
         <div class="container">
             <hr>
             <h2>Liste des tricks</h2>
@@ -45,3 +50,8 @@
         </div>
     </section>
 {% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('home') }}
+ {% endblock %}
