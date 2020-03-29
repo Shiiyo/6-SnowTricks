@@ -1,7 +1,110 @@
-#main {
-  max-width: 100%;
-  height: auto;
-  background-color: #0b2e13;
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+p {
+  color: #444;
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-color: white;
+}
+
+/* Header */
+#header {
+  padding-top: 1rem;
+  width: 100%;
+  background-color: #4b4c4c;
+}
+#header .container {
+  max-width: 1600px;
+}
+#header .navbar {
+  display: inline-block;
+  float: right;
+}
+#header #navbarColor03, #header .bg-light, #header .nav-tabs .nav-link.active, #header .nav-link:hover, #header .nav-link:active, #header .nav-link:focus {
+  background-color: #4b4c4c !important;
+  color: white;
+  border-color: white;
+}
+#header .nav-tabs {
+  border: none;
+}
+#header a {
+  color: white;
+}
+
+#body {
+  background-color: #F7F7F7;
+}
+
+#footer {
+  padding-top: 1rem;
+  background-color: #4b4c4c;
+  color: #FFFFFF;
+}
+#footer a {
+  color: #FFFFFF;
+}
+
+hr {
+  border-color: #444;
+}
+
+h1, h2 {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  color: #444;
+}
+
+.container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 0.625rem;
+  box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11), 0 4px 8px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06), 0 7px 70px rgba(90, 97, 105, 0.1);
+}
+
+#trick h1 {
+  text-align: center;
+  color: #444;
+}
+#trick #main-picture {
+  width: 100%;
+}
+#trick #img-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#trick #img-gallery a img {
+  max-height: 250px;
+}
+#trick #content {
+  font-size: 1.3rem;
+  text-indent: 3rem;
+}
+#trick .metadata {
+  text-align: right;
+}
+
+#add-comment {
+  background-color: lightgray;
+  text-align: center;
+}
+#add-comment p {
+  margin-bottom: 0;
+  font-weight: normal;
+}
+#add-comment a {
+  font-weight: bolder;
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=trick.css.map */

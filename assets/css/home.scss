@@ -19,9 +19,23 @@
   right: 0;
   height: 3rem;
   i{
-    color: #FFFFFF;
+    color: white;
     font-size: 3rem;
     animation: arrow 1s ease-in-out infinite alternate;
+  }
+}
+
+.container{
+  max-width: 1600px;
+}
+
+/* Header */
+#header {
+  background-color: transparent !important;
+  position: absolute;
+
+  #navbarColor03, .bg-light, .nav-tabs .nav-link.active, .nav-link:hover, .nav-link:active, .nav-link:focus {
+    background-color: transparent !important;
   }
 }
 
@@ -38,17 +52,22 @@
     height: 3rem;
     text-align: center;
     i{
-      color: #FFFFFF;
+      color: white;
       font-size: 3rem;
       animation: arrow 1s ease-in-out infinite alternate;
     }
   }
 }
 
+#tricks-bloc {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
 #list-tricks {
   padding-bottom: 2rem;
-  padding-top: 1rem;
-  background-color: #444;
+  padding-top: 2rem;
+  background-color: $dark;
 
   h2 {
     text-align: center;
@@ -59,7 +78,7 @@
     margin: 1rem;
     padding: 1rem;
     border-radius: 1px;
-    background-color: #444;
+    background-color: $dark;
 
 
     -webkit-box-shadow: 3px 3px 21px 0px rgba(0,0,0,0.5);
@@ -69,7 +88,7 @@
     transition: all 200ms;
 
     &:hover {
-      background-color: #6c6c6c;
+      background-color: $light-grey;
 
       transform: scale(1.05, 1.05);
     }
@@ -82,7 +101,7 @@
     h3{
       padding-top: 0.8rem;
       display: inline-block;
-      color: #FFFFFF;
+      color: white;
     }
     .fas{
       padding-top: 0.8rem;
@@ -93,4 +112,22 @@
     }
   }
 
+  #add-trick-block{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    h2{
+      padding-bottom: 2rem;
+    }
+  }
+
+  #add-trick{
+    text-align: center;
+    button{
+      padding: 22px 40px;
+      font-size: 22px;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+    }
+  }
 }

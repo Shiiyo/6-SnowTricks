@@ -1,5 +1,64 @@
-#main {
-  max-width: 100%;
-  height: auto;
-  background-color: #0b2e13;
+@import "base.scss";
+
+hr {
+  border-color: $dark;
 }
+
+h1, h2{
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  color: $dark;
+}
+
+.container{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 0.625rem;
+  box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11), 0 4px 8px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06), 0 7px 70px rgba(90, 97, 105, 0.1);
+}
+
+#trick{
+
+  h1{
+    text-align: center;
+    color: $dark;
+  }
+
+  #main-picture{
+    width: 100%;
+  }
+
+  #img-gallery{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    a img{
+      max-height: 250px;
+    }
+  }
+
+  #content{
+    font-size: 1.3rem;
+    text-indent: 3rem;
+  }
+  .metadata{
+    text-align: right;
+  }
+}
+
+#add-comment{
+  background-color: lightgray;
+  text-align: center;
+  p{
+    margin-bottom: 0;
+    font-weight: normal;
+  }
+  a{
+    font-weight: bolder;
+    text-decoration: none;
+  }
+}
+

@@ -24,7 +24,8 @@
             <hr>
             <h2>Liste des tricks</h2>
             <hr>
-            <div class="row">
+
+            <div class="row" id="tricks-bloc">
                 {% for trick in tricks %}
                     <div class="col-3">
                         <article>
@@ -46,6 +47,14 @@
                         </article>
                     </div>
                 {% endfor %}
+            </div>
+
+            <hr>
+            <div id="add-trick-block">
+                <h2>Ton trick préféré n'est pas dans la liste?</h2>
+                <div id="add-trick">
+                    <a href="{{ path('new_trick') }}"><button type="button" class="btn btn-info">Ajoute-le !</button></a>
+                </div>
             </div>
         </div>
     </section>
