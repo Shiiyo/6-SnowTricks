@@ -12,10 +12,6 @@ img{
   display:block;
 }
 
-p {
-  color: $dark;
-}
-
 hr{
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -26,7 +22,7 @@ hr{
 #header {
   padding-top: 1rem;
   width: 100%;
-  background-color: $deep-grey;
+  background-color: $dark;
 
   .container{
   max-width: 1600px;
@@ -38,7 +34,7 @@ hr{
   }
 
   #navbarColor03, .bg-light, .nav-tabs .nav-link.active, .nav-link:hover, .nav-link:active, .nav-link:focus {
-    background-color: $deep-grey !important;
+    background-color: $dark !important;
     color: white;
     border-color: white;
   }

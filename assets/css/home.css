@@ -4,10 +4,6 @@ img {
   display: block;
 }
 
-p {
-  color: #444;
-}
-
 hr {
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -18,7 +14,7 @@ hr {
 #header {
   padding-top: 1rem;
   width: 100%;
-  background-color: #4b4c4c;
+  background-color: #444;
 }
 #header .container {
   max-width: 1600px;
@@ -28,7 +24,7 @@ hr {
   float: right;
 }
 #header #navbarColor03, #header .bg-light, #header .nav-tabs .nav-link.active, #header .nav-link:hover, #header .nav-link:active, #header .nav-link:focus {
-  background-color: #4b4c4c !important;
+  background-color: #444 !important;
   color: white;
   border-color: white;
 }
