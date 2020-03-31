@@ -1,10 +1,10 @@
 @import "../base.scss";
 
 body{
-  color: $deep-grey;
-}
+   color: $deep-grey;
+ }
 
-#login{
+#container-form{
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
@@ -26,7 +26,7 @@ h1{
   }
 }
 
-#submit{
+#submit-btn{
   text-align: center;
   .btn{
     padding: 14px 30px;

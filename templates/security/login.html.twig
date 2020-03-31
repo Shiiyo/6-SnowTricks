@@ -2,13 +2,13 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('login') }}
+    {{ encore_entry_link_tags('log-form') }}
 {% endblock %}
 
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <section id="login">
+    <section id="container-form">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 box">
@@ -23,7 +23,7 @@
                                 <label for="password">Mot de passe</label>
                                 <input id="password" required name="_password" type="password" class="form-control">
                             </div>
-                            <div class="from-group" id="submit">
+                            <div class="from-group" id="submit-btn">
                                 <button type="submit" class="btn btn-info">Valider</button>
                             </div>
                         </form>
@@ -41,5 +41,5 @@
 
  {% block javascripts %}
      {{ parent() }}
-     {{ encore_entry_script_tags('login') }}
+     {{ encore_entry_script_tags('log-form') }}
  {% endblock %}
