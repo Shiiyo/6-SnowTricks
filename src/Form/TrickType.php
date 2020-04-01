@@ -18,8 +18,8 @@ class TrickType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'Nom'])
-            ->add('content', TextareaType::class, ['label' => 'Contenu'])
+            ->add('name', TextType::class, ['label' => 'Titre'])
+            ->add('content', TextareaType::class, ['label' => 'Contenu', 'attr' => ['rows' => '10']])
             ->add('trickGroup', EntityType::class, [
                 'class' => TrickGroup::class,
                 'choice_label' => 'name',
@@ -43,8 +43,7 @@ class TrickType extends AbstractType
                 'allow_delete' => true,
                 'mapped' => false,
                 'label' => false,
-            ])
-            ->add('submit', SubmitType::class);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

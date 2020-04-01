@@ -31,6 +31,8 @@ Encore
     .addEntry('trick', './assets/js/trick.js')
     .addEntry('home', './assets/js/home.js')
     .addEntry('log-form', './assets/js/security/logForm.js')
+    .addEntry('form-trick', './assets/js/formTrick.js')
+
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

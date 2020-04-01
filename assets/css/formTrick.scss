@@ -1,0 +1,86 @@
+@import "base.scss";
+
+.box{
+  background-color: white;
+}
+
+#formulaire{
+
+  h4{
+    text-align: center;
+  }
+
+  hr{
+    border-color: $light-grey;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .main-picture, .block-image, .block-video{
+    position: relative;
+    .delete-existing-picture, .delete-existing-video{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .form-control{
+    background-color: #f7f7f9;
+  }
+
+  img {
+    border-radius: 0.625rem;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  iframe {
+    width: 100%;
+    min-height: 23rem;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    border: none;
+    border-radius: 0.625rem;
+  }
+
+  i{
+    color: #d9534f;
+    font-size: 2rem;
+    opacity: 0.9;
+    transition: all 200ms;
+  }
+  i:hover{
+    opacity: 1;
+    font-size: 2.1rem;
+    transform: scale(1.01, 1.01);
+  }
+
+  ul {
+    list-style: none;
+    margin-left:0;
+    padding-left:0;
+    li{
+      text-align: center;
+    }
+  }
+
+  button{
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+
+  #submit-btn{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  #hidden-form-group{
+    display: none;
+  }
+}
+
+
+

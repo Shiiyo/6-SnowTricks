@@ -1,6 +1,6 @@
 
 //Add a picture button variables
-var $addPictureButton = $('<button type="button" class="btn btn-info add_picture_button">Ajouter une image</button>');
+var $addPictureButton = $('<button type="button" class="btn btn-outline-info add_picture_button">Ajouter une image</button>');
 var $newLinkLi = $('<li></li>').append($addPictureButton);
 var $pictureCollectionHolder;
 
