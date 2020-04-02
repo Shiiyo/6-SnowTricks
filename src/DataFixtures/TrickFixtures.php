@@ -40,7 +40,9 @@ class TrickFixtures extends Fixture
 
             $trick->setContent($faker->paragraphs(5, true));
             $trick->setUser($faker->randomElement($userArray));
-            $trick->setCreatedAt($faker->dateTimeBetween('-3 month', 'now'));
+            $createdAt = $faker->dateTimeBetween('-3 month', 'now');
+            $trick->setCreatedAt($createdAt);
+            $trick->setUpdatedAt($faker->dateTimeBetween($createdAt, 'now'));
             $trickGroup = $faker->randomElement($trickGroupArray);
             $trick->setTrickGroup($trickGroup);
             $trickGroup->addTrick($trick);

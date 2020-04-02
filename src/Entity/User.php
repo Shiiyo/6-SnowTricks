@@ -54,6 +54,10 @@ class User implements UserInterface
      *     max = 30,
      *     maxMessage = "Votre mot de passe est trop long ({{ limit }} caractères maxi)."
      * )
+     * @Assert\Regex(
+     *     pattern="$^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})$",
+     *      message="Le mot de passe doit contenir une minuscule, une majuscule, une chiffre et un caractère spécial."
+     * )
      */
     private $password;
 

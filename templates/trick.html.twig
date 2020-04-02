@@ -114,12 +114,12 @@
 
             <hr>
             <p class="metadata">
-                Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }} dans la catégorie {{ trick.trickGroup.name }}.
+                Ecrit le {{ trick.createdAt | date('d/m/Y') }} à {{ trick.createdAt | date('H:i') }}  |  Mis à jour le: {{ trick.updatedAt | date('d/m/Y') }} à {{ trick.updatedAt | date('H:i') }}   |  Catégorie: {{ trick.trickGroup.name }}.
             </p>
         </div>
     </section>
 
-
+        {#Comments#}
     <div class="container box" id="add-comment">
             {% if app.user %}
                 <section class="formulaire">

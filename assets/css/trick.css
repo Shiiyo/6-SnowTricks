@@ -149,9 +149,10 @@ h1, h2 {
   padding-left: 1.5rem;
 }
 #trick .metadata {
-  text-align: right;
+  text-align: center;
   padding-right: 1rem;
   padding-bottom: 1rem;
+  color: #6c6c6c;
 }
 
 #add-comment {
