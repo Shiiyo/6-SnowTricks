@@ -121,6 +121,12 @@ hr {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+#formulaire #delete-trick-div {
+  text-align: right;
+}
+#formulaire #delete-trick {
+  color: #d9534f;
+}
 #formulaire #hidden-form-group {
   display: none;
 }

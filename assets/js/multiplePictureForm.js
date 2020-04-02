@@ -59,6 +59,7 @@ function addPictureForm($collectionHolder, $newLinkLi) {
     var $newFormLi = $('<li></li>').append(newForm);
     $newLinkLi.before($newFormLi);
 
+
     $('.custom-file-input').on('change', function (e) {
         let inputFile = e.currentTarget;
         $(inputFile).parent()

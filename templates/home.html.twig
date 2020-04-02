@@ -40,8 +40,8 @@
                                 <h3>{{ trick.name }}</h3>
                             </a>
                             {% if app.user %}
-                                <a href="{{ path('trick_edit', {slug:trick.slug}) }}"><i class="fas fa-pencil-alt"></i></a>
                                 <a href="{{ path('trick_delete', {id:trick.id}) }}" onclick="return confirm('Vous êtes sûr de vouloir supprimer ce trick?')"><i class="fas fa-trash-alt"></i></a>
+                                <a href="{{ path('trick_edit', {slug:trick.slug}) }}"><i class="fas fa-pencil-alt"></i></a>
                             {% endif %}
 
                         </article>

@@ -47,7 +47,7 @@
   }
 
   i{
-    color: #d9534f;
+    color: $red;
     font-size: 2rem;
     opacity: 0.9;
     transition: all 200ms;
@@ -75,6 +75,13 @@
   #submit-btn{
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  #delete-trick-div{
+    text-align: right;
+  }
+  #delete-trick{
+    color: $red;
   }
 
   #hidden-form-group{
