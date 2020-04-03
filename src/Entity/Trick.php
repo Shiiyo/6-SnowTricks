@@ -55,7 +55,7 @@ class Trick
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", cascade={"persist", "remove"})
      * @ORM\joinColumn(onDelete="SET NULL")
      */
     private $pictures;
@@ -66,7 +66,7 @@ class Trick
     private $videos;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TrickGroup", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\TrickGroup", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $trickGroup;

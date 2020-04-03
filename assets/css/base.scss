@@ -5,6 +5,22 @@ $white-grey : #F7F7F7;
 $light-blue : #84caf1;
 $red: #d9534f;
 
+.alert{
+  width: 18rem;
+  height: 5rem;
+  position: fixed;
+  z-index: 90;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%, -50%);
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 2.9375rem;
+  padding-bottom: 4.5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
 body{
   background-color: $white-grey;
 }
