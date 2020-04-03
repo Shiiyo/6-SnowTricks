@@ -21,6 +21,13 @@ $red: #d9534f;
   padding-left: 1rem;
 }
 
+ul
+{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 body{
   background-color: $white-grey;
 }
@@ -47,6 +54,7 @@ hr{
   max-width: 1600px;
   }
 
+  /* Nav */
   .navbar {
     display: inline-block;
     float: right;
@@ -61,11 +69,37 @@ hr{
     border: none;
   }
 
+  /* Responsive Navbar */
+  #icon-nav-mobile{
+    text-align: right;
+    padding-right: 2rem;
+    padding-top: 2rem;
+    i{
+      font-size: 5rem;
+    }
+  }
+
+  .navbar-responsive{
+    ul{
+      text-align: right;
+      li{
+        font-size: 3rem;
+        height: 6rem;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        a{
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
   a{
     color: white;
   }
 }
 
+/* Body */
 #body {
   background-color: $white-grey;
 }

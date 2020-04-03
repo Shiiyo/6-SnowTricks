@@ -18,11 +18,18 @@
         <section id="header">
             <div class="container">
                 <div class="row">
-                    <div id="logo" class="col-2">
+                    <div id="logo" class="col-lg-2 col-6">
                         <a href="/"><img src="{{ asset('img/logo/white-text.png') }}" alt="Logo" id="img-logo"></a>
                     </div>
-                    <div id="nav" class="offset-1 col-9">
-                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div id="icon-nav-mobile" class="col-6 d-lg-none">
+                        <nav class="logo-navbar-responsive">
+                            <ul>
+                                <li><a href="#"><i class="fas fa-bars" id="menu"></i></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div id="nav" class="offset-1 col-lg-9">
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light d-none d-lg-block">
                             <div class="collapse navbar-collapse" id="navbarColor03">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item active">
@@ -50,6 +57,37 @@
                                     {% endif %}
                                 </ul>
                             </div>
+                        </nav>
+                    </div>
+
+                    <!-- Nav on small device -->
+                    <div class="navbar-responsive col-12 hidden-lg-up">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="/">Tricks</a>
+                                </li>
+
+                                {% if not app.user %}
+                                    <li>
+                                        <a href="{{ path('registration') }}">Inscription</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('log_in') }}">Connexion</a>
+                                    </li>
+
+                                {% else %}
+                                    <li>
+                                        <a href="{{ path('new_trick') }}">Ajouter un trick</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('user_edit', {id:app.user.id}) }}">Mon Compte</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('log_out') }}">Deconnexion</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
                         </nav>
                     </div>
                 </div>
