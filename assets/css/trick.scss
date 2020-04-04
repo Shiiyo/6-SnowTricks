@@ -86,6 +86,12 @@ h1, h2{
   //Carrousels
   #carrousel-block{
     padding-bottom: 3rem;
+    .media-button{
+      text-align: center;
+      button{
+        text-transform: uppercase;
+      }
+    }
   }
 
   div.carousel-item > iframe, div.carousel-item > img{

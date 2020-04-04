@@ -26,8 +26,9 @@
 
             {#Carrousels#}
             <div class="row" id="carrousel-block">
+
                 {#Pictures#}
-                <div class="col-lg-6 col-md-12">
+                <div class="d-lg-flex d-none col-lg-6 col-md-12 load-media">
                     <div id="picture-carousel" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             {% set i = 0 %}
@@ -69,7 +70,7 @@
                 </div>
 
                 {#Videos#}
-                <div class="col-lg-6 col-md-12">
+                <div class="d-lg-flex d-none col-lg-6 col-md-12 load-media">
                     <div id="video-carousel" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             {% set i = 0 %}
@@ -108,6 +109,16 @@
                         </a>
                     </div>
                 </div>
+
+                {#Button show/hide media#}
+                <div class="media-button col-12">
+                    <a href="#" id="loadMedia">
+                        <button class="btn btn-outline-info">Afficher les médias</button>
+                    </a>
+                    <a href="#" id="hideMedia" class="d-md-none d-lg-none d-none">
+                        <button class="btn btn-outline-info mt-3">Masquer les médias</button>
+                    </a>
+                </div>
             </div>
 
             <p id="content">{{ trick.content }}</p>
@@ -136,7 +147,7 @@
 
             {% for comment in trick.comments|reverse %}
                 <div class="row">
-                    <div class="col-1 user">
+                    <div class="col-lg-2 col-md-3 col-5 user">
                         <div class="user-picture">
                             {% if  comment.user.picture == null %}
 
@@ -144,11 +155,11 @@
                                 <img src="{{ asset('uploads/' ~ comment.user.picture) }}" alt="">
                             {% endif %}
                         </div>
-                    </div>
-                    <div class="col-11">
                         <p class="text-primary">{{ comment.user.username }}</p>
-                        <p class="text-secondary">{{ comment.content }}</p>
                         <p class="text-muted">le {{ comment.createdAt | date('d/m/Y') }} à {{ comment.createdAt | date('H:i') }}.</p>
+                    </div>
+                    <div class="col-lg-10 col-md-9 col-7">
+                        <p class="text-secondary">{{ comment.content }}</p>
                     </div>
                 </div>
             {% endfor %}

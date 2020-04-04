@@ -1,10 +1,16 @@
+/* Colors */
 $dark: #444;
 $deep-grey : #4b4c4c;
 $light-grey : #6c6c6c;
 $white-grey : #F7F7F7;
-$light-blue : #84caf1;
 $red: #d9534f;
 
+/* Responsive */
+$medium: 768px!default;
+$large: 1000px!default;
+
+
+/* Global properties*/
 .alert{
   width: 18rem;
   height: 5rem;
@@ -67,31 +73,6 @@ hr{
   }
   .nav-tabs{
     border: none;
-  }
-
-  /* Responsive Navbar */
-  #icon-nav-mobile{
-    text-align: right;
-    padding-right: 2rem;
-    padding-top: 2rem;
-    i{
-      font-size: 5rem;
-    }
-  }
-
-  .navbar-responsive{
-    ul{
-      text-align: right;
-      li{
-        font-size: 3rem;
-        height: 6rem;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 300;
-        a{
-          text-decoration: none;
-        }
-      }
-    }
   }
 
   a{

@@ -22,18 +22,18 @@
     <section id="list-tricks">
         <div class="container">
             <hr>
-            <h2>Liste des tricks</h2>
+            <h2 class="col-12">Liste des tricks</h2>
             <hr>
 
             <div class="row" id="tricks-bloc">
                 {% for trick in tricks %}
-                    <div class="col-3">
+                    <div class="col-lg-3 col-12">
                         <article>
                             <a href="{{ path('trick', {slug:trick.slug}) }}">
                                 {% if  trick.frontPicture is not same as(null) %}
-                                    <img src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" size="20vw">
+                                    <img class="card-img"  src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" size="20vw">
                                 {% else %}
-                                    <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" size="10vw">
+                                    <img class="card-img" src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" size="10vw">
                                 {% endif %}
                             </a>
                             <a href="{{ path('trick', {slug:trick.slug}) }}">
