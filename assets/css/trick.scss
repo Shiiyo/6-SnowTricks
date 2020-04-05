@@ -86,6 +86,9 @@ h1, h2{
   //Carrousels
   #carrousel-block{
     padding-bottom: 3rem;
+    #video-carousel{
+      width: 100%;
+    }
     .media-button{
       text-align: center;
       button{
@@ -133,15 +136,17 @@ h1, h2{
 }
 
 #comments{
-  .user-picture{
-    width: 85px;
-    height: 85px;
-    background-color: grey;
-    border-radius: 50%;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
-  }
+    #empty-picture{
+      width: 85px;
+      height: 85px;
+      background-color: grey;
+      border-radius: 50%;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
+
+
 
   .row{
     padding-bottom: 1rem;
