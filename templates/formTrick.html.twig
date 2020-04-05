@@ -55,7 +55,7 @@
 {% block body %}
 <div class="container" id="container-form">
     <div class="row justify-content-center">
-        <div class="col-md-10 box">
+        <div class="col-lg-10 col-12 box">
             {% if editMode %}
                 <h1>Modifier le trick</h1>
             {% else %}
@@ -65,9 +65,10 @@
                 {{ form_start(form) }}
 
                     <!-- Main picture -->
+                <div class="load-media d-lg-block d-none">
                     {% if editMode %}
                         <div class="row main-picture">
-                            <div class="col-md-8 offset-md-2">
+                            <div class="col-md-8 offset-md-2 col-10">
                                 {% if  trick.frontPicture is not same as(null) %}
                                     <img src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" id="main">
 
@@ -75,7 +76,7 @@
                                     <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" id="main">
                                 {% endif %}
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-2">
                                 <div class="delete-existing-picture">
                                     <a href="{{ path('delete_picture', {id:trick.frontPicture.id}) }}" class="js-delete-picture">
                                         <i class="fas fa-times"></i>
@@ -84,66 +85,86 @@
                             </div>
                         </div>
                     {% endif %}
-
-                {{ form_label(form.frontPicture, 'Image de couverture') }}
-                {{ form_widget(form.frontPicture) }}
-
-                <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            {{ form_label(form.frontPicture, 'Image de couverture') }}
+                            {{ form_widget(form.frontPicture) }}
+                        </div>
+                    </div>
+                    <hr>
+                </div>
 
                 {{ form_row(form.name) }}
 
-                <hr>
+
 
                 {#Images#}
-                <h4>Ajouter ou supprimer des images</h4>
-                    {% if editMode %}
-                        {% set i = 0 %}
-                        {% for picture in trick.pictures %}
-                            <div class="js-picture">
-                                <div class="row block-image">
-                                    <div class="col-md-8 offset-md-2">
-                                        <img src="{{ asset('uploads/' ~ picture.file) }}" alt="" class="img img-responsive img-preview">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="delete-existing-picture">
-                                            <a href="{{ path('delete_picture', {id:picture.id}) }}" class="js-delete-picture">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% set i = i + 1 %}
-                        {% endfor %}
-                    {% endif %}
-                        <ul class="pictures" data-prototype="{{ formMacro.printPictureRow(form.pictures.vars.prototype)|e('html_attr') }}">
-                        </ul>
-
-                <hr>
-
-                    {#Videos#}
-                    <h4>Ajouter ou supprimer des videos</h4>
+                <div class="load-media d-lg-block d-none">
+                    <hr>
+                    <h4>Ajouter ou supprimer des images</h4>
                         {% if editMode %}
-                            {% for video in trick.videos %}
-                                <div class="js-video">
-                                    <div class="row block-video">
-                                        <div class="col-md-8 offset-md-2">
-                                            <iframe width="480" height="270" src="{{ video.url }}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                            {% set i = 0 %}
+                            {% for picture in trick.pictures %}
+                                <div class="js-picture">
+                                    <div class="row block-image">
+                                        <div class="col-lg-8 offset-lg-2 col-10">
+                                            <img src="{{ asset('uploads/' ~ picture.file) }}" alt="" class="img img-responsive img-preview">
                                         </div>
-                                        <div class="col-md-2">
-                                            <div class="delete-existing-video">
-                                                <a href="{{ path('delete_video', {id:video.id}) }}" class="js-delete-video">
+                                        <div class="col-2">
+                                            <div class="delete-existing-picture">
+                                                <a href="{{ path('delete_picture', {id:picture.id}) }}" class="js-delete-picture">
                                                     <i class="fas fa-times"></i>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {% set i = i + 1 %}
                             {% endfor %}
                         {% endif %}
+                            <ul class="pictures" data-prototype="{{ formMacro.printPictureRow(form.pictures.vars.prototype)|e('html_attr') }}">
+                            </ul>
+                    <hr>
+                </div>
 
-                        <ul class="videos" data-prototype="{{ formMacro.printVideoRow(form.videos.vars.prototype)|e('html_attr') }}">
-                        </ul>
+
+                    {#Videos#}
+                <div class="load-media d-lg-block d-none">
+                    <h4>Ajouter ou supprimer des videos</h4>
+                    {% if editMode %}
+                        {% for video in trick.videos %}
+                            <div class="js-video">
+                                <div class="block-video row">
+                                    <div class="col-lg-8 offset-lg-2 col-10">
+                                        <iframe width="480" height="270" src="{{ video.url }}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                                    </div>
+                                    <div class="col-2 delete-video-bloc">
+                                        <div class="delete-existing-video">
+                                            <a href="{{ path('delete_video', {id:video.id}) }}" class="js-delete-video">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <ul class="videos" data-prototype="{{ formMacro.printVideoRow(form.videos.vars.prototype)|e('html_attr') }}">
+                    </ul>
+                </div>
+
+                <div class="row">
+                    {#Button show/hide media#}
+                    <div class="media-button col-12 d-lg-none">
+                        <a href="#" id="loadMedia">
+                            <button class="btn btn-outline-info">Afficher les médias</button>
+                        </a>
+                        <a href="#" id="hideMedia" class="d-md-none d-lg-none d-none">
+                            <button class="btn btn-outline-secondary mt-3">Masquer les médias</button>
+                        </a>
+                    </div>
+                </div>
 
                 <hr>
 
@@ -183,4 +204,5 @@
     {{ parent() }}
     {{ encore_entry_script_tags('multiplePicture') }}
     {{ encore_entry_script_tags('multipleVideo') }}
+    {{ encore_entry_script_tags('form-trick') }}
 {% endblock %}

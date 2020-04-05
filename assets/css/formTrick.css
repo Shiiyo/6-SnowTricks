@@ -155,6 +155,12 @@ hr {
   padding: 16px 32px;
   font-size: 18px;
 }
+#formulaire .delete-video-bloc {
+  text-align: center;
+}
+#formulaire .media-button {
+  text-align: center;
+}
 #formulaire #submit-btn {
   padding-top: 1rem;
   padding-bottom: 1rem;
