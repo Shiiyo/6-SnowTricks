@@ -5,9 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
+ * @UniqueEntity(
+ *     fields = {"name"},
+ *     message = "Ce trick est déjà présent sur le site."
+ * )
  */
 class Trick
 {
@@ -40,12 +45,17 @@ class Trick
     private $createdAt;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick", orphanRemoval=true)
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", cascade={"persist", "remove"})
      * @ORM\joinColumn(onDelete="SET NULL")
      */
     private $pictures;
@@ -56,7 +66,7 @@ class Trick
     private $videos;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TrickGroup", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\TrickGroup", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $trickGroup;
@@ -71,6 +81,7 @@ class Trick
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
 
     public function __construct()
     {
@@ -254,6 +265,18 @@ class Trick
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

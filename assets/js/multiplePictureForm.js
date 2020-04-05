@@ -1,6 +1,6 @@
 
 //Add a picture button variables
-var $addPictureButton = $('<button type="button" class="btn btn-info add_picture_button">Ajouter une image</button>');
+var $addPictureButton = $('<button type="button" class="btn btn-outline-info add_picture_button">Ajouter une image</button>');
 var $newLinkLi = $('<li></li>').append($addPictureButton);
 var $pictureCollectionHolder;
 
@@ -58,6 +58,7 @@ function addPictureForm($collectionHolder, $newLinkLi) {
     // Display the form in the page in an li, before the "Add a tag" link li
     var $newFormLi = $('<li></li>').append(newForm);
     $newLinkLi.before($newFormLi);
+
 
     $('.custom-file-input').on('change', function (e) {
         let inputFile = e.currentTarget;

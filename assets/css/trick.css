@@ -1,6 +1,231 @@
-#main {
-  max-width: 100%;
-  height: auto;
+/* Colors */
+/* Responsive */
+/* Global properties*/
+.alert {
+  width: 18rem;
+  height: 5rem;
+  position: fixed;
+  z-index: 90;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 2.9375rem;
+  padding-bottom: 4.5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #F7F7F7;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-color: white;
+}
+
+/* Header */
+#header {
+  padding-top: 1rem;
+  width: 100%;
+  background-color: #444;
+  /* Nav */
+}
+#header .container {
+  max-width: 1600px;
+}
+#header .navbar {
+  display: inline-block;
+  float: right;
+}
+#header #navbarColor03, #header .bg-light, #header .nav-tabs .nav-link.active, #header .nav-link:hover, #header .nav-link:active, #header .nav-link:focus {
+  background-color: #444 !important;
+  color: white;
+  border-color: white;
+}
+#header .nav-tabs {
+  border: none;
+}
+#header a {
+  color: white;
+}
+
+/* Body */
+#body {
+  background-color: #F7F7F7;
+}
+
+#mobile-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 99;
+  background-color: #4b4c4c;
+}
+#mobile-navbar .icon {
+  text-align: center;
+}
+#mobile-navbar i {
+  font-size: 2rem;
+  color: white;
+}
+
+#footer {
+  padding-top: 1rem;
+  background-color: #4b4c4c;
+  color: #FFFFFF;
+}
+#footer a {
+  color: #FFFFFF;
+}
+
+hr {
+  border-color: #444;
+}
+
+h1, h2 {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  color: #444;
+}
+
+.row {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.box {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 0.625rem;
+  box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11), 0 4px 8px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06), 0 7px 70px rgba(90, 97, 105, 0.1);
+}
+.box p {
+  color: #444;
+}
+
+#trick {
+  padding-top: 1rem;
+}
+#trick .picture-container {
+  position: relative;
+  padding: unset;
+}
+#trick #edit, #trick #delete {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  height: 2rem;
+  padding: 1.3rem;
+}
+#trick #edit i, #trick #delete i {
+  color: white;
+  font-size: 2rem;
+  opacity: 0.8;
+  transition: all 200ms;
+}
+#trick #edit i:hover, #trick #delete i:hover {
+  opacity: 1;
+  font-size: 2.2rem;
+  transform: scale(1.05, 1.05);
+}
+#trick #edit {
+  right: 3rem;
+}
+#trick #delete {
+  right: 0;
+}
+#trick h1 {
+  text-align: center;
+  color: #444;
+}
+#trick .card-img-top {
+  border-top-left-radius: 0.625rem;
+  border-top-right-radius: 0.625rem;
+  width: 100%;
+}
+#trick #img-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#trick #img-gallery a img {
+  max-height: 250px;
+}
+#trick #carrousel-block {
+  padding-bottom: 3rem;
+}
+#trick #carrousel-block #video-carousel {
+  width: 100%;
+}
+#trick #carrousel-block .media-button {
+  text-align: center;
+}
+#trick #carrousel-block .media-button button {
+  text-transform: uppercase;
+}
+#trick div.carousel-item > iframe, #trick div.carousel-item > img {
+  width: 100%;
+  height: 22rem;
+  display: block;
+}
+#trick .carousel-inner {
+  border-radius: 0.625rem;
+}
+#trick #content {
+  font-size: 1.3rem;
+  text-indent: 3rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
+#trick .metadata {
+  text-align: center;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+  color: #6c6c6c;
+}
+
+#add-comment {
+  background-color: lightgray;
+  text-align: center;
+}
+#add-comment p {
+  margin-bottom: 0;
+  font-weight: normal;
+}
+#add-comment a {
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+#comments #empty-picture {
+  width: 85px;
+  height: 85px;
+  background-color: grey;
+  border-radius: 50%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+#comments .row {
+  padding-bottom: 1rem;
 }
 
 /*# sourceMappingURL=trick.css.map */

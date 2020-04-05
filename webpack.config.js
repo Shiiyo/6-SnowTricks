@@ -25,8 +25,14 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('multiplePicture', './assets/js/multiplePictureForm.js')
-    .addEntry('trick', './assets/js/trick.js')
     .addEntry('multipleVideo', './assets/js/multipleVideoForm.js')
+    //CSS
+    .addEntry('base', './assets/js/base.js')
+    .addEntry('trick', './assets/js/trick.js')
+    .addEntry('home', './assets/js/home.js')
+    .addEntry('log-form', './assets/js/security/logForm.js')
+    .addEntry('form-trick', './assets/js/formTrick.js')
+
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

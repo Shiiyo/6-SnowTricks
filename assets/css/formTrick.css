@@ -1,0 +1,178 @@
+/* Colors */
+/* Responsive */
+/* Global properties*/
+.alert {
+  width: 18rem;
+  height: 5rem;
+  position: fixed;
+  z-index: 90;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 2.9375rem;
+  padding-bottom: 4.5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #F7F7F7;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-color: white;
+}
+
+/* Header */
+#header {
+  padding-top: 1rem;
+  width: 100%;
+  background-color: #444;
+  /* Nav */
+}
+#header .container {
+  max-width: 1600px;
+}
+#header .navbar {
+  display: inline-block;
+  float: right;
+}
+#header #navbarColor03, #header .bg-light, #header .nav-tabs .nav-link.active, #header .nav-link:hover, #header .nav-link:active, #header .nav-link:focus {
+  background-color: #444 !important;
+  color: white;
+  border-color: white;
+}
+#header .nav-tabs {
+  border: none;
+}
+#header a {
+  color: white;
+}
+
+/* Body */
+#body {
+  background-color: #F7F7F7;
+}
+
+#mobile-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 99;
+  background-color: #4b4c4c;
+}
+#mobile-navbar .icon {
+  text-align: center;
+}
+#mobile-navbar i {
+  font-size: 2rem;
+  color: white;
+}
+
+#footer {
+  padding-top: 1rem;
+  background-color: #4b4c4c;
+  color: #FFFFFF;
+}
+#footer a {
+  color: #FFFFFF;
+}
+
+.box {
+  background-color: white;
+}
+
+#formulaire h4 {
+  text-align: center;
+}
+#formulaire hr {
+  border-color: #6c6c6c;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+#formulaire .main-picture, #formulaire .block-image, #formulaire .block-video {
+  position: relative;
+}
+#formulaire .main-picture .delete-existing-picture, #formulaire .main-picture .delete-existing-video, #formulaire .block-image .delete-existing-picture, #formulaire .block-image .delete-existing-video, #formulaire .block-video .delete-existing-picture, #formulaire .block-video .delete-existing-video {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#formulaire .form-control {
+  background-color: #f7f7f9;
+}
+#formulaire img {
+  border-radius: 0.625rem;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+}
+#formulaire iframe {
+  width: 100%;
+  min-height: 23rem;
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  border: none;
+  border-radius: 0.625rem;
+}
+#formulaire i {
+  color: #d9534f;
+  font-size: 2rem;
+  opacity: 0.9;
+  transition: all 200ms;
+}
+#formulaire i:hover {
+  opacity: 1;
+  font-size: 2.1rem;
+  transform: scale(1.01, 1.01);
+}
+#formulaire ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+#formulaire ul li {
+  text-align: center;
+}
+#formulaire button {
+  padding: 16px 32px;
+  font-size: 18px;
+}
+#formulaire .delete-video-bloc {
+  text-align: center;
+}
+#formulaire .media-button {
+  text-align: center;
+}
+#formulaire #submit-btn {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+#formulaire #delete-trick-div {
+  text-align: right;
+}
+#formulaire #delete-trick {
+  color: #d9534f;
+}
+#formulaire #hidden-form-group {
+  display: none;
+}
+
+/*# sourceMappingURL=formTrick.css.map */

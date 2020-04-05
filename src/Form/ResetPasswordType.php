@@ -17,7 +17,6 @@ class ResetPasswordType extends AbstractType
         $builder
             ->add('email', TextType::class, ['label' => 'Email'])
             ->add('password', PasswordType::class)
-            ->add('submit', SubmitType::class, ['label' => 'Modifier le mot de passe'])
         ;
     }
 

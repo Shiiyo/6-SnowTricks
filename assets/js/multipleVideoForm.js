@@ -1,6 +1,6 @@
 
 //Add a picture button variables
-var $addVideoButton = $('<button type="button" class="btn btn-info add_video_button">Ajouter une vidéo</button>');
+var $addVideoButton = $('<button type="button" class="btn btn-outline-info add_video_button">Ajouter une vidéo</button>');
 var $newLinkLi = $('<li></li>').append($addVideoButton);
 var $collectionHolder;
 

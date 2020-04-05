@@ -17,12 +17,10 @@ class TrickGroupFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $faker = \Faker\Factory::create('fr_FR');
-
         //Create 8 trick_group
-        for ($j = 1; $j <= 8; ++$j) {
+        foreach ($this->getGroups() as $group) {
             $trickGroup = new TrickGroup();
-            $trickGroup->setName($faker->randomElement($this->getGroups()));
+            $trickGroup->setName($group);
 
             $manager->persist($trickGroup);
         }
