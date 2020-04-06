@@ -5,24 +5,40 @@
     {{ encore_entry_link_tags('log-form') }}
 {% endblock %}
 
-{% block title %}Mot de passe oublié{% endblock %}
+{% block title %}
+    Modification du compte
+{% endblock %}
 
 {% block body %}
     <div class="container" id="container-form">
         <div class="row justify-content-center">
             <div class="col-md-6 box logForm">
-                <h1>Mot de passe oublié</h1>
+                <h1>Modification du compte</h1>
+
                 <section class="formulaire">
                     {{ form_start(form) }}
                     {{ form_row(form.username, {'label': 'Pseudo'}) }}
+                    {{ form_row(form.email) }}
+                    <div class="password-btn">
+                        <a href="{{ path('change_password', {'id' : user.id}) }}"><p class="text-danger">Changer le mot de passe</p></a>
+                    </div>
+                    {{ form_row(form.picture, {'label': 'Photo de profil'}) }}
+
                     <div id="submit-btn">
                         <button type="submit" class="btn btn-info">
-                            Réinitialiser
+                            Enregistrer
                         </button>
                     </div>
+                    <div  class="metadata"><a href="{{ path('delete_user', {'id' : user.id }) }}">Supprimer le compte</a></div>
                     {{ form_end(form) }}
                 </section>
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('log-form') }}
 {% endblock %}

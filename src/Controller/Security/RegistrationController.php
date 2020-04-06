@@ -16,7 +16,6 @@ class RegistrationController extends AbstractController
 {
     /**
      * @Route("/inscription", name="registration")
-     * @Route("/modification-compte/{id}", name="user_edit")
      */
     public function index(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, RegistrationMailer $mailer, GenerateToken $generateToken)
     {
@@ -34,10 +33,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
-
-            if (null == $user->getId()) {
-                $user->setIsActive(0);
-            }
+            $user->setIsActive(0);
 
             $manager->persist($user);
             $manager->flush();
@@ -52,7 +48,6 @@ class RegistrationController extends AbstractController
 
         return $this->render('security/registration.html.twig', [
             'form' => $form->createView(),
-            'editMode' => null !== $user->getId(),
             'user_id' => $user->getId(),
         ]);
     }

@@ -16,14 +16,8 @@
 {% block body %}
     <div class="container" id="container-form">
         <div class="row justify-content-center">
-            <div class="col-md-6 box">
-                <h1>
-                    {% if editMode %}
-                        Modification du compte
-                    {% else %}
-                        Inscription
-                    {% endif %}
-                </h1>
+            <div class="col-md-6 box logForm">
+                <h1>Inscription</h1>
 
                 <section class="formulaire">
                     {{ form_start(form) }}
@@ -31,22 +25,12 @@
                     {{ form_row(form.email) }}
                     {{ form_row(form.password, {'label': 'Mot de passe'}) }}
 
-                    {% if editMode %}
-                        <div id="submit-btn">
-                            <button type="submit" class="btn btn-info">
-                                Enregistrer
-                            </button>
-                        </div>
-
-                        <div class="metadata"><a href="{{ path('delete_user', {id:user_id}) }}">Supprimer le compte</a></div>
-                    {% else %}
-                        <div id="submit-btn">
-                            <button type="submit" class="btn btn-info">
-                                Créer un compte
-                            </button>
-                        </div>
-                        <div  class="metadata"><a href="{{ path('log_in') }}">Déjà un compte ?</a></div>
-                    {% endif %}
+                    <div id="submit-btn">
+                        <button type="submit" class="btn btn-info">
+                            Créer un compte
+                        </button>
+                    </div>
+                    <div  class="metadata"><a href="{{ path('log_in') }}">Déjà un compte ?</a></div>
 
                     {{ form_end(form) }}
                 </section>
@@ -54,6 +38,9 @@
         </div>
     </div>
 
+{% endblock %}
 
-
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('log-form') }}
 {% endblock %}
