@@ -17,9 +17,9 @@
 
             {#Front picture#}
             {% if  trick.frontPicture is not same as(null) %}
-                <img src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" id="main" class="card-img-top">
+                <img src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="front picture" id="main" class="card-img-top">
             {% else %}
-                <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" id="main" class="card-img-top">
+                <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="front picture" id="main" class="card-img-top">
             {% endif %}
 
             <h1>{{ trick.name }}</h1>
@@ -153,9 +153,9 @@
                     <div class="col-lg-2 col-md-3 col-5 user">
                         <div class="user-picture">
                             {% if  comment.user.picture == null %}
-                                <div id="empty-picture"></div>
+                                <img src="{{ asset('img/default-profil.jpg') }}" alt="Avatar" class="rounded-circle" width="110">
                             {% else %}
-                                <img src="{{ asset('uploads/' ~ comment.user.picture) }}" alt="">
+                                <img src="{{ asset('uploads/' ~ user.picture.file) }}" alt="Avatar" class="rounded-circle" width="110">
                             {% endif %}
                         </div>
                         <p class="text-primary" id="username">{{ comment.user.username }}</p>

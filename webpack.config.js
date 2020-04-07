@@ -26,6 +26,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('multiplePicture', './assets/js/multiplePictureForm.js')
     .addEntry('multipleVideo', './assets/js/multipleVideoForm.js')
+    .addEntry('upload-file', './assets/js/uploadFile.js')
     //CSS
     .addEntry('base', './assets/js/base.js')
     .addEntry('trick', './assets/js/trick.js')

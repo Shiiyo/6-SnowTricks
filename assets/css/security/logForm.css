@@ -137,4 +137,12 @@ h1 {
   text-align: right;
 }
 
+#password-btn a {
+  color: #d9534f;
+}
+
+#profile-picture {
+  text-align: center;
+}
+
 /*# sourceMappingURL=logForm.css.map */

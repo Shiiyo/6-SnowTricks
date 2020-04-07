@@ -16,21 +16,32 @@
                 <h1>Modification du compte</h1>
 
                 <section class="formulaire">
-                    {{ form_start(form) }}
-                    {{ form_row(form.username, {'label': 'Pseudo'}) }}
-                    {{ form_row(form.email) }}
-                    <div class="password-btn">
-                        <a href="{{ path('change_password', {'id' : user.id}) }}"><p class="text-danger">Changer le mot de passe</p></a>
+                    <div class="offset-4 col-4" id="profile-picture">
+                        {% if user.picture == null %}
+                            <img src="{{ asset('img/default-profil.jpg') }}" alt="Avatar" class="rounded-circle" width="110">
+                        {% else %}
+                            <img src="{{ asset('uploads/' ~ user.picture.file) }}" alt="Avatar" class="rounded-circle" width="110">
+                        {% endif %}
                     </div>
-                    {{ form_row(form.picture, {'label': 'Photo de profil'}) }}
+                        {{ form_start(form) }}
+                        {{ form_row(form.username, {'label': 'Pseudo'}) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.picture, {'label': 'Photo de profil'}) }}
 
-                    <div id="submit-btn">
-                        <button type="submit" class="btn btn-info">
-                            Enregistrer
-                        </button>
+                        <div id="submit-btn">
+                            <button type="submit" class="btn btn-info">
+                                Enregistrer
+                            </button>
+                        </div>
+                        {{ form_end(form) }}
+
+                    <div class="row">
+                        <div id="password-btn" class="col-6">
+                            <a href="{{ path('change_password', {'id' : user.id}) }}">Changer le mot de passe</a>
+                        </div>
+                        <div  class="metadata col-6"><a href="{{ path('delete_user', {'id' : user.id }) }}">Supprimer le compte</a></div>
                     </div>
-                    <div  class="metadata"><a href="{{ path('delete_user', {'id' : user.id }) }}">Supprimer le compte</a></div>
-                    {{ form_end(form) }}
+
                 </section>
             </div>
         </div>
@@ -41,4 +52,5 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('log-form') }}
+    {{ encore_entry_script_tags('upload-file') }}
 {% endblock %}

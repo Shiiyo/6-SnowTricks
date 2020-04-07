@@ -4,20 +4,17 @@ namespace App\Controller\Security;
 
 use App\Entity\User;
 use App\Form\AccountType;
-use App\Mailer\RegistrationMailer;
-use App\Security\GenerateToken;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AccountController extends AbstractController
 {
     /**
      * @Route("/modification-compte/{id}", name="user_edit")
      */
-    public function index(User $user, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, RegistrationMailer $mailer, GenerateToken $generateToken)
+    public function index(User $user, Request $request, EntityManagerInterface $manager)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $this->denyAccessUnlessGranted('edit', $user);
@@ -27,16 +24,23 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hash = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($hash);
+            //Save the profile picture
+            $profilePicture = $form->get('picture')->getData()->getFile();
+            if (null !== $profilePicture) {
+                $file = $profilePicture->getData();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->getParameter('upload_directory'), $fileName);
+                $profilePicture->setFile($fileName);
+                $profilePicture->setUser($user);
+                $manager->persist($profilePicture);
+            } else {
+                $user->setPicture(null);
+            }
 
             $manager->persist($user);
             $manager->flush();
 
-            $token = $generateToken->generateToken($user);
-            $mailer->sendEmail($user, $token);
-
-            $this->addFlash('success', 'Votre compte est créé, vous allez recevoir un email de confirmation.');
+            $this->addFlash('success', 'Votre compte a bien été modifié.');
 
             return $this->redirectToRoute('home');
         }
@@ -44,6 +48,5 @@ class AccountController extends AbstractController
             'form' => $form->createView(),
             'user' => $user,
         ]);
-
     }
 }
