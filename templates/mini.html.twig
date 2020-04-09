@@ -1,9 +1,35 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('log-form') }}
+{% endblock %}
+
 {% block body %}
     <div class="container">
         <div class="row">
-            <?php imagejped($mini); ?>
+            <section id="formulaire">
+                {% if form is defined %}
+                    {{ form_start(form) }}
+                        {{ form_row(form.picture) }}
+                        <div id="submit-btn">
+                            <button type="submit" class="btn btn-success">
+                                Ajouter
+                            </button>
+                        </div>
+                    {{ form_end(form) }}
+                {% endif %}
+            </section>
+            <section id="return">
+                {% if test is defined %}
+                    <p>{{ dump(test) }}</p>
+                {% endif %}
+            </section>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('upload-file') }}
 {% endblock %}

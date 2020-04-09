@@ -46,16 +46,16 @@ class FormTrickController extends AbstractController
             $trick->setSlug($slug);
 
             //Save the front picture name file
-            $frontPicture = $form->get('frontPicture')->getData()->getFile();
-            if (null !== $frontPicture) {
-                $file = $frontPicture->getData();
-                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file = $form->get('frontPicture')->getData();
+
+            if (null !== $file) {
+                $frontPicture = new Picture();
+                $fileName = $file->getClientOriginalName();
                 $file->move($this->getParameter('upload_directory'), $fileName);
                 $frontPicture->setFile($fileName);
-                $frontPicture->setTrick($trick);
+                $trick->setFrontPicture($frontPicture);
+
                 $manager->persist($frontPicture);
-            } else {
-                $trick->setFrontPicture(null);
             }
 
             //Save all the pictures
