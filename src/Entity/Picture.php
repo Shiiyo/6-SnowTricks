@@ -31,6 +31,8 @@ class Picture
      */
     private $file;
 
+    private $miniFile;
+
     public function __construct()
     {
     }
@@ -72,5 +74,15 @@ class Picture
     public function setTrick(?Trick $trick): void
     {
         $this->trick = $trick;
+    }
+
+    public function getMiniFile()
+    {
+        return $this->miniFile;
+    }
+
+    public function setMiniFile($miniFile): void
+    {
+        $this->miniFile = $miniFile;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Picture\MinifiedPicture;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,18 @@ class HomeController extends AbstractController
     public function index(TrickRepository $repo)
     {
         $tricks = $repo->findBy([], ['createdAt' => 'desc']);
+
+        //Get mini files of pictures
+        foreach ($tricks as $trick)
+        {
+            $picture = $trick->getFrontPicture();
+            $miniPicture = new MinifiedPicture();
+            if($picture !== null)
+            {
+                $miniFilePicture = $miniPicture->getMiniFileName($picture);
+                $picture->setMiniFile($miniFilePicture);
+            }
+        }
 
         return $this->render('home.html.twig', [
             'tricks' => $tricks,

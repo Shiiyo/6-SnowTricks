@@ -31,7 +31,7 @@
                         <article>
                             <a href="{{ path('trick', {slug:trick.slug}) }}">
                                 {% if  trick.frontPicture is not same as(null) %}
-                                    <img class="card-img"  src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" size="20vw">
+                                    <img class="card-img"  src="{{ asset('uploads/' ~ trick.frontPicture.miniFile) }}" alt="" size="20vw">
                                 {% else %}
                                     <img class="card-img" src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" size="10vw">
                                 {% endif %}
