@@ -43,6 +43,19 @@ class TrickController extends AbstractController
             $video->setUrl($url);
         }
 
+        //Minified profile picture in comments
+        $comments = $trick->getComments();
+        foreach ($comments as $comment)
+        {
+            $profilPicture = $comment->getUser()->getPicture();
+            $miniPicture = new MinifiedPicture();
+            if($profilPicture !== null)
+            {
+                $miniFilePicture = $miniPicture->getMiniFileName($profilPicture);
+                $profilPicture->setMiniFile($miniFilePicture);
+            }
+        }
+
         return $this->render('trick.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),
