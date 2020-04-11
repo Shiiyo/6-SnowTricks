@@ -78,7 +78,7 @@
                             </div>
                             <div class="col-2">
                                 <div class="delete-existing-picture">
-                                    <a href="{{ path('delete_picture', {id:trick.frontPicture.id}) }}" class="js-delete-picture">
+                                    <a href="{{ path('delete_picture', {id:trick.id}) }}" class="js-delete-picture">
                                         <i class="fas fa-times"></i>
                                     </a>
                                 </div>
@@ -205,4 +205,5 @@
     {{ encore_entry_script_tags('multiplePicture') }}
     {{ encore_entry_script_tags('multipleVideo') }}
     {{ encore_entry_script_tags('form-trick') }}
+    {{ encore_entry_script_tags('upload-file') }}
 {% endblock %}

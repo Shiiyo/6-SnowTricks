@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\MiniPicture;
 use App\Entity\Picture;
 use App\Entity\Trick;
 use App\Entity\Video;
 use App\Form\TrickType;
+use App\Picture\MinifiedPicture;
 use App\SlugCreator;
 use App\VideoHostTemplate;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +21,7 @@ class FormTrickController extends AbstractController
      * @Route("/nouveau-trick", name="new_trick")
      * @Route("/modification/{slug}", name="trick_edit")
      */
-    public function index(Trick $trick = null, Request $request, EntityManagerInterface $manager)
+    public function index(Trick $trick = null, Request $request, EntityManagerInterface $manager, $upload_directory)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
@@ -46,16 +48,23 @@ class FormTrickController extends AbstractController
             $trick->setSlug($slug);
 
             //Save the front picture name file
-            $frontPicture = $form->get('frontPicture')->getData()->getFile();
-            if (null !== $frontPicture) {
-                $file = $frontPicture->getData();
-                $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                $file->move($this->getParameter('upload_directory'), $fileName);
-                $frontPicture->setFile($fileName);
-                $frontPicture->setTrick($trick);
+            $file = $form->get('frontPicture')->getData();
+
+            if (null !== $file) {
+                $frontPicture = new Picture();
+                $fileName = md5(uniqid());
+                $typeMime = $file->guessExtension();
+                $completeFileName =  $fileName.'.'. $typeMime;
+                $file->move($upload_directory, $completeFileName);
+
+                //Minified picture
+                $mini = new MinifiedPicture();
+                $mini->minified($fileName, $typeMime, $upload_directory);
+
+                $frontPicture->setFile($completeFileName);
+                $trick->setFrontPicture($frontPicture);
+
                 $manager->persist($frontPicture);
-            } else {
-                $trick->setFrontPicture(null);
             }
 
             //Save all the pictures
@@ -65,7 +74,7 @@ class FormTrickController extends AbstractController
                 $file = $pictureForm->get('file')->getData();
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $picture->setFile($fileName);
-                $file->move($this->getParameter('upload_directory'), $fileName);
+                $file->move($upload_directory, $fileName);
                 $picture->setTrick($trick);
                 $manager->persist($picture);
             }

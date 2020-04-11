@@ -22,7 +22,7 @@ class Picture
     private $trick;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="picture", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="picture", cascade={"persist"})
      */
     private $user;
 
@@ -30,6 +30,8 @@ class Picture
      * @ORM\Column(type="string", length=255)
      */
     private $file;
+
+    private $miniFile;
 
     public function __construct()
     {
@@ -72,5 +74,15 @@ class Picture
     public function setTrick(?Trick $trick): void
     {
         $this->trick = $trick;
+    }
+
+    public function getMiniFile()
+    {
+        return $this->miniFile;
+    }
+
+    public function setMiniFile($miniFile): void
+    {
+        $this->miniFile = $miniFile;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Trick;
 use App\Form\CommentType;
+use App\Picture\MinifiedPicture;
 use App\VideoHostTemplate;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +33,7 @@ class TrickController extends AbstractController
 
             $this->addFlash('success', 'Merci pour votre commentaire !');
 
-            return $this->redirectToRoute('trick', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('trick', ['slug' => $trick->getSlug()]);
         }
 
         //Get the url of each video in this trick
@@ -40,6 +41,19 @@ class TrickController extends AbstractController
         foreach ($trick->getVideos() as $video) {
             $url = $hostTemplate->getHostTemplate($video->getHostName(), $video->getName());
             $video->setUrl($url);
+        }
+
+        //Minified profile picture in comments
+        $comments = $trick->getComments();
+        foreach ($comments as $comment)
+        {
+            $profilPicture = $comment->getUser()->getPicture();
+            $miniPicture = new MinifiedPicture();
+            if($profilPicture !== null)
+            {
+                $miniFilePicture = $miniPicture->getMiniFileName($profilPicture);
+                $profilPicture->setMiniFile($miniFilePicture);
+            }
         }
 
         return $this->render('trick.html.twig', [

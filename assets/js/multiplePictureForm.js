@@ -22,13 +22,6 @@ $(document).ready(function() {
         addPictureForm($pictureCollectionHolder, $newLinkLi);
     });
 
-    $('.custom-file-input').on('change', function (e) {
-        let inputFile = e.currentTarget;
-        $(inputFile).parent()
-            .find('.custom-file-label')
-            .html(inputFile.files[0].name);
-    });
-
     ///////////////////////// Remove the image field when we click on the delete button ////////////////////////
     $('.pictures').on('click', ".delete-picture", function () {
         $(this).closest('li').remove();
