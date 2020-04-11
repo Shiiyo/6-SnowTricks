@@ -22,7 +22,7 @@ class Picture
     private $trick;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="picture", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="picture", cascade={"persist"})
      */
     private $user;
 

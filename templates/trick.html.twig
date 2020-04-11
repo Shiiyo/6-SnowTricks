@@ -155,7 +155,7 @@
                             {% if  comment.user.picture == null %}
                                 <img src="{{ asset('img/default-profil.jpg') }}" alt="Avatar" class="rounded-circle" width="110">
                             {% else %}
-                                <img src="{{ asset('uploads/' ~ user.picture.file) }}" alt="Avatar" class="rounded-circle" width="110">
+                                <img src="{{ asset('uploads/' ~ comment.user.picture.file) }}" alt="Avatar" class="rounded-circle" width="110">
                             {% endif %}
                         </div>
                         <p class="text-primary" id="username">{{ comment.user.username }}</p>

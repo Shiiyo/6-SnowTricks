@@ -33,7 +33,7 @@ class TrickController extends AbstractController
 
             $this->addFlash('success', 'Merci pour votre commentaire !');
 
-            return $this->redirectToRoute('trick', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('trick', ['slug' => $trick->getSlug()]);
         }
 
         //Get the url of each video in this trick

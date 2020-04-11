@@ -77,7 +77,7 @@ class User implements UserInterface
     private $isActive;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $comments;
 
