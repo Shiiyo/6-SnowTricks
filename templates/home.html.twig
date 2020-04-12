@@ -5,7 +5,7 @@
     {{ encore_entry_link_tags('home') }}
 {% endblock %}
 
-{% block title %}SnowTricks{% endblock %}
+{% block title %}SnowTricks - Accueil{% endblock %}
 
 {% block body %}
 
@@ -51,7 +51,7 @@
                 <div id="load-more">
                     <div id="nb-tricks" data-nb-tricks="{{ nbTricks }}"></div>
                     <div id="load-more-value" data-count-trick="8" ></div>
-                    <a href="{{ path('load_more') }}" id="load-more-btn"><i class="fas fa-plus-square"></i></a>
+                    <a href="{{ path('load_more_tricks') }}" id="load-more-btn"><i class="fas fa-plus-square"></i></a>
                 </div>
 
 

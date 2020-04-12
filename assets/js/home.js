@@ -39,7 +39,7 @@ $(document).ready(function() {
             {numberOfTricks: numberOfTricks},
             function (data) {
                 $("#tricks-bloc").append(data);
-                loadMoreValue.data('count-trick', numberOfTricks + 9).attr('data-count-trick', numberOfTricks + 9);
+                loadMoreValue.data('count-trick', numberOfTricks + 8).attr('data-count-trick', numberOfTricks + 8);
                 if (loadMoreValue.data('count-trick') >= $('#nb-tricks').data('nb-tricks')){
                     $('#load-more-btn').hide();
                 }

@@ -22,7 +22,7 @@ class CommentFixtures extends Fixture
             $now = new \DateTime();
             $interval = $now->diff($trick->getCreatedAt())->days;
 
-            for ($l = 1; $l <= random_int(3, 6); ++$l) {
+            for ($l = 1; $l <= random_int(10, 20); ++$l) {
                 $comment = new Comment();
                 $comment->setTrick($trick);
                 $comment->setCreatedAt($faker->dateTimeBetween('-'.$interval.' days'));

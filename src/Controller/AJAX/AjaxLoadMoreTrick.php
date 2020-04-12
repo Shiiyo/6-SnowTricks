@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AjaxLoadMoreTrick extends AbstractController
 {
     /**
-     * @Route("load-more", name="load_more")
+     * @Route("load-more-tricks", name="load_more_tricks")
      */
     public function loadMore(TrickRepository $repo, Request $request)
     {

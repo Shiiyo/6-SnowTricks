@@ -145,10 +145,20 @@ h1, h2{
       background-size: cover;
       background-position: center;
     }
-
-
-
   .row{
     padding-bottom: 1rem;
+  }
+  #load-more{
+    text-align: center;
+    button{
+      padding: 18px 30px;
+      font-size: 18px;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      opacity: 0.8;
+      &:hover{
+        opacity: 1;
+      }
+    }
   }
 }
