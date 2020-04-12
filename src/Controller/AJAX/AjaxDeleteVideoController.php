@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\AJAXDelete;
+namespace App\Controller\AJAX;
 
 use App\Entity\Video;
 use Doctrine\ORM\EntityManagerInterface;

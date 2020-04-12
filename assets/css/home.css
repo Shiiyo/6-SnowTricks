@@ -193,6 +193,17 @@ hr {
   margin-right: 0.8rem;
   color: #F7F7F7;
 }
+#list-tricks #load-more {
+  text-align: center;
+}
+#list-tricks #load-more i {
+  color: white;
+  font-size: 3rem;
+  opacity: 0.8;
+}
+#list-tricks #load-more i:hover {
+  opacity: 1;
+}
 #list-tricks #add-trick-block {
   padding-top: 3rem;
   padding-bottom: 3rem;

@@ -25,4 +25,25 @@ $(document).ready(function() {
             }
         });
     }
+
+    //Load more button
+    $("#load-more-btn").on('click', function (event) {
+        event.preventDefault();
+        const url = this.href;
+        var loadMoreValue = $("#load-more-value");
+        const numberOfTricks = loadMoreValue.data('count-trick');
+
+
+        $.post(
+            url,
+            {numberOfTricks: numberOfTricks},
+            function (data) {
+                $("#tricks-bloc").append(data);
+                loadMoreValue.data('count-trick', numberOfTricks + 9).attr('data-count-trick', numberOfTricks + 9);
+                if (loadMoreValue.data('count-trick') >= $('#nb-tricks').data('nb-tricks')){
+                    $('#load-more-btn').hide();
+                }
+            }
+        );
+    });
 });
