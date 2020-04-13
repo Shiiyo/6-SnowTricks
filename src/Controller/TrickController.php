@@ -6,6 +6,7 @@ use App\Entity\Comment;
 use App\Entity\Trick;
 use App\Form\CommentType;
 use App\Picture\MinifiedPicture;
+use App\Repository\CommentRepository;
 use App\VideoHostTemplate;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +18,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{slug}", name="trick")
      */
-    public function index(Trick $trick, Request $request, EntityManagerInterface $manager)
+    public function index(Trick $trick, Request $request, EntityManagerInterface $manager, CommentRepository $commentRepo)
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -44,7 +45,8 @@ class TrickController extends AbstractController
         }
 
         //Minified profile picture in comments
-        $comments = $trick->getComments();
+        $comments = $commentRepo->findPageOfComment(0, 3, $trick->getId());
+
         foreach ($comments as $comment)
         {
             $profilPicture = $comment->getUser()->getPicture();
@@ -59,6 +61,7 @@ class TrickController extends AbstractController
         return $this->render('trick.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),
+            'comments' => $comments,
         ]);
     }
 

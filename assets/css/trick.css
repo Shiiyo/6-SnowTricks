@@ -227,5 +227,18 @@ h1, h2 {
 #comments .row {
   padding-bottom: 1rem;
 }
+#comments #load-more {
+  text-align: center;
+}
+#comments #load-more button {
+  padding: 18px 30px;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  opacity: 0.8;
+}
+#comments #load-more button:hover {
+  opacity: 1;
+}
 
 /*# sourceMappingURL=trick.css.map */

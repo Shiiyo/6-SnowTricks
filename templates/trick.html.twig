@@ -5,7 +5,7 @@
     {{ encore_entry_link_tags('trick') }}
 {% endblock %}
 
-{% block title %}{{ trick.name }}{% endblock %}
+{% block title %}SnowTricks - {{ trick.name }}{% endblock %}
 
 {% block body %}
     <section id="trick">
@@ -147,27 +147,37 @@
     <section id="comments">
         <div class="container box">
             <h2> {{ trick.comments.count }} commentaires</h2>
-
-            {% for comment in trick.comments|reverse %}
-                <div class="row">
-                    <div class="col-lg-2 col-md-3 col-5 user">
-                        <div class="user-picture">
-                            {% if  comment.user.picture == null %}
-                                <img src="{{ asset('img/default-profil.jpg') }}" alt="Avatar" class="rounded-circle" width="110">
-                            {% else %}
-                                <img src="{{ asset('uploads/' ~ comment.user.picture.miniFile) }}" alt="Avatar" class="rounded-circle" width="110">
-                            {% endif %}
+            <div id="commentBloc">
+                {% for comment in comments %}
+                    <div class="row">
+                        <div class="col-lg-2 col-md-3 col-5 user">
+                            <div class="user-picture">
+                                {% if  comment.user.picture == null %}
+                                    <img src="{{ asset('img/default-profil.jpg') }}" alt="Avatar" class="rounded-circle" width="110">
+                                {% else %}
+                                    <img src="{{ asset('uploads/' ~ comment.user.picture.miniFile) }}" alt="Avatar" class="rounded-circle" width="110">
+                                {% endif %}
+                            </div>
+                            <p class="text-primary" id="username">{{ comment.user.username }}</p>
+                            <p class="d-lg-none text-muted">le {{ comment.createdAt | date('d/m/Y') }} à {{ comment.createdAt | date('H:i') }}.</p>
                         </div>
-                        <p class="text-primary" id="username">{{ comment.user.username }}</p>
-                        <p class="d-lg-none text-muted">le {{ comment.createdAt | date('d/m/Y') }} à {{ comment.createdAt | date('H:i') }}.</p>
+                        <div class="col-lg-10 col-md-9 col-7">
+                            <p class="text-secondary">{{ comment.content }}</p>
+                            <p class="d-none d-lg-block text-muted">le {{ comment.createdAt | date('d/m/Y') }} à {{ comment.createdAt | date('H:i') }}.</p>
+                        </div>
                     </div>
-                    <div class="col-lg-10 col-md-9 col-7">
-                        <p class="text-secondary">{{ comment.content }}</p>
-                        <p class="d-none d-lg-block text-muted">le {{ comment.createdAt | date('d/m/Y') }} à {{ comment.createdAt | date('H:i') }}.</p>
-                    </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
+            <div id="load-more">
+                <div id="nb-comments" data-nb-comments="{{ trick.comments.count }}"></div>
+                <div id="trick-id" data-trick-id="{{ trick.id }}" ></div>
+                <div id="load-more-value" data-count-comment="3" ></div>
+                {% if trick.comments.count > 3 %}
+                    <a href="{{ path('load_more_comments') }}" id="load-more-btn"><button type="button" class="btn btn-info">Voir plus</button></a>
+                {% endif %}
+            </div>
         </div>
+
     </section>
 {% endblock %}
 

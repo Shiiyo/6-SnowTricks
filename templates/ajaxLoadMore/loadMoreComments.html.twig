@@ -1,0 +1,19 @@
+{% for comment in comments %}
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-5 user">
+            <div class="user-picture">
+                {% if  comment.user.picture == null %}
+                    <img src="{{ asset('img/default-profil.jpg') }}" alt="Avatar" class="rounded-circle" width="110">
+                {% else %}
+                    <img src="{{ asset('uploads/' ~ comment.user.picture.miniFile) }}" alt="Avatar" class="rounded-circle" width="110">
+                {% endif %}
+            </div>
+            <p class="text-primary" id="username">{{ comment.user.username }}</p>
+            <p class="d-lg-none text-muted">le {{ comment.createdAt | date('d/m/Y') }} à {{ comment.createdAt | date('H:i') }}.</p>
+        </div>
+        <div class="col-lg-10 col-md-9 col-7">
+            <p class="text-secondary">{{ comment.content }}</p>
+            <p class="d-none d-lg-block text-muted">le {{ comment.createdAt | date('d/m/Y') }} à {{ comment.createdAt | date('H:i') }}.</p>
+        </div>
+    </div>
+{% endfor %}

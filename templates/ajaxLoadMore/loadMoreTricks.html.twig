@@ -1,0 +1,20 @@
+{% for trick in tricks %}
+    <div class="col-lg-3 col-12">
+        <article>
+            <a href="{{ path('trick', {slug:trick.slug}) }}">
+                {% if  trick.frontPicture is not same as(null) %}
+                    <img class="card-img"  src="{{ asset('uploads/' ~ trick.frontPicture.miniFile) }}" alt="" size="20vw">
+                {% else %}
+                    <img class="card-img" src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" size="10vw">
+                {% endif %}
+            </a>
+            <a href="{{ path('trick', {slug:trick.slug}) }}">
+                <h3>{{ trick.name }}</h3>
+            </a>
+            {% if app.user %}
+                <a href="{{ path('trick_delete', {id:trick.id}) }}" onclick="return confirm('Vous êtes sûr de vouloir supprimer ce trick?')"><i class="fas fa-trash-alt"></i></a>
+                <a href="{{ path('trick_edit', {slug:trick.slug}) }}"><i class="fas fa-pencil-alt"></i></a>
+            {% endif %}
+        </article>
+    </div>
+{% endfor %}

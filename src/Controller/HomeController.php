@@ -14,7 +14,8 @@ class HomeController extends AbstractController
      */
     public function index(TrickRepository $repo)
     {
-        $tricks = $repo->findBy([], ['createdAt' => 'desc']);
+        $tricks = $repo->findPageOfTricks(0, 8);
+        $nbTricks = $repo->countTricks();
 
         //Get mini files of pictures
         foreach ($tricks as $trick)
@@ -30,6 +31,7 @@ class HomeController extends AbstractController
 
         return $this->render('home.html.twig', [
             'tricks' => $tricks,
+            'nbTricks' => $nbTricks
         ]);
     }
 }
