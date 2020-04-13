@@ -107,6 +107,11 @@ h1, h2{
     border-radius: 0.625rem;
   }
 
+  .enlarge.clic-picture{
+    transform: scale(2, 2);
+    z-index: 90;
+  }
+
   //Content
   #content{
     font-size: 1.3rem;

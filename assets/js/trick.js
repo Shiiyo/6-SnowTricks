@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     //Enlarge picture
     $('.enlarge').on('click', function () {
-        $(this).toggleClass('clic-image');
+        $(this).toggleClass('clic-picture');
     });
 
     // Show trick media in small screen
