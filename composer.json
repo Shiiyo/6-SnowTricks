@@ -4,6 +4,7 @@
     "require": {
         "php": "^7.4",
         "ext-ctype": "*",
+        "ext-gd": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^1.8",
         "doctrine/doctrine-migrations-bundle": "^2.0",
@@ -22,11 +23,11 @@
         "symfony/security-bundle": "5.0.*",
         "symfony/security-http": "5.0.7",
         "symfony/sendgrid-mailer": "5.0.*",
+        "symfony/string": "5.0.*",
         "symfony/twig-pack": "^1.0",
         "symfony/validator": "5.0.*",
         "symfony/webpack-encore-bundle": "^1.7",
-        "symfony/yaml": "5.0.*",
-      "ext-gd": "*"
+        "symfony/yaml": "5.0.*"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.3",

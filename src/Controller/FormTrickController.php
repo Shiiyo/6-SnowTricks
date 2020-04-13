@@ -2,18 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\MiniPicture;
 use App\Entity\Picture;
 use App\Entity\Trick;
 use App\Entity\Video;
 use App\Form\TrickType;
 use App\Picture\MinifiedPicture;
-use App\SlugCreator;
 use App\VideoHostTemplate;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class FormTrickController extends AbstractController
 {
@@ -43,8 +42,8 @@ class FormTrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Create a slug with the name of the trick
-            $slugCreator = new SlugCreator();
-            $slug = $slugCreator->slugify($trick->getName());
+            $slugCreator = new AsciiSlugger();
+            $slug = $slugCreator->slug($trick->getName());
             $trick->setSlug($slug);
 
             //Save the front picture name file
