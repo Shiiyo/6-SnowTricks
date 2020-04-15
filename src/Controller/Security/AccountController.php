@@ -6,6 +6,7 @@ use App\Entity\Picture;
 use App\Entity\User;
 use App\Form\AccountType;
 use App\Picture\MinifiedPicture;
+use App\Picture\SquareProfilePicture;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,12 +18,13 @@ class AccountController extends AbstractController
     /**
      * @Route("/modification-compte/{id}", name="user_edit")
      */
-    public function index(User $user, $upload_directory, UserRepository $userRepo, Request $request, EntityManagerInterface $manager)
+    public function index(User $user, $upload_directory, $temp_directory, UserRepository $userRepo, Request $request, EntityManagerInterface $manager)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $this->denyAccessUnlessGranted('edit', $user);
 
         $form = $this->createForm(AccountType::class);
+
 
         //Get minified profil picture
         $picture = $user->getPicture();
@@ -42,25 +44,32 @@ class AccountController extends AbstractController
             $file = $form->get('picture')->getData();
 
             if (null !== $file) {
-                $fileName = md5(uniqid());
-                $typeMime = $file->guessExtension();
-                $completeFileName =  $fileName.'.'. $typeMime;
-                $file->move($upload_directory, $completeFileName);
+                //Temporary save the original picture
+                $name = $file->getClientOriginalName();
+                $mimeType = $file->guessExtension();
+                $file->move($temp_directory, $name);
 
-                //Minified picture
-                $mini = new MinifiedPicture();
-                $mini->minified($fileName, $typeMime, $upload_directory);
-
-                $profilePicture = new Picture();
-                $profilePicture->setFile($completeFileName);
-                $profilePicture->setUser($user);
+                //Square profile picture
+                $square = new SquareProfilePicture();
+                $newFile = $square->squarePicture($mimeType, $temp_directory.'/'.$name, $upload_directory);
+                unlink($temp_directory.'/'.$name);
 
                 //Delete existing profile picture
-                if($user->getPicture() !== null)
+                if($picture !== null)
                 {
+                    unlink($upload_directory.'/'.$picture->getFile());
+                    unlink($upload_directory.'/'.$miniPicture);
                     $manager->remove($user->getPicture());
                     $manager->flush();
                 }
+
+                //Create minified picture
+                $mini->minified($newFile, $mimeType, $upload_directory);
+
+                //Save Profile Picture
+                $profilePicture = new Picture();
+                $profilePicture->setFile($newFile.'.'.$mimeType);
+                $profilePicture->setUser($user);
 
                 $user->setPicture($profilePicture);
                 $manager->persist($profilePicture);
