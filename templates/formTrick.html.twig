@@ -71,7 +71,6 @@
                             <div class="col-md-8 offset-md-2 col-10">
                                 {% if  trick.frontPicture is not same as(null) %}
                                     <img src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" id="main">
-
                                 {% else %}
                                     <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" id="main">
                                 {% endif %}
