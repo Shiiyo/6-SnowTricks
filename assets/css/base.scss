@@ -34,8 +34,15 @@ ul
   padding: 0;
 }
 
+html{
+  height: 100%;
+}
+
 body{
   background-color: $white-grey;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 img{
@@ -83,6 +90,7 @@ hr{
 /* Body */
 #body {
   background-color: $white-grey;
+  flex: 1 0 auto;
 }
 
 #mobile-navbar{
@@ -104,6 +112,7 @@ hr{
   padding-top: 1rem;
   background-color: $deep-grey;
   color: #FFFFFF;
+  flex-shrink: 0;
   a {
     color: #FFFFFF;
   }

@@ -1,0 +1,1 @@
+import '../../css/error/error404.scss';
