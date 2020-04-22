@@ -17,13 +17,11 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 class FormTrickController extends AbstractController
 {
     /**
-     * @Route("/nouveau-trick", name="new_trick")
-     * @Route("/modification/{slug}", name="trick_edit")
+     * @Route("/admin/nouveau-trick", name="new_trick")
+     * @Route("/admin/modification-trick/{slug}", name="trick_edit")
      */
     public function index(Trick $trick = null, Request $request, EntityManagerInterface $manager, $upload_directory)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-
         //Creation mode: create a new trick
         if (!$trick) {
             $trick = new Trick();

@@ -10,12 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class AjaxDeletePictureController extends AbstractController
 {
     /**
-     * @Route("/supprimer-image/{id}", name="delete_picture")
+     * @Route("/admin/supprimer-image/{id}", name="delete_picture")
      */
     public function deletePicture(Picture $picture, EntityManagerInterface $manager, $upload_directory)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-
         unlink($upload_directory.'/'.$picture->getFile());
         $manager->remove($picture);
         $manager->flush();

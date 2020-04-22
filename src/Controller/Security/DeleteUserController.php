@@ -10,11 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class DeleteUserController extends AbstractController
 {
     /**
-     * @Route("/delete/{id}", name="delete_user")
+     * @Route("/admin/supprimer/{id}", name="delete_user")
      */
     public function index(User $user, EntityManagerInterface $manager)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
         $this->denyAccessUnlessGranted('edit', $user);
 
         $manager->remove($user);

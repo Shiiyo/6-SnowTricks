@@ -17,14 +17,9 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/inscription", name="registration")
      */
-    public function index(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, RegistrationMailer $mailer, GenerateToken $generateToken)
+    public function index( Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, RegistrationMailer $mailer, GenerateToken $generateToken)
     {
-        if (!$user) {
-            $user = new User();
-        } else {
-            $this->denyAccessUnlessGranted('ROLE_USER');
-            $this->denyAccessUnlessGranted('edit', $user);
-        }
+        $user = new User();
 
         $form = $this->createForm(RegistrationType::class, $user);
 

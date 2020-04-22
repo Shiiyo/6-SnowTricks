@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -50,30 +51,29 @@ class Trick
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick", cascade={"remove"})
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", cascade={"persist", "remove"})
-     * @ORM\joinColumn(onDelete="SET NULL")
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", cascade={"remove"})
      */
     private $pictures;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", cascade={"remove"})
      */
     private $videos;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TrickGroup", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\TrickGroup")
      * @ORM\JoinColumn(nullable=false)
      */
     private $trickGroup;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Picture", cascade={"persist"})
-     * @ORM\joinColumn(onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Picture")
+     * @JoinColumn(onDelete="CASCADE")
      */
     private $frontPicture;
 

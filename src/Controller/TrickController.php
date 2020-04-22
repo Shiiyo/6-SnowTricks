@@ -68,11 +68,30 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/supprimer/{id}", name="trick_delete")
      */
-    public function delete(Trick $trick, EntityManagerInterface $manager)
+    public function delete(Trick $trick, EntityManagerInterface $manager, $upload_directory)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
+        $frontPicture = $trick->getFrontPicture();
+        $pictures = $trick->getPictures();
+
+        //Remove the trick
         $manager->remove($trick);
+        $manager->flush();
+
+        //Remove the front picture in DB and in the server
+        $manager->remove($frontPicture);
+        $mini = new MinifiedPicture();
+        $miniPicture = $mini->getMiniFileName($frontPicture);
+        unlink($upload_directory.'/'.$frontPicture->getFile());
+        unlink($upload_directory.'/'.$miniPicture);
+
+        //Remove each pictures in DB and in the server
+        foreach ($pictures as $picture)
+        {
+            $manager->remove($picture);
+            unlink($upload_directory.'/'.$picture->getFile());
+        }
         $manager->flush();
 
         $this->addFlash('success', 'Le trick est bien supprimé !');

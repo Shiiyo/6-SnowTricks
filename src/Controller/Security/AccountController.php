@@ -16,16 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccountController extends AbstractController
 {
     /**
-     * @Route("/modification-compte/{id}", name="user_edit")
+     * @Route("/admin/modification-compte/{id}", name="user_edit")
      */
     public function index(User $user, $upload_directory, $temp_directory, UserRepository $userRepo, Request $request, EntityManagerInterface $manager)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
         $this->denyAccessUnlessGranted('edit', $user);
 
         $form = $this->createForm(AccountType::class);
-
-
+        
         //Get minified profil picture
         $picture = $user->getPicture();
         $mini = new MinifiedPicture();

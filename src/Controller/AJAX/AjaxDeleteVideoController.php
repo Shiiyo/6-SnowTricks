@@ -10,12 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class AjaxDeleteVideoController extends AbstractController
 {
     /**
-     * @Route("supprimer-video/{id}", name="delete_video")
+     * @Route("/admin/supprimer-video/{id}", name="delete_video")
      */
     public function deleteVideo(Video $video, EntityManagerInterface $manager)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-
         $manager->remove($video);
         $manager->flush();
 
