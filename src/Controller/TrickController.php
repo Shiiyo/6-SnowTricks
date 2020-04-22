@@ -80,18 +80,25 @@ class TrickController extends AbstractController
         $manager->flush();
 
         //Remove the front picture in DB and in the server
-        $manager->remove($frontPicture);
-        $mini = new MinifiedPicture();
-        $miniPicture = $mini->getMiniFileName($frontPicture);
-        unlink($upload_directory.'/'.$frontPicture->getFile());
-        unlink($upload_directory.'/'.$miniPicture);
+        if($frontPicture !== null)
+        {
+            $manager->remove($frontPicture);
+            $mini = new MinifiedPicture();
+            $miniPicture = $mini->getMiniFileName($frontPicture);
+            unlink($upload_directory.'/'.$frontPicture->getFile());
+            unlink($upload_directory.'/'.$miniPicture);
+        }
 
         //Remove each pictures in DB and in the server
-        foreach ($pictures as $picture)
+        if($pictures !== null)
         {
-            $manager->remove($picture);
-            unlink($upload_directory.'/'.$picture->getFile());
+            foreach ($pictures as $picture)
+            {
+                $manager->remove($picture);
+                unlink($upload_directory.'/'.$picture->getFile());
+            }
         }
+
         $manager->flush();
 
         $this->addFlash('success', 'Le trick est bien supprimé !');

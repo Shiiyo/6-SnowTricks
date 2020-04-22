@@ -41,15 +41,7 @@
                                         <a class="nav-link" href="/">Tricks</a>
                                     </li>
 
-                                    {% if not app.user %}
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ path('registration') }}">Inscription</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ path('log_in') }}">Connexion</a>
-                                        </li>
-
-                                    {% else %}
+                                    {% if app.user %}
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ path('new_trick') }}">Ajouter un trick</a>
                                         </li>
@@ -58,6 +50,15 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ path('log_out') }}">Deconnexion</a>
+                                        </li>
+
+                                    {% else %}
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ path('registration') }}">Inscription</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ path('log_in') }}">Connexion</a>
                                         </li>
                                     {% endif %}
                                 </ul>
