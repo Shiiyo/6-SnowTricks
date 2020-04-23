@@ -10,7 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LogInController extends AbstractController
 {
     /**
-     * @Route("/login", name="log_in")
+     * @Route("/connexion", name="log_in")
      */
     public function index(AuthenticationUtils $authenticationUtils): Response
     {

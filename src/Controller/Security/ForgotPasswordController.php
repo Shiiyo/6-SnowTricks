@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ForgotPasswordController extends AbstractController
 {
     /**
-     * @Route ("/forgot-password", name="forgot_password")
+     * @Route ("/mot-de-passe-oublie", name="forgot_password")
      */
     public function index(UserRepository $userRepo, Request $request, GenerateToken $generateToken, ResetPasswordMailer $mailer, EntityManagerInterface $manager)
     {
