@@ -2,7 +2,6 @@
 
 namespace App\Controller\AJAX;
 
-
 use App\Picture\MinifiedPicture;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,12 +22,10 @@ class AjaxLoadMoreTrick extends AbstractController
         $tricks = $repo->findPageOfTricks($minTrickNumber, $maxTrickNumber);
 
         //Get mini files of pictures
-        foreach ($tricks as $trick)
-        {
+        foreach ($tricks as $trick) {
             $picture = $trick->getFrontPicture();
             $miniPicture = new MinifiedPicture();
-            if($picture !== null)
-            {
+            if (null !== $picture) {
                 $miniFilePicture = $miniPicture->getMiniFileName($picture);
                 $picture->setMiniFile($miniFilePicture);
             }

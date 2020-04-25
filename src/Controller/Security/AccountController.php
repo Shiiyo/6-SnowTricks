@@ -18,17 +18,16 @@ class AccountController extends AbstractController
     /**
      * @Route("/admin/modification-compte/{id}", name="user_edit")
      */
-    public function index(User $user, $upload_directory, $temp_directory, UserRepository $userRepo, Request $request, EntityManagerInterface $manager)
+    public function index(User $user, $upload_directory, $temp_directory, Request $request, EntityManagerInterface $manager)
     {
         $this->denyAccessUnlessGranted('edit', $user);
 
         $form = $this->createForm(AccountType::class);
-        
+
         //Get minified profil picture
         $picture = $user->getPicture();
         $mini = new MinifiedPicture();
-        if($picture !== null)
-        {
+        if (null !== $picture) {
             $miniPicture = $mini->getMiniFileName($picture);
             $picture->setMiniFile($miniPicture);
         }
@@ -53,8 +52,7 @@ class AccountController extends AbstractController
                 unlink($temp_directory.'/'.$name);
 
                 //Delete existing profile picture
-                if($picture !== null)
-                {
+                if (null !== $picture) {
                     unlink($upload_directory.'/'.$picture->getFile());
                     unlink($upload_directory.'/'.$miniPicture);
                     $manager->remove($user->getPicture());
@@ -73,13 +71,11 @@ class AccountController extends AbstractController
                 $manager->persist($profilePicture);
             }
 
-            if ($accountDTO->username !== $user->getUsername())
-            {
+            if ($accountDTO->username !== $user->getUsername()) {
                 $user->setUsername($accountDTO->username);
             }
 
-            if ($accountDTO->email !== $user->getEmail())
-            {
+            if ($accountDTO->email !== $user->getEmail()) {
                 $user->setEmail($accountDTO->email);
             }
 
@@ -90,6 +86,7 @@ class AccountController extends AbstractController
 
             return $this->redirectToRoute('home');
         }
+
         return $this->render('security/account.html.twig', [
             'form' => $form->createView(),
             'user' => $user,

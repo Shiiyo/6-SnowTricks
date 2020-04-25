@@ -24,7 +24,7 @@ class AccountType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => AccountDTO::class,
-            'empty_data' => function(FormInterface $form){
+            'empty_data' => function (FormInterface $form) {
                 return new AccountDTO(
                     $form->get('username'),
                     $form->get('email'),

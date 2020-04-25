@@ -21,12 +21,12 @@ class CommentRepository extends ServiceEntityRepository
 
     public function findPageOfComment($startNumber, $endNumber, $trickId)
     {
-        $qb = $this->createQueryBuilder('comment')
+        $queryBuilder = $this->createQueryBuilder('comment')
             ->where('comment.trick = '.$trickId)
             ->orderBy('comment.createdAt', 'desc')
             ->setFirstResult($startNumber)
             ->setMaxResults($endNumber);
-        $query = $qb->getQuery();
+        $query = $queryBuilder->getQuery();
 
         return $query->execute();
     }

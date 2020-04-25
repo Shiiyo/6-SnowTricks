@@ -10,8 +10,7 @@ class SquareProfilePicture
     public function squarePicture($mimeType, $path, $upload_directory)
     {
         //Create image in function on the mimeType
-        switch ($mimeType)
-        {
+        switch ($mimeType) {
             case 'jpeg':
                 $source = imagecreatefromjpeg($path);
                 break;
@@ -31,13 +30,12 @@ class SquareProfilePicture
         $crop_width = imagesx($source);
         $crop_height = imagesy($source);
         $size = min($crop_width, $crop_height);
-        if($crop_width >= $crop_height) {
-            $newx= ($crop_width-$crop_height)/2;
+        if ($crop_width >= $crop_height) {
+            $newx = ($crop_width - $crop_height) / 2;
 
             $im2 = imagecrop($source, ['x' => $newx, 'y' => 0, 'width' => $size, 'height' => $size]);
-        }
-        else {
-            $newy= ($crop_height-$crop_width)/2;
+        } else {
+            $newy = ($crop_height - $crop_width) / 2;
 
             $im2 = imagecrop($source, ['x' => 0, 'y' => $newy, 'width' => $size, 'height' => $size]);
         }
@@ -46,8 +44,7 @@ class SquareProfilePicture
         $newPath = $upload_directory.'/'.$fileName.'.'.$mimeType;
 
         //Create a file from the picture given
-        switch ($mimeType)
-        {
+        switch ($mimeType) {
             case 'jpeg':
                 imagejpeg($im2, $newPath);
                 break;
@@ -63,6 +60,7 @@ class SquareProfilePicture
             default:
                 return false;
         }
+
         return $fileName;
     }
 }

@@ -14,5 +14,4 @@ class LegalNoticeController extends AbstractController
     {
         return $this->render('legalNotice.html.twig');
     }
-
 }

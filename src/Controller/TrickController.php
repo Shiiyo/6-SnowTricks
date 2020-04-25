@@ -47,12 +47,10 @@ class TrickController extends AbstractController
         //Minified profile picture in comments
         $comments = $commentRepo->findPageOfComment(0, 3, $trick->getId());
 
-        foreach ($comments as $comment)
-        {
+        foreach ($comments as $comment) {
             $profilPicture = $comment->getUser()->getPicture();
             $miniPicture = new MinifiedPicture();
-            if($profilPicture !== null)
-            {
+            if (null !== $profilPicture) {
                 $miniFilePicture = $miniPicture->getMiniFileName($profilPicture);
                 $profilPicture->setMiniFile($miniFilePicture);
             }
@@ -80,8 +78,7 @@ class TrickController extends AbstractController
         $manager->flush();
 
         //Remove the front picture in DB and in the server
-        if($frontPicture !== null)
-        {
+        if (null !== $frontPicture) {
             $manager->remove($frontPicture);
             $mini = new MinifiedPicture();
             $miniPicture = $mini->getMiniFileName($frontPicture);
@@ -90,10 +87,8 @@ class TrickController extends AbstractController
         }
 
         //Remove each pictures in DB and in the server
-        if($pictures !== null)
-        {
-            foreach ($pictures as $picture)
-            {
+        if (null !== $pictures) {
+            foreach ($pictures as $picture) {
                 $manager->remove($picture);
                 unlink($upload_directory.'/'.$picture->getFile());
             }

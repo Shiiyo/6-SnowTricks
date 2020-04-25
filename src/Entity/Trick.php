@@ -82,7 +82,6 @@ class Trick
      */
     private $slug;
 
-
     public function __construct()
     {
         $this->comments = new ArrayCollection();

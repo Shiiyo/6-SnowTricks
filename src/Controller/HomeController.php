@@ -18,12 +18,10 @@ class HomeController extends AbstractController
         $nbTricks = $repo->countTricks();
 
         //Get mini files of pictures
-        foreach ($tricks as $trick)
-        {
+        foreach ($tricks as $trick) {
             $picture = $trick->getFrontPicture();
             $miniPicture = new MinifiedPicture();
-            if($picture !== null)
-            {
+            if (null !== $picture) {
                 $miniFilePicture = $miniPicture->getMiniFileName($picture);
                 $picture->setMiniFile($miniFilePicture);
             }
@@ -31,7 +29,7 @@ class HomeController extends AbstractController
 
         return $this->render('home.html.twig', [
             'tricks' => $tricks,
-            'nbTricks' => $nbTricks
+            'nbTricks' => $nbTricks,
         ]);
     }
 }

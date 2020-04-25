@@ -51,7 +51,7 @@ class FormTrickController extends AbstractController
                 $frontPicture = new Picture();
                 $fileName = md5(uniqid());
                 $typeMime = $file->guessExtension();
-                $completeFileName =  $fileName.'.'. $typeMime;
+                $completeFileName = $fileName.'.'.$typeMime;
                 $file->move($upload_directory, $completeFileName);
 
                 //Minified picture

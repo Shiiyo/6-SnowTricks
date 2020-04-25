@@ -24,12 +24,10 @@ class AjaxLoadMoreComment extends AbstractController
         $comments = $repo->findPageOfComment($minCommentNumber, $maxCommentNumber, $trickId);
 
         //Get mini files of pictures
-        foreach ($comments as $comment)
-        {
+        foreach ($comments as $comment) {
             $profilPicture = $comment->getUser()->getPicture();
             $miniPicture = new MinifiedPicture();
-            if($profilPicture !== null)
-            {
+            if (null !== $profilPicture) {
                 $miniFilePicture = $miniPicture->getMiniFileName($profilPicture);
                 $profilPicture->setMiniFile($miniFilePicture);
             }

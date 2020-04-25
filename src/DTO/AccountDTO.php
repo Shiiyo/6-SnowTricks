@@ -10,6 +10,7 @@ class AccountDTO
 
     /**
      * AccountDTO constructor.
+     *
      * @param $username
      * @param $email
      * @param $picture

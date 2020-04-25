@@ -6,8 +6,8 @@ use App\Entity\User;
 use App\Picture\MinifiedPicture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DeleteUserController extends AbstractController
 {
@@ -18,8 +18,7 @@ class DeleteUserController extends AbstractController
     {
         $this->denyAccessUnlessGranted('edit', $user);
 
-        if ($user->getPicture() !== null)
-        {
+        if (null !== $user->getPicture()) {
             //Delete the profil picture and the minified version in the server
             $mini = new MinifiedPicture();
             $miniPicture = $mini->getMiniFileName($user->getPicture());

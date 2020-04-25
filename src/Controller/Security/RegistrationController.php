@@ -17,12 +17,11 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/inscription", name="registration")
      */
-    public function index( Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, RegistrationMailer $mailer, GenerateToken $generateToken)
+    public function index(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, RegistrationMailer $mailer, GenerateToken $generateToken)
     {
         $user = new User();
 
         $form = $this->createForm(RegistrationType::class, $user);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -21,20 +21,21 @@ class TrickRepository extends ServiceEntityRepository
 
     public function findPageOfTricks($startNumber, $endNumber)
     {
-        $qb = $this->createQueryBuilder('trick')
+        $queryBuilder = $this->createQueryBuilder('trick')
             ->orderBy('trick.createdAt', 'desc')
             ->setFirstResult($startNumber)
             ->setMaxResults($endNumber);
-        $query = $qb->getQuery();
+        $query = $queryBuilder->getQuery();
 
         return $query->execute();
     }
 
     public function countTricks()
     {
-        $qb = $this->createQueryBuilder('trick')
+        $queryBuilder = $this->createQueryBuilder('trick')
             ->select('count(trick.id)');
-        return $qb->getQuery()->getSingleScalarResult();
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 
     // /**

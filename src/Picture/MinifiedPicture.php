@@ -18,8 +18,7 @@ class MinifiedPicture
         $newPicture = imagecreatetruecolor($newWidth, $newHeight);
 
         //Create image in function on the mimeType
-        switch ($mimeType)
-        {
+        switch ($mimeType) {
             case 'jpeg':
                 $source = imagecreatefromjpeg($path);
                 break;
@@ -41,8 +40,7 @@ class MinifiedPicture
         $newPath = $upload_directory.'/'.$originalPicture.'_mini.'.$mimeType;
 
         //Create a file from the picture given
-        switch ($mimeType)
-        {
+        switch ($mimeType) {
             case 'jpeg':
                 imagejpeg($newPicture, $newPath);
                 break;
@@ -58,6 +56,7 @@ class MinifiedPicture
             default:
                 return false;
         }
+
         return true;
     }
 
@@ -66,8 +65,9 @@ class MinifiedPicture
     {
         $file = $picture->getFile();
         $extension = pathinfo($file, PATHINFO_EXTENSION);
-        $without_extension = substr($file, 0, strrpos($file, "."));
+        $without_extension = substr($file, 0, strrpos($file, '.'));
         $miniFileName = $without_extension.'_mini'.'.'.$extension;
+
         return $miniFileName;
     }
 }
