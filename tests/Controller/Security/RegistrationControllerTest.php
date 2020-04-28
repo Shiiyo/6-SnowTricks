@@ -16,6 +16,6 @@ class RegistrationControllerTest extends WebTestCase
     public function testModification()
     {
         $test = new TestGlobalController();
-        $test->testRenderView('/modification/87', 302);
+        $test->testRenderView('/admin/modification-compte/87', 302);
     }
 }

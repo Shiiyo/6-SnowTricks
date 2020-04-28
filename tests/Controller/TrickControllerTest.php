@@ -9,6 +9,6 @@ class TrickControllerTest extends WebTestCase
     public function testIndex()
     {
         $test = new TestGlobalController();
-        $test->testRenderView('/trick/40', 200);
+        $test->testRenderView('/trick/1620', 200);
     }
 }
