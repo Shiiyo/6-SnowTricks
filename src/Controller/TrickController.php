@@ -45,7 +45,7 @@ class TrickController extends AbstractController
         }
 
         //Minified profile picture in comments
-        $comments = $commentRepo->findPageOfComment(0, 3, $trick->getId());
+        $comments = $commentRepo->findPageOfComment(0, 10, $trick->getId());
 
         foreach ($comments as $comment) {
             $profilPicture = $comment->getUser()->getPicture();

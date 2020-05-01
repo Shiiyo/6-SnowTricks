@@ -19,7 +19,7 @@ class AjaxLoadMoreComment extends AbstractController
         $trickId = $request->request->get('trickId');
 
         $minCommentNumber = $numberOfComment + 1;
-        $maxCommentNumber = 3;
+        $maxCommentNumber = 10;
 
         $comments = $repo->findPageOfComment($minCommentNumber, $maxCommentNumber, $trickId);
 
