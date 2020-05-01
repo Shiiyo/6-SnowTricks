@@ -18,44 +18,15 @@ class MinifiedPicture
         $newPicture = imagecreatetruecolor($newWidth, $newHeight);
 
         //Create image in function on the mimeType
-        switch ($mimeType) {
-            case 'jpeg':
-                $source = imagecreatefromjpeg($path);
-                break;
-
-            case 'png':
-                $source = imagecreatefrompng($path);
-                break;
-
-            case 'gif':
-                $source = imagecreatefromgif($path);
-                break;
-
-            default:
-                return false;
-        }
+        $mimeTypeImage = new MimeTypeImage();
+        $source = $mimeTypeImage->createImageWithMimeType($mimeType, $path);
 
         imagecopyresized($newPicture, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
         $newPath = $upload_directory.'/'.$originalPicture.'_mini.'.$mimeType;
 
         //Create a file from the picture given
-        switch ($mimeType) {
-            case 'jpeg':
-                imagejpeg($newPicture, $newPath);
-                break;
-
-            case 'png':
-                imagepng($newPicture, $newPath);
-                break;
-
-            case 'gif':
-                imagegif($newPicture, $newPath);
-                break;
-
-            default:
-                return false;
-        }
+        $mimeTypeImage->createFileFromPicture($mimeType, $newPicture, $newPath);
 
         return true;
     }

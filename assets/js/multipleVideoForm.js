@@ -17,7 +17,7 @@ $(document).ready(function() {
     // index when inserting a new item (e.g. 2)
     $collectionHolder.data('index', $collectionHolder.find(':input').length);
 
-    $addVideoButton.on('click', function (e) {
+    $addVideoButton.on('click', function () {
         // add a new tag form (see next code block)
         addVideoForm($collectionHolder, $newLinkLi);
     });

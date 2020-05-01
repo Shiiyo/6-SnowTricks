@@ -2,12 +2,10 @@
 
 namespace App\Controller\Security;
 
-use App\Entity\Picture;
 use App\Entity\User;
 use App\Form\AccountType;
 use App\Picture\MinifiedPicture;
-use App\Picture\SquareProfilePicture;
-use App\Repository\UserRepository;
+use App\Picture\SavePicture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,8 +24,8 @@ class AccountController extends AbstractController
 
         //Get minified profil picture
         $picture = $user->getPicture();
-        $mini = new MinifiedPicture();
         if (null !== $picture) {
+            $mini = new MinifiedPicture();
             $miniPicture = $mini->getMiniFileName($picture);
             $picture->setMiniFile($miniPicture);
         }
@@ -41,15 +39,9 @@ class AccountController extends AbstractController
             $file = $form->get('picture')->getData();
 
             if (null !== $file) {
-                //Temporary save the original picture
-                $name = $file->getClientOriginalName();
-                $mimeType = $file->guessExtension();
-                $file->move($temp_directory, $name);
 
-                //Square profile picture
-                $square = new SquareProfilePicture();
-                $newFile = $square->squarePicture($mimeType, $temp_directory.'/'.$name, $upload_directory);
-                unlink($temp_directory.'/'.$name);
+                $savePicture = new SavePicture();
+                $profilePicture = $savePicture->saveAccountPicture($file, $temp_directory, $upload_directory, $user);
 
                 //Delete existing profile picture
                 if (null !== $picture) {
@@ -58,14 +50,6 @@ class AccountController extends AbstractController
                     $manager->remove($user->getPicture());
                     $manager->flush();
                 }
-
-                //Create minified picture
-                $mini->minified($newFile, $mimeType, $upload_directory);
-
-                //Save Profile Picture
-                $profilePicture = new Picture();
-                $profilePicture->setFile($newFile.'.'.$mimeType);
-                $profilePicture->setUser($user);
 
                 $user->setPicture($profilePicture);
                 $manager->persist($profilePicture);
