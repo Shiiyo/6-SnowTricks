@@ -2,7 +2,7 @@
 
 namespace App\Picture;
 
-class MimeTypeImage
+class MimeTypeImage implements MimeTypeImageInterface
 {
     public function createImageWithMimeType($mimeType, $path)
     {

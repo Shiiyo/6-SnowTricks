@@ -9,7 +9,6 @@
 bin/.phpunit/
 .idea/inspectionProfiles/Project_Default.xml
 .php_cs.dist
-config/packages/
 .idea/
 .php_cs.cache
 public/uploads/
