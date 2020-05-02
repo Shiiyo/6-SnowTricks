@@ -28,11 +28,6 @@ security:
 
             user_checker: App\Security\UserChecker
 
-            remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800
-                path:     /
-
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
