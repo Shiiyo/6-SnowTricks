@@ -36,7 +36,7 @@ class AccountController extends AbstractController
             $accountDTO = $form->getData();
 
             //Save the profile picture
-            $file = $form->get('picture')->getData();
+            $file = $accountDTO->picture->picture;
 
             if (null !== $file) {
 

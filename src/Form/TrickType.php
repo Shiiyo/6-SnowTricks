@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class TrickType extends AbstractType
 {
@@ -25,7 +27,7 @@ class TrickType extends AbstractType
                 'choice_label' => 'name',
                 'label' => 'Groupe de trick',
             ])
-            ->add('frontPicture', FileType::class, [
+            ->add('frontPicture', PictureType::class, [
                 'mapped' => false,
                 'required' => false,
                 ])

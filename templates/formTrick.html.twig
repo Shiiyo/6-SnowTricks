@@ -121,6 +121,11 @@
                                 {% set i = i + 1 %}
                             {% endfor %}
                         {% endif %}
+                        <div class="form-error">
+                            {% for picture in form.pictures %}
+                                {{ form_errors(picture.file) }}
+                            {% endfor %}
+                        </div>
                             <ul class="pictures" data-prototype="{{ formMacro.printPictureRow(form.pictures.vars.prototype)|e('html_attr') }}">
                             </ul>
                     <hr>
