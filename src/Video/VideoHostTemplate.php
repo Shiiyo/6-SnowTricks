@@ -2,7 +2,9 @@
 
 namespace App;
 
-class VideoHostTemplate
+use App\Video\Interfaces\VideoHostTemplateInterface;
+
+class VideoHostTemplate implements VideoHostTemplateInterface
 {
     private $hosts = [
         [

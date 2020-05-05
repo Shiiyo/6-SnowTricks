@@ -2,9 +2,9 @@
 
 namespace App\Picture;
 
-use App\Entity\Picture;
+use App\Picture\Interfaces\SquareProfilePictureInterface;
 
-class SquareProfilePicture
+class SquareProfilePicture implements SquareProfilePictureInterface
 {
     //Change the given picture into a square picture
     public function squarePicture($mimeType, $path, $upload_directory)

@@ -3,8 +3,9 @@
 namespace App\Picture;
 
 use App\Entity\Picture;
+use App\Picture\Interfaces\MinifiedPictureInterface;
 
-class MinifiedPicture
+class MinifiedPicture implements MinifiedPictureInterface
 {
     //Create miniature picture
     public function minified($originalPicture, $mimeType, $upload_directory)

@@ -3,8 +3,9 @@
 namespace App\Picture;
 
 use App\Entity\Picture;
+use App\Picture\Interfaces\SavePictureInterface;
 
-class SavePicture
+class SavePicture implements SavePictureInterface
 {
     public function saveFrontPicture($file, $upload_directory)
     {

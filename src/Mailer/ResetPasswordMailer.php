@@ -4,10 +4,11 @@ namespace App\Mailer;
 
 use App\Entity\Token;
 use App\Entity\User;
+use App\Mailer\Interfaces\ResetPasswordMailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 
-class ResetPasswordMailer
+class ResetPasswordMailer implements ResetPasswordMailerInterface
 {
     private MailerInterface $mailer;
 

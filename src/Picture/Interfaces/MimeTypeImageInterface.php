@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Picture;
+namespace App\Picture\Interfaces;
 
 interface MimeTypeImageInterface
 {
