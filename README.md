@@ -4,7 +4,7 @@ OpenClassrooms project as part of the PHP / Symfony application developer course
 Using PHP 7.4.2 and Symfony 5.0.2
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/cd8b6e80ac40c7ff05c9/maintainability)](https://codeclimate.com/github/Shiiyo/6-SnowTricks/maintainability)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1bec73de138f493b94352ceb64d44dbd)](https://www.codacy.com/manual/Shiiyo/Festival-des-Films-de-Plein-Air?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Shiiyo/Festival-des-Films-de-Plein-Air&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d0e1ef5329145f7a0a4324709ecf965)](https://www.codacy.com/manual/Shiiyo/6-SnowTricks?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Shiiyo/6-SnowTricks&amp;utm_campaign=Badge_Grade)
 
 ##Prerequisite
 - PHP 7.4.2
