@@ -39,7 +39,6 @@ class AccountController extends AbstractController
             $file = $accountDTO->picture->picture;
 
             if (null !== $file) {
-
                 $savePicture = new SavePicture();
                 $profilePicture = $savePicture->saveAccountPicture($file, $temp_directory, $upload_directory, $user);
 

@@ -45,9 +45,9 @@ class FormTrickController extends AbstractController
 
             //Save the front picture name file
             $savePicture = new SavePicture();
-            $file = $form->get('frontPicture')->getData();
+            $file = $form->get('frontPicture');
 
-            if (null !== $file) {
+            if (null !== $file->get('file')->getData()) {
                 $frontPicture = $savePicture->saveFrontPicture($file, $upload_directory);
                 $trick->setFrontPicture($frontPicture);
                 $manager->persist($frontPicture);

@@ -15,6 +15,11 @@ class AjaxDeletePictureController extends AbstractController
     public function deletePicture(Picture $picture, EntityManagerInterface $manager, $upload_directory)
     {
         unlink($upload_directory.'/'.$picture->getFile());
+        if (null !== $picture->getTrick()) {
+            $trick = $picture->getTrick();
+            $trick->setFrontPicture(null);
+            $manager->persist($trick);
+        }
         $manager->remove($picture);
         $manager->flush();
 

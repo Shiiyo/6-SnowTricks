@@ -28,8 +28,8 @@ class ConfirmEmailController extends AbstractController
             $manager->remove($token);
             $manager->flush();
             $this->addFlash('error', 'Votre lien a expiré merci de renouveler votre demande.');
-            return $this->redirectToRoute('home');
 
+            return $this->redirectToRoute('home');
         }
         $this->addFlash('error', 'Votre lien n\'est pas bon, merci de réessayer.');
 

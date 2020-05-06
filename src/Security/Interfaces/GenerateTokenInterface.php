@@ -10,12 +10,10 @@ interface GenerateTokenInterface
 {
     /**
      * GenerateTokenInterface constructor.
-     * @param EntityManagerInterface $manager
      */
     public function __construct(EntityManagerInterface $manager);
 
     /**
-     * @param User $user
      * @return Token
      */
     public function generateToken(User $user);

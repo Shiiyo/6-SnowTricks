@@ -35,8 +35,7 @@ class ForgotPasswordController extends AbstractController
                 $mailer->sendEmail($user, $token);
 
                 $this->addFlash('success', 'Un email vous a été envoyé.');
-            }
-            else{
+            } else {
                 $this->addFlash('error', 'Votre pseudo n\'existe pas');
             }
         }

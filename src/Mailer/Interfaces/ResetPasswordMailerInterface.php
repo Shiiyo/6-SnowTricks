@@ -8,8 +8,6 @@ use App\Entity\User;
 interface ResetPasswordMailerInterface
 {
     /**
-     * @param User $user
-     * @param Token $token
      * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
     public function sendEmail(User $user, Token $token);

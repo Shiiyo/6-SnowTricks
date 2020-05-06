@@ -7,6 +7,7 @@ interface MimeTypeImageInterface
     /**
      * @param $mimeType
      * @param $path
+     *
      * @return mixed
      */
     public function createImageWithMimeType($mimeType, $path);
@@ -15,6 +16,7 @@ interface MimeTypeImageInterface
      * @param $mimeType
      * @param $newPicture
      * @param $newPath
+     *
      * @return mixed
      */
     public function createFileFromPicture($mimeType, $newPicture, $newPath);

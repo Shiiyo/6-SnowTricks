@@ -7,29 +7,30 @@ use App\Picture\Interfaces\SavePictureInterface;
 
 class SavePicture implements SavePictureInterface
 {
-    public function saveFrontPicture($file, $upload_directory)
+    public function saveFrontPicture($frontPicture, $upload_directory)
     {
-        $frontPicture = new Picture();
-        $fileName = md5(uniqid());
+        $file = $frontPicture->get('file')->getData();
         $typeMime = $file->guessExtension();
-        $completeFileName = $fileName.'.'.$typeMime;
-        $file->move($upload_directory, $completeFileName);
+        $fileName = md5(uniqid());
+        $fullName = $fileName.'.'.$typeMime;
+        $file->move($upload_directory, $fullName);
 
         //Minified picture
         $mini = new MinifiedPicture();
         $mini->minified($fileName, $typeMime, $upload_directory);
 
-        $frontPicture->setFile($completeFileName);
+        $picture = new Picture();
+        $picture->setFile($fullName);
 
-        return $frontPicture;
+        return $picture;
     }
 
     public function savePicture($pictureForm, $upload_directory)
     {
-        /** @var Picture $picture */
-        $picture = $pictureForm->getData();
         $file = $pictureForm->get('file')->getData();
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+        $picture = new Picture();
         $picture->setFile($fileName);
         $file->move($upload_directory, $fileName);
 

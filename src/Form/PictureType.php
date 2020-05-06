@@ -25,14 +25,14 @@ class PictureType extends AbstractType
             'constraints' => [new Image([
                 'minWidth' => 200,
                 'minWidthMessage' => 'L\'image est trop petite: {{ width }}px. Le minimum autorisé est de {{ min_width }}px.',
-                'maxWidth' => 4000,
-                'maxWidthMessage' =>"L'image est trop large: {{ width }}px. Le maximum autorisé est de {{ max_width }}px.",
+                'maxWidth' => 5000,
+                'maxWidthMessage' => "L'image est trop large: {{ width }}px. Le maximum autorisé est de {{ max_width }}px.",
                 'minHeight' => 200,
                 'minHeightMessage' => "L'image est trop petite: {{ height }}px. Le mminimum autorisé est de {{ min_height }}px.",
-                'maxHeight' => 4000,
+                'maxHeight' => 5000,
                 'maxHeightMessage' => "L'image est trop haute: {{ height }}px. Le maximum autorisé est de {{ max_height }}px.",
-                'mimeTypes' => ["image/jpeg", "image/png", "image/gif"],
-                'mimeTypesMessage' => "Le format de l'image n'est pas bon. Format accepté: JPEG, PNG et GIF."
+                'mimeTypes' => ['image/jpeg', 'image/png', 'image/gif'],
+                'mimeTypesMessage' => "Le format de l'image n'est pas bon. Format accepté: JPEG, PNG et GIF.",
             ])],
         ]);
     }

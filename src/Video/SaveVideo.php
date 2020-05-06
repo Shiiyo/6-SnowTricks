@@ -17,6 +17,7 @@ class SaveVideo implements SaveVideoInterface
 
         $videoName = $hostTemplate->getVideoName($videoURL, $hostName);
         $video->setName($videoName);
+
         return $video;
     }
 }

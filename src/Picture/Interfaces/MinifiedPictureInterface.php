@@ -10,12 +10,12 @@ interface MinifiedPictureInterface
      * @param $originalPicture
      * @param $mimeType
      * @param $upload_directory
+     *
      * @return true
      */
     public function minified($originalPicture, $mimeType, $upload_directory);
 
     /**
-     * @param Picture $picture
      * @return string
      */
     public function getMiniFileName(Picture $picture);

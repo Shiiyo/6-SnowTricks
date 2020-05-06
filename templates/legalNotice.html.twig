@@ -2,13 +2,13 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('home') }}
+    {{ encore_entry_link_tags('legalNotice') }}
 {% endblock %}
 
 {% block title %}SnowTricks - Mentions légales{% endblock %}
 
 {% block body %}
-        <div style="background-color: #b6b7b8;">
+        <section id="body">
             <div class="container">
                 <h1>Mentions légales</h1>
                 <hr>
@@ -221,6 +221,11 @@
                     Tout litige en relation avec l’utilisation du site&nbsp;<a href="https://www.snowtricks.com">https://www.snowtricks.com</a>&nbsp;est soumis au droit français.
                     En dehors des cas où la loi ne le permet pas, il est fait attribution exclusive de juridiction aux tribunaux compétents de Chamonix</p>
             </div>
-        </div>
+        </section>
 {% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('legalNotice') }}
+ {% endblock %}
 

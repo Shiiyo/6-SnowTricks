@@ -46,6 +46,7 @@ class MimeTypeImage implements MimeTypeImageInterface
             default:
                 return false;
         }
+
         return true;
     }
 }
