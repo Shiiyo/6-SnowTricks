@@ -10,6 +10,6 @@ class DeleteUserControllerTest extends WebTestCase
     public function testIndex()
     {
         $test = new TestGlobalController();
-        $test->testRenderView('/delete/87', 302);
+        $test->testRenderView('/admin/supprimer/87', 302);
     }
 }

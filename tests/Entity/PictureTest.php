@@ -17,13 +17,11 @@ class PictureTest extends TestCase
         $this->picture = new Picture();
     }
 
-    public function testTricks()
+    public function testTrick()
     {
         $trick = new Trick();
-        $this->picture->addTrick($trick);
-        $trickArray[] = $trick;
-        $trickCollection = new ArrayCollection($trickArray);
-        $this->assertEquals($trickCollection, $this->picture->getTrick());
+        $this->picture->setTrick($trick);
+        $this->assertEquals($trick, $this->picture->getTrick());
     }
 
     public function testUser()
@@ -33,7 +31,7 @@ class PictureTest extends TestCase
         $this->assertSame($user, $this->picture->getUser());
     }
 
-    public function testName()
+    public function testFile()
     {
         $this->picture->setFile('Test');
         $this->assertSame('Test', $this->picture->getFile());

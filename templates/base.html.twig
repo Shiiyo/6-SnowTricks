@@ -14,6 +14,16 @@
             {{ encore_entry_link_tags('base') }}
         {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}">
+        <link rel="mask-icon" href="{{ asset('favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+
     </head>
     <body>
         <section id="header">
@@ -31,15 +41,7 @@
                                         <a class="nav-link" href="/">Tricks</a>
                                     </li>
 
-                                    {% if not app.user %}
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ path('registration') }}">Inscription</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ path('log_in') }}">Connexion</a>
-                                        </li>
-
-                                    {% else %}
+                                    {% if app.user %}
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ path('new_trick') }}">Ajouter un trick</a>
                                         </li>
@@ -48,6 +50,15 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ path('log_out') }}">Deconnexion</a>
+                                        </li>
+
+                                    {% else %}
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ path('registration') }}">Inscription</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ path('log_in') }}">Connexion</a>
                                         </li>
                                     {% endif %}
                                 </ul>

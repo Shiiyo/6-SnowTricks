@@ -33,6 +33,8 @@ Encore
     .addEntry('home', './assets/js/home.js')
     .addEntry('log-form', './assets/js/security/logForm.js')
     .addEntry('form-trick', './assets/js/formTrick.js')
+    .addEntry('error404', './assets/js/error/error404.js')
+    .addEntry('legalNotice', './assets/js/legalNotice.js')
 
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

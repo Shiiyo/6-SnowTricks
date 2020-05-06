@@ -1,0 +1,25 @@
+#body{
+  background-image: url("../../../public/img/404.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+h1, p, a{
+  color: white;
+}
+
+h1{
+  font-size: 18.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  flex-basis: min-content;
+}
+
+p{
+  font-size: 1.875rem;
+}

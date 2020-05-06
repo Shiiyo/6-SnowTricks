@@ -16,13 +16,6 @@ class CommentTest extends TestCase
         $this->comment = new Comment();
     }
 
-    public function testUser()
-    {
-        $user = new User();
-        $this->comment->setUser($user);
-        $this->assertSame($user, $this->comment->getUser());
-    }
-
     public function testCreatedAt()
     {
         $dateCreate = new \DateTime('2020-01-28T15:03:01.012345Z');
@@ -41,5 +34,12 @@ class CommentTest extends TestCase
         $trick = new Trick();
         $this->comment->setTrick($trick);
         $this->assertSame($trick, $this->comment->getTrick());
+    }
+
+    public function testUser()
+    {
+        $user = new User();
+        $this->comment->setUser($user);
+        $this->assertSame($user, $this->comment->getUser());
     }
 }

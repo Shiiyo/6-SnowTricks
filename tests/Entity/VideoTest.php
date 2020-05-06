@@ -15,7 +15,7 @@ class VideoTest extends TestCase
         $this->video = new Video();
     }
 
-    public function testTricks()
+    public function testTrick()
     {
         $trick = new Trick();
         $this->video->setTrick($trick);
@@ -26,5 +26,12 @@ class VideoTest extends TestCase
     {
         $this->video->setName('Test');
         $this->assertSame('Test', $this->video->getName());
+    }
+
+    public function hostName()
+    {
+        $host = 'test';
+        $this->video->setHostName($host);
+        $this->assertEquals($host, $this->video->getHostName());
     }
 }

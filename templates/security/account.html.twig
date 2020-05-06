@@ -20,7 +20,9 @@
                         {% if user.picture == null %}
                             <img src="{{ asset('img/default-profil.jpg') }}" alt="Avatar" class="rounded-circle" width="110">
                         {% else %}
-                            <img src="{{ asset('uploads/' ~ user.picture.miniFile) }}" alt="Avatar" class="rounded-circle" width="110">
+                            <div class="circular-picture">
+                                <img src="{{ asset('uploads/' ~ user.picture.miniFile) }}" alt="Avatar" width="110">
+                            </div>
                         {% endif %}
                     </div>
                         {{ form_start(form) }}

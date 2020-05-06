@@ -17,10 +17,10 @@ class ChangePasswordType extends AbstractType
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passes doivent être identiques.',
-                'options' => [ 'attr' => ['class' => 'password-field']],
+                'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options' => ['label' => 'Nouveau mot de passe'],
-                'second_options' =>['label' => 'Confirmation de mot de passe']
+                'second_options' => ['label' => 'Confirmation de mot de passe'],
             ])
         ;
     }

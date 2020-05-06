@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ForgotPasswordController extends AbstractController
 {
     /**
-     * @Route ("/forgot-password", name="forgot_password")
+     * @Route ("/mot-de-passe-oublie", name="forgot_password")
      */
     public function index(UserRepository $userRepo, Request $request, GenerateToken $generateToken, ResetPasswordMailer $mailer, EntityManagerInterface $manager)
     {
@@ -35,17 +35,9 @@ class ForgotPasswordController extends AbstractController
                 $mailer->sendEmail($user, $token);
 
                 $this->addFlash('success', 'Un email vous a été envoyé.');
-
-                return $this->render('security/forgotPassword.html.twig', [
-                    'form' => $form->createView(),
-                ]);
+            } else {
+                $this->addFlash('error', 'Votre pseudo n\'existe pas');
             }
-
-            $this->addFlash('error', 'Votre pseudo n\'existe pas');
-
-            return $this->render('security/forgotPassword.html.twig', [
-                'form' => $form->createView(),
-            ]);
         }
 
         return $this->render('security/forgotPassword.html.twig', [

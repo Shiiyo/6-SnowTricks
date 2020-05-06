@@ -42,15 +42,13 @@ class ResetPasswordController extends AbstractController
                 return $this->render('security/resetPassword.html.twig', [
                     'form' => $form->createView(),
                 ]);
-            } else {
-                $manager->remove($token);
-                $manager->flush();
-                $this->addFlash('error', 'Votre lien a expiré merci de renouveler votre demande.');
-
-                return $this->redirectToRoute('home');
             }
+            $manager->remove($token);
+            $manager->flush();
+            $this->addFlash('error', 'Votre lien a expiré merci de renouveler votre demande.');
+        } else {
+            $this->addFlash('error', 'Votre lien n\'est pas bon, merci de réessayer.');
         }
-        $this->addFlash('error', 'Votre lien n\'est pas bon, merci de réessayer.');
 
         return $this->redirectToRoute('home');
     }

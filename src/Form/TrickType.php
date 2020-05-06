@@ -7,7 +7,6 @@ use App\Entity\TrickGroup;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +24,7 @@ class TrickType extends AbstractType
                 'choice_label' => 'name',
                 'label' => 'Groupe de trick',
             ])
-            ->add('frontPicture', FileType::class, [
+            ->add('frontPicture', PictureType::class, [
                 'mapped' => false,
                 'required' => false,
                 ])

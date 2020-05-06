@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     //Enlarge picture
     $('.enlarge').on('click', function () {
-        $(this).toggleClass('clic-image');
+        $(this).toggleClass('clic-picture');
     });
 
     // Show trick media in small screen
@@ -37,7 +37,7 @@ $(document).ready(function () {
             },
             function (data) {
                 $("#commentBloc").append(data);
-                loadMoreValue.data('count-comment', numberOfComments + 3).attr('data-count-comment', numberOfComments + 3);
+                loadMoreValue.data('count-comment', numberOfComments + 10).attr('data-count-comment', numberOfComments + 10);
                 if (loadMoreValue.data('count-comment') >= $('#nb-comments').data('nb-comments')){
                     $('#load-more-btn').hide();
                 }

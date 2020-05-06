@@ -4,9 +4,10 @@ namespace App\Security;
 
 use App\Entity\Token;
 use App\Entity\User;
+use App\Security\Interfaces\GenerateTokenInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-class GenerateToken
+class GenerateToken implements GenerateTokenInterface
 {
     private EntityManagerInterface $manager;
 

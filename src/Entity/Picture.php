@@ -17,12 +17,12 @@ class Picture
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="pictures", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="pictures")
      */
     private $trick;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="picture", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="picture")
      */
     private $user;
 

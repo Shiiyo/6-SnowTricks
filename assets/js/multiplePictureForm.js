@@ -17,7 +17,7 @@ $(document).ready(function() {
     // index when inserting a new item (e.g. 2)
     $pictureCollectionHolder.data('index', $pictureCollectionHolder.find(':input').length);
 
-    $addPictureButton.on('click', function(e) {
+    $addPictureButton.on('click', function() {
         // add a new tag form (see next code block)
         addPictureForm($pictureCollectionHolder, $newLinkLi);
     });

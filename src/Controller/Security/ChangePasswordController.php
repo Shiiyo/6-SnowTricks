@@ -13,11 +13,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ChangePasswordController extends AbstractController
 {
     /**
-     * @Route("/change-password/{id}", name="change_password")
+     * @Route("/admin/mot-de-passe/{id}", name="change_password")
      */
     public function index(User $user, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
         $this->denyAccessUnlessGranted('edit', $user);
 
         $form = $this->createForm(ChangePasswordType::class, $user);
@@ -39,6 +38,5 @@ class ChangePasswordController extends AbstractController
             'form' => $form->createView(),
             'user' => $user,
         ]);
-}
-
+    }
 }

@@ -3,8 +3,9 @@
 namespace App\Picture;
 
 use App\Entity\Picture;
+use App\Picture\Interfaces\MinifiedPictureInterface;
 
-class MinifiedPicture
+class MinifiedPicture implements MinifiedPictureInterface
 {
     //Create miniature picture
     public function minified($originalPicture, $mimeType, $upload_directory)
@@ -18,46 +19,16 @@ class MinifiedPicture
         $newPicture = imagecreatetruecolor($newWidth, $newHeight);
 
         //Create image in function on the mimeType
-        switch ($mimeType)
-        {
-            case 'jpeg':
-                $source = imagecreatefromjpeg($path);
-                break;
-
-            case 'png':
-                $source = imagecreatefrompng($path);
-                break;
-
-            case 'gif':
-                $source = imagecreatefromgif($path);
-                break;
-
-            default:
-                return false;
-        }
+        $mimeTypeImage = new MimeTypeImage();
+        $source = $mimeTypeImage->createImageWithMimeType($mimeType, $path);
 
         imagecopyresized($newPicture, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
         $newPath = $upload_directory.'/'.$originalPicture.'_mini.'.$mimeType;
 
         //Create a file from the picture given
-        switch ($mimeType)
-        {
-            case 'jpeg':
-                imagejpeg($newPicture, $newPath);
-                break;
+        $mimeTypeImage->createFileFromPicture($mimeType, $newPicture, $newPath);
 
-            case 'png':
-                imagepng($newPicture, $newPath);
-                break;
-
-            case 'gif':
-                imagegif($newPicture, $newPath);
-                break;
-
-            default:
-                return false;
-        }
         return true;
     }
 
@@ -66,8 +37,9 @@ class MinifiedPicture
     {
         $file = $picture->getFile();
         $extension = pathinfo($file, PATHINFO_EXTENSION);
-        $without_extension = substr($file, 0, strrpos($file, "."));
+        $without_extension = substr($file, 0, strrpos($file, '.'));
         $miniFileName = $without_extension.'_mini'.'.'.$extension;
+
         return $miniFileName;
     }
 }

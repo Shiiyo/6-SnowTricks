@@ -15,9 +15,13 @@
                     <h1>Connexion</h1>
                     <section class="formulaire">
                         <form action="{{ path('log_in') }}" method="post">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+
                             <div class="form-group">
                                 <label for="username">Nom d'utilisateur</label>
-                                <input id="username" required name="_username" type="text" class="form-control">
+                                <input id="username" value="{{ last_username }}" required name="_username" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="password">Mot de passe</label>

@@ -2,11 +2,10 @@
 
 namespace App\Controller\Security;
 
-use App\Entity\Picture;
 use App\Entity\User;
 use App\Form\AccountType;
 use App\Picture\MinifiedPicture;
-use App\Repository\UserRepository;
+use App\Picture\SavePicture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,20 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccountController extends AbstractController
 {
     /**
-     * @Route("/modification-compte/{id}", name="user_edit")
+     * @Route("/admin/modification-compte/{id}", name="user_edit")
      */
-    public function index(User $user, $upload_directory, UserRepository $userRepo, Request $request, EntityManagerInterface $manager)
+    public function index(User $user, $upload_directory, $temp_directory, Request $request, EntityManagerInterface $manager)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
         $this->denyAccessUnlessGranted('edit', $user);
 
         $form = $this->createForm(AccountType::class);
 
         //Get minified profil picture
         $picture = $user->getPicture();
-        $mini = new MinifiedPicture();
-        if($picture !== null)
-        {
+        if (null !== $picture) {
+            $mini = new MinifiedPicture();
             $miniPicture = $mini->getMiniFileName($picture);
             $picture->setMiniFile($miniPicture);
         }
@@ -39,25 +36,16 @@ class AccountController extends AbstractController
             $accountDTO = $form->getData();
 
             //Save the profile picture
-            $file = $form->get('picture')->getData();
+            $file = $accountDTO->picture->picture;
 
             if (null !== $file) {
-                $fileName = md5(uniqid());
-                $typeMime = $file->guessExtension();
-                $completeFileName =  $fileName.'.'. $typeMime;
-                $file->move($upload_directory, $completeFileName);
-
-                //Minified picture
-                $mini = new MinifiedPicture();
-                $mini->minified($fileName, $typeMime, $upload_directory);
-
-                $profilePicture = new Picture();
-                $profilePicture->setFile($completeFileName);
-                $profilePicture->setUser($user);
+                $savePicture = new SavePicture();
+                $profilePicture = $savePicture->saveAccountPicture($file, $temp_directory, $upload_directory, $user);
 
                 //Delete existing profile picture
-                if($user->getPicture() !== null)
-                {
+                if (null !== $picture) {
+                    unlink($upload_directory.'/'.$picture->getFile());
+                    unlink($upload_directory.'/'.$miniPicture);
                     $manager->remove($user->getPicture());
                     $manager->flush();
                 }
@@ -66,13 +54,11 @@ class AccountController extends AbstractController
                 $manager->persist($profilePicture);
             }
 
-            if ($accountDTO->username !== $user->getUsername())
-            {
+            if ($accountDTO->username !== $user->getUsername()) {
                 $user->setUsername($accountDTO->username);
             }
 
-            if ($accountDTO->email !== $user->getEmail())
-            {
+            if ($accountDTO->email !== $user->getEmail()) {
                 $user->setEmail($accountDTO->email);
             }
 
@@ -83,6 +69,7 @@ class AccountController extends AbstractController
 
             return $this->redirectToRoute('home');
         }
+
         return $this->render('security/account.html.twig', [
             'form' => $form->createView(),
             'user' => $user,

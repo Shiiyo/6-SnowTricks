@@ -1,0 +1,27 @@
+{% extends 'bundles/TwigBundle/Exception/baseError.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('error404') }}
+{% endblock %}
+
+{% block title %}SnowTricks - Page non trouvée{% endblock %}
+
+{% block body %}
+
+    <div id="title">
+        <h1>Oups</h1>
+    </div>
+    <div class="side_404">
+        <p>Aucune poudreuse à exploiter ici !</p>
+        <p> Pour retourner à l'accueil</p>
+        <p> <a href="{{ path('home') }}">c'est par là !</a></p>
+    </div>
+
+
+{% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('error404') }}
+ {% endblock %}

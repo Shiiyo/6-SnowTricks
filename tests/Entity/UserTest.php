@@ -2,9 +2,11 @@
 
 namespace App\Tests;
 
+use App\Entity\Comment;
 use App\Entity\Picture;
 use App\Entity\Token;
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
@@ -52,5 +54,14 @@ class UserTest extends TestCase
     {
         $this->user->setIsActive(1);
         $this->assertSame(true, $this->user->getIsActive());
+    }
+
+    public function testComments()
+    {
+        $comment = new Comment();
+        $this->user->addComment($comment);
+        $commentArray[] = $comment;
+        $commentCollection = new ArrayCollection($commentArray);
+        $this->assertEquals($commentCollection, $this->user->getComments());
     }
 }

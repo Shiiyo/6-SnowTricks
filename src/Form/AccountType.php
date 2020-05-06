@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\DTO\AccountDTO;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,7 +15,7 @@ class AccountType extends AbstractType
         $builder
             ->add('username')
             ->add('email')
-            ->add('picture', FileType::class)
+            ->add('picture', PictureType::class)
         ;
     }
 
@@ -24,7 +23,7 @@ class AccountType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => AccountDTO::class,
-            'empty_data' => function(FormInterface $form){
+            'empty_data' => function (FormInterface $form) {
                 return new AccountDTO(
                     $form->get('username'),
                     $form->get('email'),

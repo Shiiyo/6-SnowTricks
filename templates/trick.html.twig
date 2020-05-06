@@ -42,7 +42,7 @@
                                 {% endfor %}
                             </ol>
 
-                            <div class="carousel-inner">
+                            <div class="carousel-inner  enlarge">
                                 {% set i = 0 %}
                                 {% for picture in trick.pictures %}
                                     {% if i == 0 %}
@@ -171,8 +171,8 @@
             <div id="load-more">
                 <div id="nb-comments" data-nb-comments="{{ trick.comments.count }}"></div>
                 <div id="trick-id" data-trick-id="{{ trick.id }}" ></div>
-                <div id="load-more-value" data-count-comment="3" ></div>
-                {% if trick.comments.count > 3 %}
+                <div id="load-more-value" data-count-comment="9" ></div>
+                {% if trick.comments.count > 10 %}
                     <a href="{{ path('load_more_comments') }}" id="load-more-btn"><button type="button" class="btn btn-info">Voir plus</button></a>
                 {% endif %}
             </div>

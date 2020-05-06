@@ -67,20 +67,21 @@
                     <!-- Main picture -->
                 <div class="load-media d-lg-block d-none">
                     {% if editMode %}
-                        <div class="row main-picture">
+                        <div class="row main-picture js-picture">
                             <div class="col-md-8 offset-md-2 col-10">
                                 {% if  trick.frontPicture is not same as(null) %}
                                     <img src="{{ asset('uploads/' ~ trick.frontPicture.file) }}" alt="" id="main">
-
                                 {% else %}
                                     <img src="{{ asset('img/defaultFrontTrick.jpg') }}" alt="" id="main">
                                 {% endif %}
                             </div>
                             <div class="col-2">
                                 <div class="delete-existing-picture">
-                                    <a href="{{ path('delete_picture', {id:trick.id}) }}" class="js-delete-picture">
-                                        <i class="fas fa-times"></i>
-                                    </a>
+                                    {% if  trick.frontPicture is not same as(null) %}
+                                        <a href="{{ path('delete_picture', {id:trick.frontPicture.id}) }}" class="js-delete-picture">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -122,6 +123,11 @@
                                 {% set i = i + 1 %}
                             {% endfor %}
                         {% endif %}
+                        <div class="form-error">
+                            {% for picture in form.pictures %}
+                                {{ form_errors(picture.file) }}
+                            {% endfor %}
+                        </div>
                             <ul class="pictures" data-prototype="{{ formMacro.printPictureRow(form.pictures.vars.prototype)|e('html_attr') }}">
                             </ul>
                     <hr>

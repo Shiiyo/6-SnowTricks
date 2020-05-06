@@ -3,9 +3,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\Trick;
-use App\SlugCreator;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class TrickFixtures extends Fixture
 {
@@ -20,26 +20,26 @@ class TrickFixtures extends Fixture
       'Front-flip',
       'Back-flip',
       '1620',
-        'Mute',
-        'Tail grab',
-        'Nose grab',
-        'Seat belt',
-        'Slide',
-        'Nose slide',
-        'Front-360',
-        'Front-flip',
-        'Back-flip',
-        '1620',
-        'Mute',
-        'Tail grab',
-        'Nose grab',
-        'Seat belt',
-        'Slide',
-        'Nose slide',
-        'Front-360',
-        'Front-flip',
-        'Back-flip',
-        '1620',
+      'Stalefish',
+      'FS 720',
+      'Backside Rodeo 1080',
+      'Cork',
+      'Rodeo',
+      'Tail slide',
+      'Backside Triple Cork 1440',
+      'Method Air',
+      'Double Backflip One Foot',
+      'Double Mc Twist 1260',
+      'Double Backside Rodeo 1080',
+      'Switch',
+      'Crippler',
+      '270',
+      'Backside air',
+      'Mc Twist',
+      'Crippler',
+      'Air to fakie',
+      'Handplant',
+      'Revert',
     ];
 
     public function load(ObjectManager $manager)
@@ -54,8 +54,8 @@ class TrickFixtures extends Fixture
             $trick = new Trick();
             $trick->setName($name);
 
-            $slugCreator = new SlugCreator();
-            $slug = $slugCreator->slugify($name);
+            $slugCreator = new AsciiSlugger();
+            $slug = $slugCreator->slug($name);
             $trick->setSlug($slug);
 
             $trick->setContent($faker->paragraphs(5, true));

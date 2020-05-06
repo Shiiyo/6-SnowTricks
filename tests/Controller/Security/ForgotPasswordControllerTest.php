@@ -7,9 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ForgotPasswordControllerTest extends WebTestCase
 {
-    public function testInscription()
+    public function testIndex()
     {
         $test = new TestGlobalController();
-        $test->testRenderView('/forgot-password', 200);
+        $test->testRenderView('/mot-de-passe-oublie', 200);
     }
 }

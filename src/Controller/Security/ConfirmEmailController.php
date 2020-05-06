@@ -24,13 +24,12 @@ class ConfirmEmailController extends AbstractController
                 $this->addFlash('success', 'Votre email a bien été confirmé, vous pouvez désormais vous connecter.');
 
                 return $this->redirectToRoute('home');
-            } else {
-                $manager->remove($token);
-                $manager->flush();
-                $this->addFlash('error', 'Votre lien a expiré merci de renouveler votre demande.');
-
-                return $this->redirectToRoute('home');
             }
+            $manager->remove($token);
+            $manager->flush();
+            $this->addFlash('error', 'Votre lien a expiré merci de renouveler votre demande.');
+
+            return $this->redirectToRoute('home');
         }
         $this->addFlash('error', 'Votre lien n\'est pas bon, merci de réessayer.');
 
